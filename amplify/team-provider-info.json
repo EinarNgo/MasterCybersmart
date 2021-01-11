@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mastercybersmart-dev-172157-authRole",
+      "UnauthRoleArn": "arn:aws:iam::485119929514:role/amplify-mastercybersmart-dev-172157-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::485119929514:role/amplify-mastercybersmart-dev-172157-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-mastercybersmart-dev-172157-deployment",
+      "UnauthRoleName": "amplify-mastercybersmart-dev-172157-unauthRole",
+      "StackName": "amplify-mastercybersmart-dev-172157",
+      "StackId": "arn:aws:cloudformation:us-east-2:485119929514:stack/amplify-mastercybersmart-dev-172157/22b19db0-5429-11eb-b6e6-0abd43d40ad8",
+      "AmplifyAppId": "d3q7258dv81u6u"
+    }
+  }
+}

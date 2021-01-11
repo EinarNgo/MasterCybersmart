@@ -10,6 +10,11 @@
       "StackName": "amplify-mastercybersmart-dev-172157",
       "StackId": "arn:aws:cloudformation:us-east-2:485119929514:stack/amplify-mastercybersmart-dev-172157/22b19db0-5429-11eb-b6e6-0abd43d40ad8",
       "AmplifyAppId": "d3q7258dv81u6u"
+    },
+    "categories": {
+      "auth": {
+        "mastercybersmart437930ab": {}
+      }
     }
   }
 }

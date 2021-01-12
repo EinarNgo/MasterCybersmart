@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     forgotPasswordButtonText: {
-      color: 'tomato',
+      color: '#03A9F4',
       fontSize: 18,
       fontWeight: '600'
     }

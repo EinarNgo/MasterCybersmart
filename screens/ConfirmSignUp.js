@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
@@ -40,6 +40,13 @@ export default function ConfirmSignUp({ navigation }) {
           keyboardType="numeric"
         />
         <AppButton title="Confirm Sign Up" onPress={confirmSignUp} />
+        <View style={styles.footerButtonContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={styles.forgotPasswordButtonText}>
+              Confirm verification later
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -56,8 +63,13 @@ const styles = StyleSheet.create({
     },
     title: {
       fontSize: 20,
-      color: '#202020',
+      color: '#03A9F4',
       fontWeight: '500',
       marginVertical: 15
+    },
+    footerButtonContainer: {
+      marginVertical: 15,
+      justifyContent: 'center',
+      alignItems: 'center'
     }
   });

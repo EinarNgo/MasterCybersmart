@@ -12,6 +12,7 @@ Amplify.configure(config);
 
 const AuthenticationStack = createStackNavigator();
 const AppStack = createStackNavigator();
+
 const AuthenticationNavigator = props => {
   return (
     <AuthenticationStack.Navigator headerMode="none">
@@ -70,6 +71,7 @@ function App() {
   return (
     <NavigationContainer>
       {isUserLoggedIn === 'initializing' && <Initializing />}
+
       {isUserLoggedIn === 'loggedIn' && (
         <AppNavigator updateAuthState={updateAuthState} />
       )}

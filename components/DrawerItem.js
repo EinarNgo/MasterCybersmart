@@ -55,7 +55,7 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.INFO}
           />
         );
-      case "Getting Started":
+      case "Les mer":
         return (<Icon
           name="spaceship"
           family="ArgonExtra"
@@ -81,7 +81,7 @@ class DrawerItem extends React.Component {
       <TouchableOpacity
         style={{ height: 60 }}
         onPress={() =>
-          title == "Getting Started"
+          title == "Les mer"
             ? Linking.openURL(
                 "https://demos.creative-tim.com/argon-pro-react-native/docs/"
               ).catch(err => console.error("An error occurred", err))

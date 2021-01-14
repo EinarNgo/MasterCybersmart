@@ -1,113 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, View, Button, LogoTitle } from 'react-native';
-import Amplify, { Auth } from 'aws-amplify';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import config from './aws-exports';
-import SignIn from './screens/SignIn';
-import SignUp from './screens/SignUp';
-import ConfirmSignUp from './screens/ConfirmSignUp';
-import Home from './screens/Home';
-import Home1 from './screens/Home1';
-import Pro from './screens/Pro';
-import Onboarding from './screens/Onboarding';
-Amplify.configure(config);
+import Screen from './navigation/Screen';
+import { Block, GalioProvider } from "galio-framework";
+import { argonTheme } from "./constants/Theme";
 
-const AuthenticationStack = createStackNavigator();
-const AppStack = createStackNavigator();
-
-const Initializing = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" color="tomato" />
-    </View>
-  );
-};
-
-const AuthenticationNavigator = props => {
-  return (
-    <AuthenticationStack.Navigator headerMode="none">
-      <AuthenticationStack.Screen
-        name="Onboarding"
-        component={Onboarding}
-        option={{
-          headerTransparent: true
-        }}
-      />
-      <AuthenticationStack.Screen name="App" component={Onboarding} />
-      <AuthenticationStack.Screen name="SignIn">
-        {screenProps => (
-          <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
-        )}
-      </AuthenticationStack.Screen>
-      <AuthenticationStack.Screen name="SignUp" component={SignUp} />
-      <AuthenticationStack.Screen
-        name="ConfirmSignUp"
-        component={ConfirmSignUp}
-      />
-    </AuthenticationStack.Navigator>
-  );
-};
-
-const AppNavigator = props => {
-  return (
-    <AppStack.Navigator>
-      <AppStack.Screen name="Home">
-          {screenProps => (
-          <Home {...screenProps} updateAuthState={props.updateAuthState} />
-        )}
-      </AppStack.Screen>
-      <AppStack.Screen name="Home1">
-          {screenProps => (
-          <Home1 {...screenProps} updateAuthState={props.updateAuthState} />
-        )}
-      </AppStack.Screen>
-      <AppStack.Screen name="Pro">
-          {screenProps => (
-          <Pro {...screenProps} updateAuthState={props.updateAuthState} />
-        )}
-      </AppStack.Screen>
-    </AppStack.Navigator>
-  );
-};
-
-function App() {
-  const [isUserLoggedIn, setUserLoggedIn] = useState('initializing');
-  useEffect(() => {
-    checkAuthState();
-  }, []);
-  async function checkAuthState() {
-    try {
-      await Auth.currentAuthenticatedUser();
-      console.log('User is signed in');
-      setUserLoggedIn('loggedIn');
-    } catch (err) {
-      console.log('User is not signed in');
-      setUserLoggedIn('loggedOut');
-    }
-  }
-  async function signOut() {
-    try {
-      await Auth.signOut();
-      updateAuthState('loggedOut');
-    } catch (error) {
-      console.log('Error signing out: ', error);
-    }
-  }
-
-  function updateAuthState(isUserLoggedIn) {
-    setUserLoggedIn(isUserLoggedIn);
-  }
-
+export default props => {
   return (
     <NavigationContainer>
-      {isUserLoggedIn === 'initializing' && <Initializing />}
-      {isUserLoggedIn === 'loggedIn' && (
-        <AppNavigator updateAuthState={updateAuthState}/>
-      )}
-      {isUserLoggedIn === 'loggedOut' && (
-        <AuthenticationNavigator updateAuthState={updateAuthState} />
-      )}
+      <GalioProvider theme={argonTheme}>
+          <Block flex>
+            <Screen/>
+          </Block>
+        </GalioProvider>
     </NavigationContainer>
   );
-} export default App;
+}

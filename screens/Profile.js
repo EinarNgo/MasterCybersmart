@@ -49,13 +49,13 @@ class Profile extends React.Component {
                       small
                       style={{ backgroundColor: argonTheme.COLORS.INFO }}
                     >
-                      CONNECT
+                      TEAM
                     </Button>
                     <Button
                       small
                       style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
                     >
-                      MESSAGE
+                      RANK: ?
                     </Button>
                   </Block>
                   <Block row space="between">
@@ -66,9 +66,9 @@ class Profile extends React.Component {
                         color="#525F7F"
                         style={{ marginBottom: 4 }}
                       >
-                        2K
+                        0
                       </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>Orders</Text>
+                      <Text size={12} color={argonTheme.COLORS.TEXT}>Points</Text>
                     </Block>
                     <Block middle>
                       <Text
@@ -77,9 +77,9 @@ class Profile extends React.Component {
                         size={18}
                         style={{ marginBottom: 4 }}
                       >
-                        10
+                        0
                       </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>Photos</Text>
+                      <Text size={12} color={argonTheme.COLORS.TEXT}>Challenges</Text>
                     </Block>
                     <Block middle>
                       <Text
@@ -88,19 +88,19 @@ class Profile extends React.Component {
                         size={18}
                         style={{ marginBottom: 4 }}
                       >
-                        89
+                        0
                       </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>Comments</Text>
+                      <Text size={12} color={argonTheme.COLORS.TEXT}>Friends</Text>
                     </Block>
                   </Block>
                 </Block>
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Jessica Jones, 27
+                      Test name, 00
                     </Text>
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                      San Francisco, USA
+                      Address, Country
                     </Text>
                   </Block>
                   <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
@@ -112,8 +112,7 @@ class Profile extends React.Component {
                       color="#525F7F"
                       style={{ textAlign: "center" }}
                     >
-                      An artist of considerable range, Jessica name taken by
-                      Melbourne …
+                      TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
                     </Text>
                     <Button
                       color="transparent"
@@ -123,7 +122,7 @@ class Profile extends React.Component {
                         fontSize: 16
                       }}
                     >
-                      Show more
+                      Edit text
                     </Button>
                   </Block>
                   <Block
@@ -131,7 +130,7 @@ class Profile extends React.Component {
                     space="between"
                   >
                     <Text bold size={16} color="#525F7F" style={{marginTop: 12}}>
-                      Album
+                      Trophy
                     </Text>
                     <Button
                       small

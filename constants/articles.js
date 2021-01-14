@@ -1,28 +1,28 @@
 export default [
   {
     title: 'Read about privacy',
-    image: 'https://images.unsplash.com/photo-1516559828984-fb3b99548b21?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80',
+    image: 'https://core4.bmctoday.net/storage/images/RumxtyAnYA2EQOfT7WSsLUzXsu1U8PiLl0rpvGlj.jpeg?v=ea75bed',
     cta: 'View article', 
     horizontal: true
   },
   {
     title: 'Learn cybersecurity',
-    image: 'https://images.unsplash.com/photo-1519368358672-25b03afee3bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2004&q=80',
+    image: 'https://previews.123rf.com/images/bestdesign36/bestdesign361712/bestdesign36171200777/91535981-conceptual-cyber-security-online-access-technology-paint-brush-word-cloud-isolated-background-collag.jpg',
     cta: 'View article'
   },
   {
     title: 'Task ',
-    image: 'https://images.unsplash.com/photo-1500522144261-ea64433bbe27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80',
+    image: 'https://vertassets.blob.core.windows.net/image/2cf5b506/2cf5b506-1de1-4e24-bf94-796a96f28748/375_250-road_sign_challenges_battle_warning_450x300.jpg',
     cta: 'View article' 
   },
   {
     title: 'Check highscore',
-    image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1326&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/en/b/ba/High_Score_title_card.jpg',
     cta: 'View article' 
   },
   {
-    title: 'Check personally records',
-    image: 'https://images.unsplash.com/photo-1482686115713-0fbcaced6e28?fit=crop&w=1947&q=80',
+    title: 'Education videos',
+    image: 'https://www.publicidadenaweb.com/wp-content/uploads/2019/06/como-fazer-video-de-vendas.jpg',
     cta: 'View article', 
     horizontal: true
   },

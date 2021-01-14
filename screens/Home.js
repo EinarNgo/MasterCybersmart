@@ -1,8 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Button, SectionList} from 'react-native';
+import React from "react";
+import { StyleSheet, Dimensions, Button, TouchableOpacity, Text} from 'react-native';
 import { Auth } from 'aws-amplify';
+import { Block, theme } from 'galio-framework';
+import argonTheme from "../constants/Theme";
+const { width } = Dimensions.get('screen');
+import AppButton from '../components/AppButton';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomNavigation } from 'react-native-paper';
+const Tab = createBottomTabNavigator();
 
-export default function Home({ updateAuthState }) {
+export default function Home ({updateAuthState}) {
   async function signOut() {
     try {
       await Auth.signOut();
@@ -12,88 +19,28 @@ export default function Home({ updateAuthState }) {
     }
   }
 
-  let INF = [
-    {id: '1', value: 'Kryptografi'},
-    {id: '2', value: 'Etisk hacking'},
-    {id: '3', value: 'Personvern'},
-    {id: '4', value: 'Passordhåndtering'},
-  ];
-  let A = [
-    {id: '1', value: 'Kryptering'},
-    {id: '2', value: 'Etisk hacking'},
-    {id: '3', value: 'Personvern'},
-  ];
-  let B = [
-    {id: '1', value: 'Kryptering'},
-    {id: '2', value: 'Etisk hacking'},
-    {id: '3', value: 'Personvern'},
-  ];
-  let C = [
-    {id: '1', value: 'Kryptering'},
-    {id: '2', value: 'Etisk hacking'},
-    {id: '3', value: 'Personvern'},
-  ];
-  let D = [
-    {id: '1', value: 'Kryptering'},
-    {id: '2', value: 'Etisk hacking'},
-    {id: '3', value: 'Personvern'},
-  ];
-  let E = [
-    {id: '1', value: 'Kryptering'},
-    {id: '2', value: 'Etisk hacking'},
-    {id: '3', value: 'Personvern'},
-  ];
-
-  const FlatListItemSeparator = () => {
     return (
-      //Item Separator
-      <View style={styles.listItemSeparatorStyle} />
+      <Block flex center style={styles.home}>
+        <TouchableOpacity onPress={() => navigation.navigate('Pro')}>
+              <Text style={styles.forgotPasswordButtonText}>
+                 Pro
+              </Text>
+        </TouchableOpacity>
+        <Button title="Sign Out" color="#03A9F4" style={styles.button} onPress={signOut} />
+        </Block>
     );
-  };
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <SectionList
-          ItemSeparatorComponent={FlatListItemSeparator}
-          sections={[
-            {title: 'UNDERVISNING', data: INF},
-            {title: 'OPPGAVER - ENKELT', data: A},
-            {title: 'OPPGAVER - ENKEL-MIDDELS', data: B},
-            {title: 'OPPGAVER - MIDDELS', data: C},
-            {title: 'OPPGAVER - MIDDELS-VANSKELIG', data: D},
-            {title: 'OPPGAVER - VANSKELIG', data: E},
-          ]}
-          renderSectionHeader={({section}) => (
-            <Text style={styles.sectionHeaderStyle}>
-              {section.title}
-            </Text>
-          )}
-          renderItem={({item}) => (
-            // Item for the FlatListItems
-            <Text
-              style={styles.sectionListItemStyle}
-              //Item Separator View
-              onPress={() => alert(JSON.stringify(item))}>
-              {item.value}
-            </Text>
-          )}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
-
-      <View style={styles.bottom}>
-          <Button title="Sign Out" color="#03A9F4" onPress={signOut} />
-      </View>
-    </SafeAreaView>
-  );
 }
+
 
 const styles = StyleSheet.create({
   bottom: {
     flex: 1,
     justifyContent: 'flex-end',
     marginBottom: 36
+  },
+  articles: {
+    width: width - theme.SIZES.BASE * 2,
+    paddingVertical: theme.SIZES.BASE,
   },
   container: {
     flex: 15,
@@ -117,4 +64,16 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#C8C8C8',
   },
-});
+  home: {
+    flex: 1,   
+  },
+  button: {
+    marginVertical: 100,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15,
+    width: '80%',
+    backgroundColor: '#03A9F4'
+  },
+})

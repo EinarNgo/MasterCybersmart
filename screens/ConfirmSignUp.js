@@ -7,6 +7,7 @@ import AppButton from '../components/AppButton';
 export default function ConfirmSignUp({ navigation }) {
   const [username, setUsername] = useState('');
   const [authCode, setAuthCode] = useState('');
+  
   async function confirmSignUp() {
     try {
       await Auth.confirmSignUp(username, authCode);

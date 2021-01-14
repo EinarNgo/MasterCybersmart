@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, Button, LogoTitle } from 'react-native';
 import Amplify, { Auth } from 'aws-amplify';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,14 +8,33 @@ import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
 import ConfirmSignUp from './screens/ConfirmSignUp';
 import Home from './screens/Home';
+import Home1 from './screens/Home1';
+import Pro from './screens/Pro';
+import Onboarding from './screens/Onboarding';
 Amplify.configure(config);
 
 const AuthenticationStack = createStackNavigator();
 const AppStack = createStackNavigator();
 
+const Initializing = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="tomato" />
+    </View>
+  );
+};
+
 const AuthenticationNavigator = props => {
   return (
     <AuthenticationStack.Navigator headerMode="none">
+      <AuthenticationStack.Screen
+        name="Onboarding"
+        component={Onboarding}
+        option={{
+          headerTransparent: true
+        }}
+      />
+      <AuthenticationStack.Screen name="App" component={Onboarding} />
       <AuthenticationStack.Screen name="SignIn">
         {screenProps => (
           <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
@@ -34,19 +53,21 @@ const AppNavigator = props => {
   return (
     <AppStack.Navigator>
       <AppStack.Screen name="Home">
-        {screenProps => (
+          {screenProps => (
           <Home {...screenProps} updateAuthState={props.updateAuthState} />
         )}
       </AppStack.Screen>
+      <AppStack.Screen name="Home1">
+          {screenProps => (
+          <Home1 {...screenProps} updateAuthState={props.updateAuthState} />
+        )}
+      </AppStack.Screen>
+      <AppStack.Screen name="Pro">
+          {screenProps => (
+          <Pro {...screenProps} updateAuthState={props.updateAuthState} />
+        )}
+      </AppStack.Screen>
     </AppStack.Navigator>
-  );
-};
-
-const Initializing = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" color="tomato" />
-    </View>
   );
 };
 
@@ -65,20 +86,28 @@ function App() {
       setUserLoggedIn('loggedOut');
     }
   }
+  async function signOut() {
+    try {
+      await Auth.signOut();
+      updateAuthState('loggedOut');
+    } catch (error) {
+      console.log('Error signing out: ', error);
+    }
+  }
+
   function updateAuthState(isUserLoggedIn) {
     setUserLoggedIn(isUserLoggedIn);
   }
+
   return (
     <NavigationContainer>
       {isUserLoggedIn === 'initializing' && <Initializing />}
-
       {isUserLoggedIn === 'loggedIn' && (
-        <AppNavigator updateAuthState={updateAuthState} />
+        <AppNavigator updateAuthState={updateAuthState}/>
       )}
       {isUserLoggedIn === 'loggedOut' && (
         <AuthenticationNavigator updateAuthState={updateAuthState} />
       )}
     </NavigationContainer>
   );
-}
-export default App;
+} export default App;

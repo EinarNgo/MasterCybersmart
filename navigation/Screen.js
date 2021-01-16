@@ -184,7 +184,7 @@ function AppStack({props,updateAuthState}) {
   return (
     <Drawer.Navigator
       style={{ flex: 1 }}
-      drawerContent={props => <CustomDrawerContent {...props} updateAuthState={props.updateAuthState}/>}
+      drawerContent={props => <CustomDrawerContent {...props} updateAuthState={updateAuthState}/>}
       drawerStyle={{
         backgroundColor: "white",
         width: width * 0.8

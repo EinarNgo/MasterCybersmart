@@ -19,21 +19,15 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     "Profile",
   ];
 
-  /*
   async function signOut() {
     try {
       await Auth.signOut();
       updateAuthState('loggedOut');
+
     } catch (error) {
       console.log('Error signing out: ', error);
     }
   }
-  */
- function signOut() {
-  Auth.signOut()
-    .then(data => console.log(data))
-    .catch(err => console.log(err))
-}
 
   return (
     <Block

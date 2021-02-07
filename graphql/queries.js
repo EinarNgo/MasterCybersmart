@@ -7,6 +7,7 @@ export const getCtf = /* GraphQL */ `
       id
       name
       key
+      description
       points
       totalSolved
       createdAt
@@ -25,6 +26,7 @@ export const listCtfs = /* GraphQL */ `
         id
         name
         key
+        description
         points
         totalSolved
         createdAt

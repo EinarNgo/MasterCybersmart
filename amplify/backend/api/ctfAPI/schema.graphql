@@ -2,6 +2,7 @@ type Ctf @model {
   id: ID!
   name: String!
   key: String!
+  description: String!
   points: Int!
   totalSolved: Int!
 }

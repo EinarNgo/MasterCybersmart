@@ -7,6 +7,7 @@ export const onCreateCtf = /* GraphQL */ `
       id
       name
       key
+      description
       points
       totalSolved
       createdAt
@@ -20,6 +21,7 @@ export const onUpdateCtf = /* GraphQL */ `
       id
       name
       key
+      description
       points
       totalSolved
       createdAt
@@ -33,6 +35,7 @@ export const onDeleteCtf = /* GraphQL */ `
       id
       name
       key
+      description
       points
       totalSolved
       createdAt

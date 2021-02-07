@@ -3,7 +3,6 @@ import Amplify, { API, Auth, graphqlOperation  } from 'aws-amplify';
 import { StyleSheet, Dimensions, ScrollView, Text, View, Image } from 'react-native';
 import { Block, theme } from 'galio-framework';
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
-import articles from '../constants/articles';
 import { listCtfs } from '../graphql/queries';
 import { updateSong } from '../graphql/mutations';
 const { width } = Dimensions.get('screen');
@@ -28,23 +27,6 @@ export default function Ctf({ navigation, updateAuthState }) {
   };
 
   return (
-    /*
-    <Card>
-    <Card.Title>CARD WITH DIVIDER</Card.Title>
-    {
-      ctfs.map((u, i) => {
-        return (
-          <View key={i} style={styles.user}>
-            <Text style={styles.name}>{u.name}</Text>
-            <Card.Divider/>
-          </View>
-          
-        );
-      })
-    }
-    </Card>
-    */
-
     <Block flex center style={styles.home1}>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -54,18 +36,17 @@ export default function Ctf({ navigation, updateAuthState }) {
           return (
         
             <Card key={`ctf${idx}`}>
-            <Card.Title>{ctf.name}</Card.Title>
+            <Card.Title style={{textAlign:'center',fontSize:30}}>{ctf.name}</Card.Title>
+            <Card.Title >{ctf.points}</Card.Title>
             <Card.Divider/>
               <Text style={{marginBottom: 10}}>
                 The idea with React Native Elements is more about component structure than actual design.
+                The idea with React Native Elements is more about component structure than actual design.
               </Text>
               <Button
-                icon={<Icon name='code' color='#ffffff' />}
                 buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
                 title='VIEW NOW' />
             </Card>
-          
-          
           )
           })}
 

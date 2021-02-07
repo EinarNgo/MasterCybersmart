@@ -12,9 +12,11 @@ import { Block, Button, Text, theme } from "galio-framework";
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from "@react-navigation/drawer";
 const { height, width } = Dimensions.get("screen");
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify, { API, Auth, graphqlOperation  } from 'aws-amplify';
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
+import { listCtfs } from '../graphql/queries';
+import { updateCtf } from '../graphql/mutations';
 import Onboarding from '../screens/Onboarding';
 import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
@@ -180,7 +182,23 @@ export default function SignStack(props) {
 }
 
 function AppStack({props,updateAuthState}) {
-  
+  const [ctfs, setCtfs] = useState([]);
+
+  useEffect(() => {
+      fetchCtfs();
+  }, []);
+
+  const fetchCtfs = async () => {
+    try {
+        const ctfData = await API.graphql(graphqlOperation(listCtfs));
+        const ctfList = ctfData.data.listCtfs.items;
+        console.log('ctf list', ctfList);
+         setCtfs(ctfList);
+    } catch (error) {
+        console.log('error on fetching ctf', error);
+    }
+  };
+
   return (
     <Drawer.Navigator
       style={{ flex: 1 }}

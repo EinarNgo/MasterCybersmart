@@ -1,0 +1,8 @@
+type Ctf @model {
+  id: ID!
+  name: String!
+  key: String!
+  points: Int!
+  totalSolved: Int!
+}
+

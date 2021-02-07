@@ -16,13 +16,14 @@ import Amplify, { API, Auth, graphqlOperation  } from 'aws-amplify';
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
 import { listCtfs } from '../graphql/queries';
-import { updateCtf } from '../graphql/mutations';
+import { updateSong } from '../graphql/mutations';
 import Onboarding from '../screens/Onboarding';
 import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
 import ConfirmSignUp from '../screens/ConfirmSignUp';
 import Home from '../screens/Home';
 import Pro from "../screens/Pro";
+import Ctf from "../screens/Ctf";
 import CustomDrawerContent from "./Menu";
 import Profile from "../screens/Profile";
 // header for screens
@@ -95,8 +96,8 @@ function HomeStack(props) {
         }}
       />
       <Stack.Screen
-        name="Pro"
-        component={Pro}
+        name="Ctf"
+        component={Ctf}
         options={{
           header: ({ navigation, scene }) => (
             <Header
@@ -182,22 +183,23 @@ export default function SignStack(props) {
 }
 
 function AppStack({props,updateAuthState}) {
+
   const [ctfs, setCtfs] = useState([]);
 
-  useEffect(() => {
-      fetchCtfs();
-  }, []);
+    useEffect(() => {
+        fetchCtfs();
+    }, []);
 
-  const fetchCtfs = async () => {
-    try {
-        const ctfData = await API.graphql(graphqlOperation(listCtfs));
-        const ctfList = ctfData.data.listCtfs.items;
-        console.log('ctf list', ctfList);
-         setCtfs(ctfList);
-    } catch (error) {
-        console.log('error on fetching ctf', error);
-    }
-  };
+    const fetchCtfs = async () => {
+      try {
+          const ctfData = await API.graphql(graphqlOperation(listCtfs));
+          const ctfList = ctfData.data.listCtfs.items;
+          console.log('ctf list', ctfList);
+          setCtfs(ctfList);
+      } catch (error) {
+          console.log('error on fetching ctf', error);
+      }
+    };
 
   return (
     <Drawer.Navigator

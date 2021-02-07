@@ -1,6 +1,6 @@
 export default [
   {
-    title: 'Read about privacy',
+    title: 'Play CTF',
     image: 'https://core4.bmctoday.net/storage/images/RumxtyAnYA2EQOfT7WSsLUzXsu1U8PiLl0rpvGlj.jpeg?v=ea75bed',
     cta: 'View article', 
     horizontal: true

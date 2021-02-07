@@ -1,100 +1,87 @@
-import React from 'react';
-import { ImageBackground, Image, StyleSheet, StatusBar, Dimensions, Platform, Linking } from 'react-native';
-import { Block, Button, Text, theme } from 'galio-framework';
+import React, { useState, useEffect } from 'react';
+import Amplify, { API, Auth, graphqlOperation  } from 'aws-amplify';
+import { StyleSheet, Dimensions, ScrollView, Text, View, Image } from 'react-native';
+import { Block, theme } from 'galio-framework';
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import articles from '../constants/articles';
+import { listCtfs } from '../graphql/queries';
+import { updateSong } from '../graphql/mutations';
+const { width } = Dimensions.get('screen');
 
-const { height, width } = Dimensions.get('screen');
-import { Images, argonTheme } from '../constants/';
-import { HeaderHeight } from "../constants/utils";
 
-export default class Ctf extends React.Component {
-  render() {
-    const { navigation } = this.props;
+export default function Ctf({ navigation, updateAuthState }) {
+  const [ctfs, setCtfs] = useState([]);
 
-    return (
-      <Block flex style={styles.container}>
-        <StatusBar barStyle="light-content" />
+  useEffect(() => {
+      fetchCtfs();
+  }, []);
+
+  const fetchCtfs = async () => {
+    try {
+        const ctfData = await API.graphql(graphqlOperation(listCtfs));
+        const ctfList = ctfData.data.listCtfs.items;
+        console.log('ctf list', ctfList);
+        setCtfs(ctfList);
+    } catch (error) {
+        console.log('error on fetching ctf', error);
+    }
+  };
+
+  return (
+    /*
+    <Card>
+    <Card.Title>CARD WITH DIVIDER</Card.Title>
+    {
+      ctfs.map((u, i) => {
+        return (
+          <View key={i} style={styles.user}>
+            <Text style={styles.name}>{u.name}</Text>
+            <Card.Divider/>
+          </View>
+          
+        );
+      })
+    }
+    </Card>
+    */
+
+    <Block flex center style={styles.home1}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollList}>
         <Block flex>
-          <ImageBackground
-            source={Images.Pro}
-            style={{ flex: 1, height: height, width, zIndex: 1 }}
-          />
-          <Block space="between" style={styles.padded}>
-            <Block>
-              <Block>
-                <Image source={Images.ArgonLogo}
-                  style={{ marginBottom: theme.SIZES.BASE * 1.5 }}/>
-              </Block>
-              <Block >
-                <Block>
-                  <Text color="white" size={60}>HELLO</Text>
-                </Block>
-                <Block>
-                  <Text color="white" size={60}>Design</Text>
-                </Block>
-                <Block row>
-                  <Text color="white" size={60}>System</Text>
-                  <Block middle style={styles.pro}>
-                    <Text size={16} color="white">PRO</Text>
-                  </Block>
-                </Block>
-              </Block>
-              <Text size={16} color='rgba(255,255,255,0.6)' style={{ marginTop: 35 }}>
-                Take advantage of all the features and screens made upon Galio Design System, coded on React Native for both.
+        {ctfs.map((ctf, idx) => {
+          return (
+        
+            <Card key={`ctf${idx}`}>
+            <Card.Title>{ctf.name}</Card.Title>
+            <Card.Divider/>
+              <Text style={{marginBottom: 10}}>
+                The idea with React Native Elements is more about component structure than actual design.
               </Text>
-              <Block row style={{ marginTop: theme.SIZES.BASE * 1.5, marginBottom: theme.SIZES.BASE * 4 }}>
-                <Image
-                  source={Images.iOSLogo}
-                  style={{ height: 38, width: 82, marginRight: theme.SIZES.BASE * 1.5 }} />
-                <Image
-                  source={Images.androidLogo}
-                  style={{ height: 38, width: 140 }} />
-              </Block>
               <Button
-                shadowless
-                style={styles.button}
-                color={argonTheme.COLORS.INFO}
-                onPress={() => Linking.openURL('https://www.creative-tim.com/product/argon-pro-react-native').catch((err) => console.error('An error occurred', err))}>
-                <Text bold color={theme.COLORS.WHITE}>BUY NOW</Text>
-              </Button>
-            </Block>
-          </Block>
+                icon={<Icon name='code' color='#ffffff' />}
+                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                title='VIEW NOW' />
+            </Card>
+          
+          
+          )
+          })}
+
         </Block>
-      </Block>
-    );
-  }
+      </ScrollView>
+    </Block>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.COLORS.BLACK,
-    marginTop: Platform.OS === 'android' ? -HeaderHeight : 0,
+  home1: {
+    width: width,
+    paddingTop: 50, 
   },
-  padded: {
-    paddingHorizontal: theme.SIZES.BASE * 2,
-    zIndex: 3,
-    position: 'absolute',
-    bottom: Platform.OS === 'android' ? theme.SIZES.BASE * 2 : theme.SIZES.BASE * 3,
-  },
-  button: {
-    width: width - theme.SIZES.BASE * 4,
-    height: theme.SIZES.BASE * 3,
-    shadowRadius: 0,
-    shadowOpacity: 0,
-  },
-  pro: {
-    backgroundColor: argonTheme.COLORS.INFO,
-    paddingHorizontal: 8,
-    marginLeft: 3,
-    borderRadius: 4,
-    height: 22,
-    marginTop: 15
-  },
-  gradient: {
-    zIndex: 1,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 66,
+  scrollList: {
+    width: width - theme.SIZES.BASE * 2,
+    paddingVertical: theme.SIZES.BASE,
   },
 });

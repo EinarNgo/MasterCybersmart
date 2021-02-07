@@ -15,8 +15,6 @@ const { height, width } = Dimensions.get("screen");
 import Amplify, { API, Auth, graphqlOperation  } from 'aws-amplify';
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
-import { listCtfs } from '../graphql/queries';
-import { updateSong } from '../graphql/mutations';
 import Onboarding from '../screens/Onboarding';
 import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
@@ -77,6 +75,7 @@ function ProfileStack(props) {
 }
 
 function HomeStack(props) {
+
   return (
     <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
@@ -183,23 +182,6 @@ export default function SignStack(props) {
 }
 
 function AppStack({props,updateAuthState}) {
-
-  const [ctfs, setCtfs] = useState([]);
-
-    useEffect(() => {
-        fetchCtfs();
-    }, []);
-
-    const fetchCtfs = async () => {
-      try {
-          const ctfData = await API.graphql(graphqlOperation(listCtfs));
-          const ctfList = ctfData.data.listCtfs.items;
-          console.log('ctf list', ctfList);
-          setCtfs(ctfList);
-      } catch (error) {
-          console.log('error on fetching ctf', error);
-      }
-    };
 
   return (
     <Drawer.Navigator

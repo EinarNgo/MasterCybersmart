@@ -78,14 +78,7 @@ export const listModulers = /* GraphQL */ `
         bilder
         points
         totalSolved
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
       }
-      nextToken
-      startedAt
     }
   }
 `;

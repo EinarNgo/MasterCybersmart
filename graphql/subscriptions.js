@@ -1,43 +1,67 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateCtf = /* GraphQL */ `
-  subscription OnCreateCtf {
-    onCreateCtf {
+export const onCreateModuler = /* GraphQL */ `
+  subscription OnCreateModuler {
+    onCreateModuler {
       id
-      name
-      key
-      description
+      kategori
+      type
+      sporsmaal
+      fasit
+      valgmuligheter
+      vanskelighetsgrad
+      antallfeil
+      bilder
       points
       totalSolved
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateCtf = /* GraphQL */ `
-  subscription OnUpdateCtf {
-    onUpdateCtf {
+export const onUpdateModuler = /* GraphQL */ `
+  subscription OnUpdateModuler {
+    onUpdateModuler {
       id
-      name
-      key
-      description
+      kategori
+      type
+      sporsmaal
+      fasit
+      valgmuligheter
+      vanskelighetsgrad
+      antallfeil
+      bilder
       points
       totalSolved
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteCtf = /* GraphQL */ `
-  subscription OnDeleteCtf {
-    onDeleteCtf {
+export const onDeleteModuler = /* GraphQL */ `
+  subscription OnDeleteModuler {
+    onDeleteModuler {
       id
-      name
-      key
-      description
+      kategori
+      type
+      sporsmaal
+      fasit
+      valgmuligheter
+      vanskelighetsgrad
+      antallfeil
+      bilder
       points
       totalSolved
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }

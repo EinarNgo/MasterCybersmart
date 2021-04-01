@@ -1,9 +1,13 @@
-type Ctf @model {
+type Moduler @model {
   id: ID!
-  name: String!
-  key: String!
-  description: String!
+  kategori: String!
+  type: String!
+  sporsmaal: String!
+  fasit: String!
+  valgmuligheter: [String!]
+  vanskelighetsgrad: String!
+  antallfeil: Int!
+  bilder: String
   points: Int!
   totalSolved: Int!
 }
-

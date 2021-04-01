@@ -1,52 +1,76 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createCtf = /* GraphQL */ `
-  mutation CreateCtf(
-    $input: CreateCtfInput!
-    $condition: ModelCtfConditionInput
+export const createModuler = /* GraphQL */ `
+  mutation CreateModuler(
+    $input: CreateModulerInput!
+    $condition: ModelModulerConditionInput
   ) {
-    createCtf(input: $input, condition: $condition) {
+    createModuler(input: $input, condition: $condition) {
       id
-      name
-      key
-      description
+      kategori
+      type
+      sporsmaal
+      fasit
+      valgmuligheter
+      vanskelighetsgrad
+      antallfeil
+      bilder
       points
       totalSolved
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
   }
 `;
-export const updateCtf = /* GraphQL */ `
-  mutation UpdateCtf(
-    $input: UpdateCtfInput!
-    $condition: ModelCtfConditionInput
+export const updateModuler = /* GraphQL */ `
+  mutation UpdateModuler(
+    $input: UpdateModulerInput!
+    $condition: ModelModulerConditionInput
   ) {
-    updateCtf(input: $input, condition: $condition) {
+    updateModuler(input: $input, condition: $condition) {
       id
-      name
-      key
-      description
+      kategori
+      type
+      sporsmaal
+      fasit
+      valgmuligheter
+      vanskelighetsgrad
+      antallfeil
+      bilder
       points
       totalSolved
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteCtf = /* GraphQL */ `
-  mutation DeleteCtf(
-    $input: DeleteCtfInput!
-    $condition: ModelCtfConditionInput
+export const deleteModuler = /* GraphQL */ `
+  mutation DeleteModuler(
+    $input: DeleteModulerInput!
+    $condition: ModelModulerConditionInput
   ) {
-    deleteCtf(input: $input, condition: $condition) {
+    deleteModuler(input: $input, condition: $condition) {
       id
-      name
-      key
-      description
+      kategori
+      type
+      sporsmaal
+      fasit
+      valgmuligheter
+      vanskelighetsgrad
+      antallfeil
+      bilder
       points
       totalSolved
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }

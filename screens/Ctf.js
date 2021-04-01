@@ -3,26 +3,24 @@ import Amplify, { API, Auth, graphqlOperation  } from 'aws-amplify';
 import { StyleSheet, Dimensions, ScrollView, Text, View, Image } from 'react-native';
 import { Block, theme } from 'galio-framework';
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
-import { listCtfs } from '../graphql/queries';
-import { updateSong } from '../graphql/mutations';
+import { listModulers } from '../graphql/queries';
 const { width } = Dimensions.get('screen');
 
 
 export default function Ctf({ navigation, updateAuthState }) {
-  const [ctfs, setCtfs] = useState([]);
+  const [modulers, setModulers] = useState([]);
 
   useEffect(() => {
-      fetchCtfs();
+      fetchModulers();
   }, []);
 
-  const fetchCtfs = async () => {
+  const fetchModulers = async () => {
     try {
-        const ctfData = await API.graphql(graphqlOperation(listCtfs));
-        const ctfList = ctfData.data.listCtfs.items;
-        console.log('ctf list', ctfList);
-        setCtfs(ctfList);
+        const modulerData = await API.graphql(graphqlOperation(listModulers));
+        const modulerList = modulerData.data.listModulers.items;
+        console.log('module list', modulerList);
     } catch (error) {
-        console.log('error on fetching ctf', error);
+        console.log('error on fetching modul', error);
     }
   };
 
@@ -32,12 +30,11 @@ export default function Ctf({ navigation, updateAuthState }) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollList}>
         <Block flex>
-        {ctfs.map((ctf, idx) => {
+        {modulers.map((modul, idx) => {
           return (
-        
-            <Card key={`ctf${idx}`}>
-            <Card.Title style={{textAlign:'center',fontSize:30}}>{ctf.name}</Card.Title>
-            <Card.Title >{ctf.points}</Card.Title>
+            <Card key={`modul${idx}`}>
+            <Card.Title style={{textAlign:'center',fontSize:30}}>{modul.kategori}</Card.Title>
+            <Card.Title >{modul.points}</Card.Title>
             <Card.Divider/>
               <Text style={{marginBottom: 10}}>
                 The idea with React Native Elements is more about component structure than actual design.

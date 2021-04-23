@@ -6,7 +6,8 @@ import {
   StatusBar,
   Dimensions,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  Navbar
 } from "react-native";
 import { Block, Button, Text, theme } from "galio-framework";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -22,11 +23,13 @@ import ConfirmSignUp from '../screens/ConfirmSignUp';
 import Home from '../screens/Home';
 import Pro from "../screens/Pro";
 import Ctf from "../screens/Ctf";
+import Quiz from '../screens/Quiz';
 import CustomDrawerContent from "./Menu";
 import Profile from "../screens/Profile";
 // header for screens
 import { Header } from "../components";
 import config from '../aws-exports';
+import QuizIndex from '../screens/QuizIndex';
 Amplify.configure(config);
 
 const AuthenticationStack = createStackNavigator();
@@ -75,7 +78,6 @@ function ProfileStack(props) {
 }
 
 function HomeStack(props) {
-
   return (
     <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
@@ -100,12 +102,55 @@ function HomeStack(props) {
         options={{
           header: ({ navigation, scene }) => (
             <Header
-              title=""
+              title="Home"
               back
               white
               transparent
               navigation={navigation}
               scene={scene}
+            />
+          ),
+          headerTransparent: true
+        }}
+      />
+      <Stack.Screen
+        name="QuizIndex"
+        component={QuizIndex}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title="Home"
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true
+        }}
+      />
+    
+    </Stack.Navigator>
+    
+  );
+}
+
+function QuizStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="Quiz"
+        component={Quiz}
+        centerComponent={{ name: 'MY TITLE' }}
+        options={{
+          header: () => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              centerComponent={{ title: 'MY TITLE' }}
             />
           ),
           headerTransparent: true
@@ -214,6 +259,7 @@ function AppStack({props,updateAuthState}) {
       initialRouteName="Home"
     >
       <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name="Quiz" component={QuizStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
     </Drawer.Navigator>
   );

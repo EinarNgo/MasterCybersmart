@@ -6,9 +6,9 @@ export default [
     horizontal: true
   },
   {
-    title: 'Learn cybersecurity',
+    title: 'Quiz',
     image: 'https://previews.123rf.com/images/bestdesign36/bestdesign361712/bestdesign36171200777/91535981-conceptual-cyber-security-online-access-technology-paint-brush-word-cloud-isolated-background-collag.jpg',
-    cta: 'View article'
+    cta: 'Spill'
   },
   {
     title: 'Task ',

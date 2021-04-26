@@ -13,14 +13,17 @@ import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 import quiz from '../constants/quiz';
+import spaceQuestions from "../assets/data/space"
+
 
 const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-class QuizIndex extends React.Component {
-  render() {
-    return (
+export default class QuizIndex extends React.Component {
+  render() {  
+  const { navigate } = this.props.navigation;
+  return (
       <Block flex style={styles.quizScreen}>
         <Block flex>
           <ImageBackground
@@ -50,6 +53,13 @@ class QuizIndex extends React.Component {
                       <Button
                         small
                         style={{ backgroundColor: argonTheme.COLORS.INFO }}
+                        onPress={() =>
+                          navigate("Quiz", {
+                            title: "Space",
+                            questions: spaceQuestions,
+                            color: "#000"
+                          })
+                        }
                       >
                         Poeng: ?
                       </Button>
@@ -154,4 +164,3 @@ const styles = StyleSheet.create({
   },
 
 });
-export default QuizIndex;

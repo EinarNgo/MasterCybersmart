@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Dimensions,
   ScrollView,
   Image,
   ImageBackground,
-  Platform
+  Platform,
+  route
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Card } from '../components';
@@ -13,13 +14,64 @@ import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 import quiz from '../constants/quiz';
+import QuizIndex from "./QuizIndex";
 
 const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-class Quiz extends React.Component {
+export default class Quiz extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  state = {
+    correctCount: 0,
+    totalCount: 0,
+    activeQuestionIndex: this.props.route.params.questions.length,
+    answered: false,
+    answerCorrect: false
+  };
+
+  answer = correct => {
+    this.setState(
+      state => {
+        const nextState = { answered: true };
+
+        if (correct) {
+          nextState.correctCount = state.correctCount + 1;
+          nextState.answerCorrect = true;
+        } else {
+          nextState.answerCorrect = false;
+        }
+
+        return nextState;
+      },
+      () => {
+        setTimeout(() => this.nextQuestion(), 750);
+      }
+    );
+  };
+
+  nextQuestion = () => {
+    this.setState(state => {
+      const nextIndex = state.activeQuestionIndex + 1;
+
+      if (nextIndex >= state.totalCount) {
+        return this.props.navigation.popToTop();
+      }
+
+      return {
+        activeQuestionIndex: nextIndex,
+        answered: false
+      };
+    });
+  };
+
   render() {
+    const questions = this.props.route.params.questions;
+    //const question = questions[this.state.activeQuestionIndex];
+    console.log("-------------------------------------");
+    console.log(this.props.route.params.questions);
     return (
       <Block flex style={styles.quizScreen}>
         <Block flex>
@@ -42,9 +94,10 @@ class Quiz extends React.Component {
                       space="evenly"
                       style={{ marginTop: 20, paddingBottom: 24 }}
                     >
-                      <Text>Bar med nummer </Text>
+                      <Text></Text>
                     </Block>
               </Block>
+              
               <Block flex style={styles.valg}>
                 <Block
                       row
@@ -180,5 +233,4 @@ const styles = StyleSheet.create({
   },
 
 });
-export default Quiz;
 

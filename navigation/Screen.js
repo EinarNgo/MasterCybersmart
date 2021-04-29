@@ -114,6 +114,13 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
+    </Stack.Navigator>
+  );
+}
+
+function QuizStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
         name="QuizIndex"
         component={QuizIndex}
@@ -131,13 +138,6 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
-    </Stack.Navigator>
-  );
-}
-
-function QuizStack(props) {
-  return (
-    <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
         name="Quiz"
         component={Quiz}
@@ -282,9 +282,9 @@ function AppStack({ props, updateAuthState }) {
       initialRouteName="Home"
     >
       <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="Quiz" component={QuizStack} />
-      <Drawer.Screen name="ModuleQuestion" component={ModuleQuestion} />
+      <Drawer.Screen name="QuizIndex" component={QuizStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
+      <Drawer.Screen name="ModuleQuestion" component={ModuleQuestion} />
     </Drawer.Navigator>
   );
 }

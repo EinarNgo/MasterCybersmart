@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   Image,
@@ -7,29 +7,30 @@ import {
   Dimensions,
   View,
   ActivityIndicator,
-  Navbar
+  Navbar,
 } from "react-native";
 import { Block, Button, Text, theme } from "galio-framework";
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 const { height, width } = Dimensions.get("screen");
-import Amplify, { API, Auth, graphqlOperation  } from 'aws-amplify';
+import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
-import Onboarding from '../screens/Onboarding';
-import SignIn from '../screens/SignIn';
-import SignUp from '../screens/SignUp';
-import ConfirmSignUp from '../screens/ConfirmSignUp';
-import Home from '../screens/Home';
+import Onboarding from "../screens/Onboarding";
+import SignIn from "../screens/SignIn";
+import SignUp from "../screens/SignUp";
+import ConfirmSignUp from "../screens/ConfirmSignUp";
+import Home from "../screens/Home";
 import Pro from "../screens/Pro";
 import Ctf from "../screens/Ctf";
-import Quiz from '../screens/Quiz';
+import Quiz from "../screens/Quiz";
 import CustomDrawerContent from "./Menu";
 import Profile from "../screens/Profile";
 // header for screens
 import { Header } from "../components";
-import config from '../aws-exports';
-import QuizIndex from '../screens/QuizIndex';
+import config from "../aws-exports";
+import QuizIndex from "../screens/QuizIndex";
+import ModuleQuestion from "../screens/ModuleQuestion";
 Amplify.configure(config);
 
 const AuthenticationStack = createStackNavigator();
@@ -53,10 +54,10 @@ function ProfileStack(props) {
             />
           ),
           cardStyle: { backgroundColor: "#FFFFFF" },
-          headerTransparent: true
+          headerTransparent: true,
         }}
       />
-            <Stack.Screen
+      <Stack.Screen
         name="Pro"
         component={Pro}
         options={{
@@ -70,7 +71,7 @@ function ProfileStack(props) {
               scene={scene}
             />
           ),
-          headerTransparent: true
+          headerTransparent: true,
         }}
       />
     </Stack.Navigator>
@@ -93,7 +94,7 @@ function HomeStack(props) {
               scene={scene}
             />
           ),
-          cardStyle: { backgroundColor: "#F8F9FE" }
+          cardStyle: { backgroundColor: "#F8F9FE" },
         }}
       />
       <Stack.Screen
@@ -110,7 +111,7 @@ function HomeStack(props) {
               scene={scene}
             />
           ),
-          headerTransparent: true
+          headerTransparent: true,
         }}
       />
       <Stack.Screen
@@ -127,12 +128,10 @@ function HomeStack(props) {
               scene={scene}
             />
           ),
-          headerTransparent: true
+          headerTransparent: true,
         }}
       />
-    
     </Stack.Navigator>
-    
   );
 }
 
@@ -142,7 +141,7 @@ function QuizStack(props) {
       <Stack.Screen
         name="Quiz"
         component={Quiz}
-        centerComponent={{ name: 'MY TITLE' }}
+        centerComponent={{ name: "MY TITLE" }}
         options={{
           header: () => (
             <Header
@@ -150,10 +149,33 @@ function QuizStack(props) {
               back
               white
               transparent
-              centerComponent={{ title: 'MY TITLE' }}
+              centerComponent={{ title: "MY TITLE" }}
             />
           ),
-          headerTransparent: true
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function CtfStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="ModuleQuestion"
+        component={ModuleQuestion}
+        centerComponent={{ name: "MY TITLE" }}
+        options={{
+          header: () => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              centerComponent={{ title: "MY TITLE" }}
+            />
+          ),
+          headerTransparent: true,
         }}
       />
     </Stack.Navigator>
@@ -162,7 +184,7 @@ function QuizStack(props) {
 
 const Initializing = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ActivityIndicator size="large" color="tomato" />
     </View>
   );
@@ -171,41 +193,41 @@ const Initializing = () => {
 function AuthenticationNavigation(props) {
   return (
     <AuthenticationStack.Navigator headerMode="none">
-        <AuthenticationStack.Screen
-          name="Onboarding"
-          component={Onboarding}
-          option={{
-            headerTransparent: true
-          }}
-        />
-        <AuthenticationStack.Screen name="App" component={Onboarding} />
-        <AuthenticationStack.Screen name="SignIn">
-          {screenProps => (
-            <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
-          )}
-        </AuthenticationStack.Screen>
-        <AuthenticationStack.Screen name="SignUp" component={SignUp} />
-        <AuthenticationStack.Screen
-          name="ConfirmSignUp"
-          component={ConfirmSignUp}
-        />
-      </AuthenticationStack.Navigator>
+      <AuthenticationStack.Screen
+        name="Onboarding"
+        component={Onboarding}
+        option={{
+          headerTransparent: true,
+        }}
+      />
+      <AuthenticationStack.Screen name="App" component={Onboarding} />
+      <AuthenticationStack.Screen name="SignIn">
+        {(screenProps) => (
+          <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
+        )}
+      </AuthenticationStack.Screen>
+      <AuthenticationStack.Screen name="SignUp" component={SignUp} />
+      <AuthenticationStack.Screen
+        name="ConfirmSignUp"
+        component={ConfirmSignUp}
+      />
+    </AuthenticationStack.Navigator>
   );
 }
 
 export default function SignStack(props) {
-  const [isUserLoggedIn, setUserLoggedIn] = useState('initializing');
+  const [isUserLoggedIn, setUserLoggedIn] = useState("initializing");
   useEffect(() => {
     checkAuthState();
   }, []);
   async function checkAuthState() {
     try {
       await Auth.currentAuthenticatedUser();
-      console.log('User is signed in');
-      setUserLoggedIn('loggedIn');
+      console.log("User is signed in");
+      setUserLoggedIn("loggedIn");
     } catch (err) {
-      console.log('User is not signed in');
-      setUserLoggedIn('loggedOut');
+      console.log("User is not signed in");
+      setUserLoggedIn("loggedOut");
     }
   }
 
@@ -214,27 +236,28 @@ export default function SignStack(props) {
   }
 
   return (
-      <Block flex>
-        {isUserLoggedIn === 'initializing' && <Initializing />}
-        {isUserLoggedIn === 'loggedIn' && (
-          <AppStack updateAuthState={updateAuthState} />
-        )}
-        {isUserLoggedIn === 'loggedOut' && (
-          <AuthenticationNavigation updateAuthState={updateAuthState} />
-        )}
-      </Block>
-    );
+    <Block flex>
+      {isUserLoggedIn === "initializing" && <Initializing />}
+      {isUserLoggedIn === "loggedIn" && (
+        <AppStack updateAuthState={updateAuthState} />
+      )}
+      {isUserLoggedIn === "loggedOut" && (
+        <AuthenticationNavigation updateAuthState={updateAuthState} />
+      )}
+    </Block>
+  );
 }
 
-function AppStack({props,updateAuthState}) {
-
+function AppStack({ props, updateAuthState }) {
   return (
     <Drawer.Navigator
       style={{ flex: 1 }}
-      drawerContent={props => <CustomDrawerContent {...props} updateAuthState={updateAuthState}/>}
+      drawerContent={(props) => (
+        <CustomDrawerContent {...props} updateAuthState={updateAuthState} />
+      )}
       drawerStyle={{
         backgroundColor: "white",
-        width: width * 0.8
+        width: width * 0.8,
       }}
       drawerContentOptions={{
         activeTintcolor: "white",
@@ -248,18 +271,19 @@ function AppStack({props,updateAuthState}) {
           justifyContent: "center",
           alignContent: "center",
           alignItems: "center",
-          overflow: "hidden"
+          overflow: "hidden",
         },
         labelStyle: {
           fontSize: 18,
           marginLeft: 12,
-          fontWeight: "normal"
-        }
+          fontWeight: "normal",
+        },
       }}
       initialRouteName="Home"
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Quiz" component={QuizStack} />
+      <Drawer.Screen name="ModuleQuestion" component={ModuleQuestion} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
     </Drawer.Navigator>
   );

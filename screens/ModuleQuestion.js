@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-import { View } from "react-native";
+import React, { Component, useState, useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
+import { getModuler, listModulers } from "../graphql/queries";
 
-export default function ModuleQuestions() {
+export default function ModuleQuestion() {
   const [Questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -20,11 +22,17 @@ export default function ModuleQuestions() {
     } catch (error) {
       console.log("error on fetching questions", error);
     }
-
-    return (
-      <View>
-        <Text>Dette er spørsmål siden</Text>
-      </View>
-    );
   };
+  return (
+    <View>
+      <Text style={styles.text}>Dette er spørsmål siden</Text>
+    </View>
+  );
 }
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 80,
+    textAlign: "center",
+    textAlignVertical: "bottom",
+  },
+});

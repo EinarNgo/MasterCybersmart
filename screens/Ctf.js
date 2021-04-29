@@ -13,6 +13,7 @@ import { Block, theme } from "galio-framework";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
 import { getModuler, listModulers } from "../graphql/queries";
 import Module_header from "../components/Module_header";
+import ModuleQuestion from "./ModuleQuestion";
 const { width } = Dimensions.get("screen");
 
 export default function Ctf({ navigation, updateAuthState }) {
@@ -60,6 +61,7 @@ export default function Ctf({ navigation, updateAuthState }) {
                   <Text style={styles.solved}>Antall løste: 5</Text>
                 </View>
                 <Button
+                  onPress={() => navigation.navigate(ModuleQuestion)}
                   buttonStyle={{
                     borderRadius: 0,
                     marginLeft: 0,

@@ -6,8 +6,7 @@ import {
   Image,
   ImageBackground,
   Platform,
-  View,
-  ButtonContainer
+  route
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Card } from '../components';
@@ -27,8 +26,8 @@ export default class Quiz extends React.Component {
   }
   state = {
     correctCount: 0,
-    totalCount: this.props.route.params.questions.length,
-    activeQuestionIndex: 0,
+    totalCount: 0,
+    activeQuestionIndex: this.props.route.params.questions.length,
     answered: false,
     answerCorrect: false
   };
@@ -71,9 +70,7 @@ export default class Quiz extends React.Component {
   render() {
     const questions = this.props.route.params.questions;
     const question = questions[this.state.activeQuestionIndex];
-    console.log("-------------------------------------");
-    //console.log(question);
-    console.log(question.answers);
+    console.log(question);
     return (
       <Block flex style={styles.quizScreen}>
         <Block flex>
@@ -90,21 +87,60 @@ export default class Quiz extends React.Component {
               <Text bold size={16} color="#000" style={{marginTop: -5}}>
                         Tid igjen: --,--
                       </Text>
-                      <Text style={styles.text}>{question.question}</Text>
               <Block
                       middle
                       row
                       space="evenly"
                       style={{ marginTop: 20, paddingBottom: 24 }}
                     >
+                      <Text>Bar med nummer {this.props.route.params.title}  </Text>
                       <Text></Text>
                     </Block>
               </Block>
               
               <Block flex style={styles.valg}>
-                <Text style={styles.text}>
-                  {`${this.state.correctCount}/${this.state.totalCount}`}
-                </Text>
+                <Block
+                      row
+                      space="between"
+                    >
+
+                </Block>
+
+
+        
+              </Block>
+              <Block flex style={styles.valg}>
+                <Block
+                      row
+                      space="between"
+                    >
+
+                </Block>
+
+
+        
+              </Block>
+              <Block flex style={styles.valg}>
+                <Block
+                      row
+                      space="between"
+                    >
+
+                </Block>
+
+
+        
+              </Block>
+              <Block flex style={styles.valg}>
+                <Block
+                      row
+                      space="between"
+                    >
+
+                </Block>
+
+
+        
               </Block>
             </ScrollView>
           </ImageBackground>

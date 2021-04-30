@@ -20,9 +20,8 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-export default class QuizIndex extends React.Component {
-  render() {  
-  const { navigate } = this.props.navigation;
+export default function QuizIndex({ navigation, updateAuthState }) {
+  //const { navigate } = this.props.navigation;
   return (
       <Block flex style={styles.quizScreen}>
         <Block flex>
@@ -54,7 +53,7 @@ export default class QuizIndex extends React.Component {
                         small
                         style={{ backgroundColor: argonTheme.COLORS.INFO }}
                         onPress={() =>
-                          navigate("Quiz", {
+                          navigation.navigate("Quiz", {
                             title: "Space",
                             questions: spaceQuestions,
                             color: "#000"
@@ -96,7 +95,6 @@ export default class QuizIndex extends React.Component {
       </Block>
     );
   }
-}
 
 const styles = StyleSheet.create({
   quizScreen: {

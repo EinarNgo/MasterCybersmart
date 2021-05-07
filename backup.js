@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Dimensions,
   ScrollView,
   Image,
   ImageBackground,
-  Platform
+  Platform,
+  route
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Card } from '../components';
@@ -13,16 +14,64 @@ import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 import quiz from '../constants/quiz';
-import spaceQuestions from "../assets/data/space"
-
+import QuizIndex from "./QuizIndex";
 
 const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-export default function QuizIndex({ navigation, updateAuthState }) {
-  //const { navigate } = this.props.navigation;
-  return (
+export default class Quiz extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  state = {
+    correctCount: 0,
+    totalCount: 0,
+    activeQuestionIndex: this.props.route.params.questions.length,
+    answered: false,
+    answerCorrect: false
+  };
+
+  answer = correct => {
+    this.setState(
+      state => {
+        const nextState = { answered: true };
+
+        if (correct) {
+          nextState.correctCount = state.correctCount + 1;
+          nextState.answerCorrect = true;
+        } else {
+          nextState.answerCorrect = false;
+        }
+
+        return nextState;
+      },
+      () => {
+        setTimeout(() => this.nextQuestion(), 750);
+      }
+    );
+  };
+
+  nextQuestion = () => {
+    this.setState(state => {
+      const nextIndex = state.activeQuestionIndex + 1;
+
+      if (nextIndex >= state.totalCount) {
+        return this.props.navigation.popToTop();
+      }
+
+      return {
+        activeQuestionIndex: nextIndex,
+        answered: false
+      };
+    });
+  };
+
+  render() {
+    const questions = this.props.route.params.questions;
+    const question = questions[this.state.activeQuestionIndex];
+    console.log(question);
+    return (
       <Block flex style={styles.quizScreen}>
         <Block flex>
           <ImageBackground
@@ -34,14 +83,9 @@ export default function QuizIndex({ navigation, updateAuthState }) {
               showsVerticalScrollIndicator={false}
               style={{ width, marginTop: '25%' }}
             >
-              <Block middle style={styles.statsContainer}>
-                    <Text bold size={28} color="#fff">
-                      Quiz
-                    </Text>
-              </Block>
               <Block flex style={styles.resultCard}>
               <Text bold size={16} color="#000" style={{marginTop: -5}}>
-                        Resultater
+                        Tid igjen: --,--
                       </Text>
               <Block
                       middle
@@ -49,44 +93,53 @@ export default function QuizIndex({ navigation, updateAuthState }) {
                       space="evenly"
                       style={{ marginTop: 20, paddingBottom: 24 }}
                     >
-                      <Button
-                        small
-                        style={{ backgroundColor: argonTheme.COLORS.INFO }}
-                        onPress={() =>
-                          navigation.navigate("Quiz", {
-                            title: "Space",
-                            questions: spaceQuestions,
-                            color: "#000"
-                          })
-                        }
-                      >
-                        Poeng: ?
-                      </Button>
-                      <Button
-                        small
-                        style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-                      >
-                        Forsøk: ?
-                      </Button>
+                      <Text>Bar med nummer {this.props.route.params.title}  </Text>
+                      <Text></Text>
                     </Block>
               </Block>
-              <Block flex style={styles.CategoriesCard}>
+              
+              <Block flex style={styles.valg}>
                 <Block
                       row
                       space="between"
                     >
-                      <Text bold size={16} color="#000" style={{marginTop: -5}}>
-                        Kategorier
-                      </Text>
-                    </Block>
-                  <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      <Card item={quiz[2]} style={{ marginRight: theme.SIZES.BASE }} nav={'Quiz'}/>
-                      <Card item={quiz[3]}/>
-                  </Block>
-                  <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      <Card item={quiz[4]} style={{ marginRight: theme.SIZES.BASE }}/>
-                      <Card item={quiz[1]}/>
-                  </Block>
+
+                </Block>
+
+
+        
+              </Block>
+              <Block flex style={styles.valg}>
+                <Block
+                      row
+                      space="between"
+                    >
+
+                </Block>
+
+
+        
+              </Block>
+              <Block flex style={styles.valg}>
+                <Block
+                      row
+                      space="between"
+                    >
+
+                </Block>
+
+
+        
+              </Block>
+              <Block flex style={styles.valg}>
+                <Block
+                      row
+                      space="between"
+                    >
+
+                </Block>
+
+
         
               </Block>
             </ScrollView>
@@ -95,6 +148,7 @@ export default function QuizIndex({ navigation, updateAuthState }) {
       </Block>
     );
   }
+}
 
 const styles = StyleSheet.create({
   quizScreen: {
@@ -134,6 +188,23 @@ const styles = StyleSheet.create({
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginTop: 20,
+    marginBottom: 50,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    zIndex: 2
+  },
+  valg: {
+    // position: "relative",
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginTop: 20,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     borderBottomLeftRadius: 6,
@@ -162,3 +233,4 @@ const styles = StyleSheet.create({
   },
 
 });
+

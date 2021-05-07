@@ -6,11 +6,13 @@ import {
   Image,
   ImageBackground,
   Platform,
-  route
+  View,
+  ButtonContainer,
+  Button
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Card } from '../components';
-import { Button } from "../components";
+//import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 import quiz from '../constants/quiz';
@@ -26,8 +28,8 @@ export default class Quiz extends React.Component {
   }
   state = {
     correctCount: 0,
-    totalCount: 0,
-    activeQuestionIndex: this.props.route.params.questions.length,
+    totalCount: this.props.route.params.questions.length,
+    activeQuestionIndex: 0,
     answered: false,
     answerCorrect: false
   };
@@ -68,10 +70,12 @@ export default class Quiz extends React.Component {
   };
 
   render() {
+    console.log(this.state.activeQuestionIndex)
     const questions = this.props.route.params.questions;
-    //const question = questions[this.state.activeQuestionIndex];
+    const question = questions[this.state.activeQuestionIndex];
     console.log("-------------------------------------");
-    console.log(this.props.route.params.questions);
+    console.log(question);
+    console.log(questions[this.state.activeQuestionIndex].answers[1]);
     return (
       <Block flex style={styles.quizScreen}>
         <Block flex>
@@ -88,59 +92,31 @@ export default class Quiz extends React.Component {
               <Text bold size={16} color="#000" style={{marginTop: -5}}>
                         Tid igjen: --,--
                       </Text>
+                      <Text style={styles.text}>{question.question}</Text>
+              
+              </Block>
               <Block
                       middle
                       row
                       space="evenly"
                       style={{ marginTop: 20, paddingBottom: 24 }}
                     >
-                      <Text></Text>
+                      
+                        {question.answers.map((answer) => (
+                        <Block flex style={styles.valg}>
+                          <Button
+                            title={answer.text}
+                            onPress={() => this.answer(answer.correct)}
+                          />
+                        </Block>
+                        ))}
+                      
                     </Block>
-              </Block>
               
               <Block flex style={styles.valg}>
-                <Block
-                      row
-                      space="between"
-                    >
-
-                </Block>
-
-
-        
-              </Block>
-              <Block flex style={styles.valg}>
-                <Block
-                      row
-                      space="between"
-                    >
-
-                </Block>
-
-
-        
-              </Block>
-              <Block flex style={styles.valg}>
-                <Block
-                      row
-                      space="between"
-                    >
-
-                </Block>
-
-
-        
-              </Block>
-              <Block flex style={styles.valg}>
-                <Block
-                      row
-                      space="between"
-                    >
-
-                </Block>
-
-
-        
+                <Text style={styles.text}>
+                  {`${this.state.correctCount}/${this.state.totalCount}`}
+                </Text>
               </Block>
             </ScrollView>
           </ImageBackground>
@@ -203,7 +179,7 @@ const styles = StyleSheet.create({
   valg: {
     // position: "relative",
     padding: theme.SIZES.BASE,
-    marginHorizontal: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE ,
     marginTop: 20,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,

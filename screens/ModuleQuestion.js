@@ -1,9 +1,13 @@
 import React, { Component, useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions, } from "react-native";
 import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
 import { getModuler, listModulers } from "../graphql/queries";
 import TestHeader from "../components/TestComps/TestHeader";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { Card } from "react-native-elements";
+import Theme from "../constants/Theme";
+const { width } = Dimensions.get("screen");
+const { height } = Dimensions.get("window").height;
 
 export default function ModuleQuestion() {
   const [Questions, setQuestions] = useState([]);
@@ -61,18 +65,23 @@ export default function ModuleQuestion() {
                 <TouchableOpacity
                   key={`list${idx}`}
                   onPress={() => currentQuestion(idx)}
-                >
+                > 
                   <Text style={styles.testText} key={`list${idx}`}>
                     {idx}
                   </Text>
+                  
                 </TouchableOpacity>
               );
             })}
           </ScrollView>
         </View>
       </View>
-
+      <View style={styles.container}>
+      <Card containerStyle = {styles.questionCard}>
       <Text style={styles.text}>{Current}</Text>
+      <TextInput style={styles.input}></TextInput>
+      </Card>
+      </View>
     </View>
   );
 }
@@ -98,4 +107,26 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "white",
   },
+  container:{
+    width:width,
+    marginTop:150,
+    //endre slik at høyden er en konstant over flere forskjellige skjermer
+
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  questionCard:{
+    backgroundColor:"white",
+    borderRadius: 15,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
+    elevation: 2,
+    
+  }
 });

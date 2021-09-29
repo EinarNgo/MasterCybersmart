@@ -6,6 +6,8 @@ import TestHeader from "../components/TestComps/TestHeader";
 import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { Card } from "react-native-elements";
 import Theme from "../constants/Theme";
+import { Block, theme } from "galio-framework";
+import Module_header from "../components/Module_header";
 const { width } = Dimensions.get("screen");
 const { height } = Dimensions.get("window").height;
 
@@ -59,6 +61,7 @@ export default function ModuleQuestion() {
     <View>
       <View>
         <View style={styles.testList}>
+        <Block flex>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {list.map((q, idx) => {
               return (
@@ -74,6 +77,7 @@ export default function ModuleQuestion() {
               );
             })}
           </ScrollView>
+          </Block>
         </View>
       </View>
       <View style={styles.container}>

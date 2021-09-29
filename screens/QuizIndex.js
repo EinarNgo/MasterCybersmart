@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
 import {
   StyleSheet,
   Dimensions,
@@ -14,7 +15,10 @@ import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 import quiz from '../constants/quiz';
 import spaceQuestions from "../assets/data/space"
-
+import { getModuler, listModulers } from "../graphql/queries";
+import Module_header from "../components/Module_header";
+import ModuleQuestion from "./ModuleQuestion";
+import questions from "../assets/data/space";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -22,8 +26,29 @@ const thumbMeasure = (width - 48 - 32) / 3;
 
 export default function QuizIndex({ navigation, updateAuthState }) {
   //const { navigate } = this.props.navigation;
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
+  const fetchQuestions = async () => {
+    try {
+      //hent alle spørsmål relatert til den kategorien. Må sende inn kategorinavn som en prop og deretter gjøre en query
+      //må fikse hvordan filtrere queries, og hvordan fikse screens riktig
+      const questionData = await API.graphql(graphqlOperation(listModulers));
+
+      const questionList = questionData.data.listModulers.items;
+
+      setQuestions(questionList);
+    } catch (error) {
+      console.log("error on fetching questions", error);
+    }
+  };
+
   return (
       <Block flex style={styles.quizScreen}>
+        <Module_header name=""></Module_header>
         <Block flex>
           <ImageBackground
             source={Images.QuizBackground}
@@ -32,7 +57,7 @@ export default function QuizIndex({ navigation, updateAuthState }) {
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '25%' }}
+              style={{ width, marginTop: '0%' }}
             >
               <Block middle style={styles.statsContainer}>
                     <Text bold size={28} color="#fff">
@@ -55,7 +80,7 @@ export default function QuizIndex({ navigation, updateAuthState }) {
                         onPress={() =>
                           navigation.navigate("Quiz", {
                             title: "Space",
-                            questions: spaceQuestions,
+                            questions: questions,
                             color: "#000"
                           })
                         }

@@ -41,9 +41,10 @@ const styles = {
   text: {
     color: "white",
     position: "absolute",
-    bottom: 0,
+    bottom: 10,
     alignSelf: "center",
     fontSize: 30,
     fontFamily: "Arial",
+    fontWeight: 'bold',
   },
 };

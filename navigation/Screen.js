@@ -145,7 +145,7 @@ function QuizStack(props) {
         options={{
           header: () => (
             <Header
-              title=""
+              title="Home"
               back
               white
               transparent
@@ -168,7 +168,7 @@ function CtfStack(props) {
         options={{
           header: () => (
             <Header
-              title=""
+              title="Head"
               back
               white
               transparent
@@ -284,7 +284,7 @@ function AppStack({ props, updateAuthState }) {
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="QuizIndex" component={QuizStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
-      <Drawer.Screen name="ModuleQuestion" component={ModuleQuestion} />
+      <Drawer.Screen name="ModuleQuestion" component={CtfStack} />
     </Drawer.Navigator>
   );
 }

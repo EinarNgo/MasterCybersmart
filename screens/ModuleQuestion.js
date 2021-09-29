@@ -1,9 +1,13 @@
 import React, { Component, useState, useEffect } from "react";
-import { View, Text, StyleSheet, Dimensions, } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
 import { getModuler, listModulers } from "../graphql/queries";
 import TestHeader from "../components/TestComps/TestHeader";
-import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { Card } from "react-native-elements";
 import Theme from "../constants/Theme";
 import { Block, theme } from "galio-framework";
@@ -13,9 +17,9 @@ const { height } = Dimensions.get("window").height;
 
 export default function ModuleQuestion() {
   const [Questions, setQuestions] = useState([]);
-  const [Current, setCurrent] = useState(" første tekst ");
+  const [Current, setCurrent] = useState(" første tekst lorem ipsum doores ");
   const list = [
-    "0",
+    "jsfkasf asfkjasf kasf jjas fjkaskfas jf jas jf jasf jaks asdnklas dasdasl dasjd lasdas d sadasj dlkasjdasjdas djasldas das das dasld asl dasl d",
     "1",
     "2",
     "3",
@@ -56,9 +60,22 @@ export default function ModuleQuestion() {
     console.log(list[number] + " hentet fra listen ");
     setCurrent(list[number]);
   };
+  const checkAnswer = (answer) => {
+    let realAnswer = "Hei";
+    if (answer == realAnswer) {
+      console.log("riktig");
+      alert("riktig svar!");
+    } else {
+      console.log("feil ");
+      console.log(answer);
+      console.log(realAnswer);
+      alert("feil svar, prøv på nytt!");
+    }
+    //fiks slik at når den sjekker svar at den faktisk sjekker svar og ikke er streng med mellomrom og slikt
+  };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View>
         <View style={styles.testList}>
         <Block flex>
@@ -81,17 +98,20 @@ export default function ModuleQuestion() {
         </View>
       </View>
       <View style={styles.container}>
-      <Card containerStyle = {styles.questionCard}>
-      <Text style={styles.text}>{Current}</Text>
-      <TextInput style={styles.input}></TextInput>
-      </Card>
+        <Card containerStyle={styles.questionCard}>
+          <Text style={styles.text}>{Current}</Text>
+          <TextInput
+            style={styles.input}
+            onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
+          ></TextInput>
+        </Card>
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
   text: {
-    fontSize: 80,
+    fontSize: 30,
     textAlign: "center",
     textAlignVertical: "bottom",
   },
@@ -101,9 +121,8 @@ const styles = StyleSheet.create({
   },
   testList: {
     backgroundColor: "limegreen",
-    height: 100,
-    paddingTop: 25,
-    alignItems: "center",
+    height: height,
+    paddingTop: 35,
     flexDirection: "row",
   },
   testText: {
@@ -111,26 +130,24 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "white",
   },
-  container:{
-    width:width,
-    marginTop:150,
-    //endre slik at høyden er en konstant over flere forskjellige skjermer
-
+  container: {
+    maxWidth: width,
+    height: height,
+    backgroundColor: "blue",
   },
   input: {
-    height: 40,
-    margin: 12,
     borderWidth: 1,
-    padding: 10,
+    height: 50,
+    backgroundColor: "green",
   },
-  questionCard:{
-    backgroundColor:"white",
+  questionCard: {
+    height: 350,
+    backgroundColor: "red",
     borderRadius: 15,
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.4,
     shadowRadius: 8,
     elevation: 2,
-    
-  }
+  },
 });

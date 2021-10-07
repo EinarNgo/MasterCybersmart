@@ -5,11 +5,12 @@ import { StyleSheet, Dimensions, Image, TouchableWithoutFeedback } from 'react-n
 import { Block, Text, theme } from 'galio-framework';
 
 import { argonTheme } from '../constants';
+import { title } from 'process';
 
 
 class Card extends React.Component {
   render() {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle, nav, question,title } = this.props;
+    const { navigation, item, horizontal, full, style, ctaColor, imageStyle, nav, question, title } = this.props;
     
     const imageStyles = [
       full ? styles.fullImage : styles.horizontalImage,

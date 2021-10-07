@@ -77,15 +77,8 @@ export default function QuizIndex({ navigation, updateAuthState }) {
                       <Button
                         small
                         style={{ backgroundColor: argonTheme.COLORS.INFO }}
-                        onPress={() =>
-                          navigation.navigate("Quiz", {
-                            title: "Space",
-                            questions: questions,
-                            color: "#000"
-                          })
-                        }
                       >
-                        Poeng: ?
+                        Poeng1: ?
                       </Button>
                       <Button
                         small
@@ -93,6 +86,7 @@ export default function QuizIndex({ navigation, updateAuthState }) {
                       >
                         Forsøk: ?
                       </Button>
+                
                     </Block>
               </Block>
               <Block flex style={styles.CategoriesCard}>
@@ -101,11 +95,17 @@ export default function QuizIndex({ navigation, updateAuthState }) {
                       space="between"
                     >
                       <Text bold size={16} color="#000" style={{marginTop: -5}}>
-                        Kategorier
+                        Kategori
                       </Text>
                     </Block>
                   <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      <Card item={quiz[2]} style={{ marginRight: theme.SIZES.BASE }} nav={'Quiz'}/>
+                      <Card 
+                        item={quiz[2]}
+                        style={{ marginRight: theme.SIZES.BASE }}
+                        nav={"Quiz"}
+                        question={questions}
+                      >
+                      </Card>
                       <Card item={quiz[3]}/>
                   </Block>
                   <Block row space="between" style={{ flexWrap: "wrap" }}>

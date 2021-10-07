@@ -126,14 +126,11 @@ export default class Quiz extends React.Component {
                     {question.valgmuligheter.map((answer, idx) => (
                         <Block flex style={styles.valg}>
                           <Button
-                            key={`modul${idx}`}
+                            key={`modul${answer.idx}`}
                             title={answer}
                             onPress={() =>
           
                               this.checkAnswer(answer,riktigSvar)
-                              
-                            
-                              
                             }
                           />
                         </Block>

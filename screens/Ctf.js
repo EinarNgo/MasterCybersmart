@@ -14,6 +14,8 @@ import { Card, ListItem, Button, Icon } from "react-native-elements";
 import { getModuler, listModulers } from "../graphql/queries";
 import Module_header from "../components/Module_header";
 import ModuleQuestion from "./ModuleQuestion";
+import moduleConstants from "../constants/moduleConstants";
+
 const { width } = Dimensions.get("screen");
 
 export default function Ctf({ navigation, updateAuthState }) {
@@ -34,6 +36,7 @@ export default function Ctf({ navigation, updateAuthState }) {
       console.log("error on fetching modul", error);
     }
   };
+  const uniqueModules = () => {};
 
   return (
     <Block flex center style={styles.home1}>
@@ -46,11 +49,11 @@ export default function Ctf({ navigation, updateAuthState }) {
           Kategorier
         </TextInput>
         <Block flex>
-          {modulers.map((modul, idx) => {
+          {moduleConstants.Categories.map((modul, idx) => {
             return (
               <Card containerStyle={styles.card} key={`modul${idx}`}>
                 <Card.Title style={{ textAlign: "center", fontSize: 30 }}>
-                  {modul.kategori}
+                  {modul.title}
                 </Card.Title>
                 <Card.Divider />
                 <Text style={{ paddingBottom: 15 }}>

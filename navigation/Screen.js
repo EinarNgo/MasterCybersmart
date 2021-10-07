@@ -168,7 +168,7 @@ function CtfStack(props) {
         options={{
           header: () => (
             <Header
-              title="Head"
+              title="Home"
               back
               white
               transparent

@@ -8,18 +8,20 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import { Card } from "react-native-elements";
+import { Card, Button } from "react-native-elements";
 import Theme from "../constants/Theme";
 import { Block, theme } from "galio-framework";
 import Module_header from "../components/Module_header";
+import { constants } from "buffer";
 const { width } = Dimensions.get("screen");
 const { height } = Dimensions.get("window").height;
 
 export default function ModuleQuestion() {
   const [Questions, setQuestions] = useState([]);
   const [Current, setCurrent] = useState(" første tekst lorem ipsum doores ");
+  const [CurrentIndex, setCurrentIndex] = useState(0);
   const list = [
-    "jsfkasf asfkjasf kasf jjas fjkaskfas jf jas jf jasf jaks asdnklas dasdasl dasjd lasdas d sadasj dlkasjdasjdas djasldas das das dasld asl dasl d",
+    "0",
     "1",
     "2",
     "3",
@@ -40,7 +42,8 @@ export default function ModuleQuestion() {
 
   useEffect(() => {
     fetchQuestions();
-  }, []);
+    console.log(CurrentIndex + " ----------- ");
+  }, [CurrentIndex]);
 
   const fetchQuestions = async () => {
     try {
@@ -71,31 +74,22 @@ export default function ModuleQuestion() {
       console.log(realAnswer);
       alert("feil svar, prøv på nytt!");
     }
-    //fiks slik at når den sjekker svar at den faktisk sjekker svar og ikke er streng med mellomrom og slikt
+  };
+  const prevQuestion = (number) => {
+    setCurrent(list[number]);
+    setCurrentIndex(CurrentIndex - 1);
+  };
+  const nextQuestion = (number) => {
+    setCurrent(list[number]);
+    setCurrentIndex(CurrentIndex + 1);
+    console.log(number + " vvvvvvvvv");
+    console.log(CurrentIndex + " zzzzzz");
   };
 
   return (
     <View style={{ flex: 1 }}>
       <View>
-        <View style={styles.testList}>
-        <Block flex>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {list.map((q, idx) => {
-              return (
-                <TouchableOpacity
-                  key={`list${idx}`}
-                  onPress={() => currentQuestion(idx)}
-                > 
-                  <Text style={styles.testText} key={`list${idx}`}>
-                    {idx}
-                  </Text>
-                  
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-          </Block>
-        </View>
+        <Module_header name="TEST"></Module_header>
       </View>
       <View style={styles.container}>
         <Card containerStyle={styles.questionCard}>
@@ -105,6 +99,18 @@ export default function ModuleQuestion() {
             onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
           ></TextInput>
         </Card>
+        <View style={styles.buttonContainer}>
+          <Button
+            buttonStyle={styles.button}
+            onPress={() => prevQuestion(CurrentIndex - 1)}
+            title="Previous"
+          ></Button>
+          <Button
+            buttonStyle={styles.button}
+            onPress={() => nextQuestion(CurrentIndex + 1)}
+            title="Next"
+          ></Button>
+        </View>
       </View>
     </View>
   );
@@ -116,15 +122,20 @@ const styles = StyleSheet.create({
     textAlignVertical: "bottom",
   },
   header: {
-    backgroundColor: "red",
     height: 100,
   },
-  testList: {
-    backgroundColor: "limegreen",
-    height: height,
-    paddingTop: 35,
+  buttonContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
   },
+  button: {
+    backgroundColor: "limegreen",
+    shadowColor: "black",
+    width: 150,
+    marginTop: 10,
+  },
+
   testText: {
     fontSize: 25,
     padding: 10,
@@ -133,16 +144,13 @@ const styles = StyleSheet.create({
   container: {
     maxWidth: width,
     height: height,
-    backgroundColor: "blue",
   },
   input: {
     borderWidth: 1,
     height: 50,
-    backgroundColor: "green",
   },
   questionCard: {
     height: 350,
-    backgroundColor: "red",
     borderRadius: 15,
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },

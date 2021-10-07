@@ -78,7 +78,7 @@ export default function QuizIndex({ navigation, updateAuthState }) {
                         small
                         style={{ backgroundColor: argonTheme.COLORS.INFO }}
                       >
-                        Poeng1: ?
+                        Poeng: ?
                       </Button>
                       <Button
                         small

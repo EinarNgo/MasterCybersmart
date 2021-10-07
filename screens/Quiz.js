@@ -55,9 +55,11 @@ export default class Quiz extends React.Component {
     this.setState(state => {
       const nextIndex = state.activeQuestionIndex + 1;
 
+      /*
       if (nextIndex >= state.totalCount) {
-        return this.props.navigation.popToTop();
-      }
+        //return this.props.navigation.popToTop();
+      } 
+      */
 
       return {
         activeQuestionIndex: nextIndex,
@@ -96,52 +98,83 @@ export default class Quiz extends React.Component {
     console.log("-------------------------------------");
     console.log(question);
     console.log(questions[this.state.activeQuestionIndex].fasit[1]);
-    return (
-      <Block flex style={styles.quizScreen}>
-        <Block flex>
-          <ImageBackground
-            source={Images.QuizBackground}
-            style={styles.container}
-            imageStyle={styles.background}
-          >
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '25%' }}
+
+    if (this.state.activeQuestionIndex >= this.state.totalCount) {
+      return (
+        <Block flex style={styles.quizScreen}>
+          <Block flex>
+            <ImageBackground
+              source={Images.QuizBackground}
+              style={styles.container}
+              imageStyle={styles.background}
             >
-              <Block flex style={styles.resultCard}>
-              <View style={styles.textview}>
-                  <Text style={styles.questions}>Antall spørsmål: {`${this.state.totalCount}`}</Text>
-                  <Text style={styles.solved}>Antall løste: {`${this.state.correctCount}`}</Text>
-                </View>
-                <Text bold size={16} color="#000" style={{marginTop: 10}}>
-                          Tid igjen: --,--
-                </Text>
-                      <Text style={styles.text}>{question.sporsmaal}</Text>
-              
-              </Block>
-              <Block
-                      space="evenly"
-                      style={{ marginTop: 20, paddingBottom: 24 }}
-                    >
-                    {question.valgmuligheter.map((answer, idx) => (
-                        <Block flex style={styles.valg}>
-                          <Button
-                            key={`modul${answer.idx}`}
-                            title={answer}
-                            onPress={() =>
-          
-                              this.checkAnswer(answer,riktigSvar)
-                            }
-                          />
-                        </Block>
-                        ))}
-                      
-                    </Block>
-            </ScrollView>
-          </ImageBackground>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ width, marginTop: '50%' }}
+              >
+                <Block flex style={styles.resultCard}>
+                <View style={styles.textview}>
+                  </View>
+                  <Text bold size={16} color="#000" style={{marginTop: 10}}>
+                  Gratulerer du er ferdig med quizzzen
+                  </Text>
+                        <Text style={styles.text}>Du klarte {`${this.state.correctCount}`} oppgaver</Text>
+                
+                </Block>
+              </ScrollView>
+            </ImageBackground>
+          </Block>
         </Block>
-      </Block>
-    );
+      );
+    }
+    else{
+      return (
+        <Block flex style={styles.quizScreen}>
+          <Block flex>
+            <ImageBackground
+              source={Images.QuizBackground}
+              style={styles.container}
+              imageStyle={styles.background}
+            >
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ width, marginTop: '25%' }}
+              >
+                <Block flex style={styles.resultCard}>
+                <View style={styles.textview}>
+                    <Text style={styles.questions}>Antall spørsmål: {`${this.state.totalCount}`}</Text>
+                    <Text style={styles.solved}>Antall løste: {`${this.state.correctCount}`}</Text>
+                  </View>
+                  <Text bold size={16} color="#000" style={{marginTop: 10}}>
+                            Tid igjen: --,--
+                  </Text>
+                        <Text style={styles.text}>{question.sporsmaal}</Text>
+                
+                </Block>
+                <Block
+                        space="evenly"
+                        style={{ marginTop: 20, paddingBottom: 24 }}
+                      >
+                      {question.valgmuligheter.map((answer, idx) => (
+                          <Block flex style={styles.valg}>
+                            <Button
+                              key={`modul${answer.idx}`}
+                              title={answer}
+                              onPress={() =>
+            
+                                this.checkAnswer(answer,riktigSvar)
+                              }
+                            />
+                          </Block>
+                          ))}
+                        
+                      </Block>
+              </ScrollView>
+            </ImageBackground>
+          </Block>
+        </Block>
+      );
+    }
   }
 }
 

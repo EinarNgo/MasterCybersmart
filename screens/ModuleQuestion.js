@@ -13,12 +13,15 @@ import Theme from "../constants/Theme";
 import { Block, theme } from "galio-framework";
 import Module_header from "../components/Module_header";
 import { constants } from "buffer";
+import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 const { width } = Dimensions.get("screen");
 const { height } = Dimensions.get("window").height;
 
 export default function ModuleQuestion() {
   const [Questions, setQuestions] = useState([]);
-  const [Current, setCurrent] = useState(" første tekst lorem ipsum doores ");
+  const [CurrentQuestion, setCurrentQuestion] = useState(
+    " Velkommen trykk på test "
+  );
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const list = [
     "0",
@@ -42,13 +45,10 @@ export default function ModuleQuestion() {
 
   useEffect(() => {
     fetchQuestions();
-    console.log(CurrentIndex + " ----------- ");
-  }, [CurrentIndex]);
-
+  }, []);
+  useEffect(() => {}, [CurrentIndex]);
   const fetchQuestions = async () => {
     try {
-      //hent alle spørsmål relatert til den kategorien. Må sende inn kategorinavn som en prop og deretter gjøre en query
-      //må fikse hvordan filtrere queries, og hvordan fikse screens riktig
       const questions = await API.graphql(graphqlOperation(listModulers));
 
       const questionArray = questions.data.listModulers.items;
@@ -58,42 +58,31 @@ export default function ModuleQuestion() {
       console.log("error on fetching questions", error);
     }
   };
-  const currentQuestion = (number) => {
-    console.log(number);
-    console.log(list[number] + " hentet fra listen ");
-    setCurrent(list[number]);
-  };
-  const checkAnswer = (answer) => {
-    let realAnswer = "Hei";
-    if (answer == realAnswer) {
-      console.log("riktig");
-      alert("riktig svar!");
-    } else {
-      console.log("feil ");
-      console.log(answer);
-      console.log(realAnswer);
-      alert("feil svar, prøv på nytt!");
-    }
+  const ActiveQuestion = (number) => {};
+  const checkAnswer = (answer) => {};
+  const getFilteredQuestions = (filteredRequest) => {
+    var qs = Questions.filter((e) => e.kategori === filteredRequest);
+    setQuestions(qs);
+    var l = FilteredByCategories("Skadevare", Questions);
+    console.log(l);
   };
   const prevQuestion = (number) => {
-    setCurrent(list[number]);
+    setCurrentQuestion(list[number]);
     setCurrentIndex(CurrentIndex - 1);
   };
   const nextQuestion = (number) => {
-    setCurrent(list[number]);
+    setCurrentQuestion(list[number]);
     setCurrentIndex(CurrentIndex + 1);
-    console.log(number + " vvvvvvvvv");
-    console.log(CurrentIndex + " zzzzzz");
   };
 
   return (
     <View style={{ flex: 1 }}>
       <View>
-        <Module_header name="TEST"></Module_header>
+        <Module_header name="KategoriNAVN"></Module_header>
       </View>
       <View style={styles.container}>
         <Card containerStyle={styles.questionCard}>
-          <Text style={styles.text}>{Current}</Text>
+          <Text style={styles.text}>{CurrentQuestion}</Text>
           <TextInput
             style={styles.input}
             onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
@@ -109,6 +98,11 @@ export default function ModuleQuestion() {
             buttonStyle={styles.button}
             onPress={() => nextQuestion(CurrentIndex + 1)}
             title="Next"
+          ></Button>
+          <Button
+            buttonStyle={styles.button}
+            onPress={() => getFilteredQuestions("Skadevare")}
+            title="TEST"
           ></Button>
         </View>
       </View>

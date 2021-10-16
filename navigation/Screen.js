@@ -23,7 +23,6 @@ import ConfirmSignUp from "../screens/ConfirmSignUp";
 import Home from "../screens/Home";
 import Pro from "../screens/Pro";
 import Ctf from "../screens/Ctf";
-import Quiz from "../screens/Quiz";
 import CustomDrawerContent from "./Menu";
 import Profile from "../screens/Profile";
 // header for screens
@@ -114,13 +113,6 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
-    </Stack.Navigator>
-  );
-}
-
-function QuizStack(props) {
-  return (
-    <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
         name="QuizIndex"
         component={QuizIndex}
@@ -138,26 +130,11 @@ function QuizStack(props) {
           headerTransparent: true,
         }}
       />
-      <Stack.Screen
-        name="Quiz"
-        component={Quiz}
-        centerComponent={{ name: "MY TITLE" }}
-        options={{
-          header: () => (
-            <Header
-              title="Home"
-              back
-              white
-              transparent
-              centerComponent={{ title: "MY TITLE" }}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
     </Stack.Navigator>
   );
 }
+
+
 function CtfStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
@@ -282,7 +259,6 @@ function AppStack({ props, updateAuthState }) {
       initialRouteName="Home"
     >
       <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="QuizIndex" component={QuizStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="ModuleQuestion" component={CtfStack} />
     </Drawer.Navigator>

@@ -14,6 +14,7 @@ export default function SignUp({ navigation }) {
       console.log('Sign-up Confirmed');
       navigation.navigate('ConfirmSignUp');
     } catch (error) {
+      alert(error.message);
       console.log('Error signing up...', error);
     }
   }

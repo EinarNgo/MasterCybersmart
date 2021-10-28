@@ -15,6 +15,7 @@ export default function SignIn({ navigation, updateAuthState }) {
       console.log('Success');
       updateAuthState('loggedIn');
     } catch (error) {
+      alert(error.message)
       console.log('Error signing in...', error);
     }
   }

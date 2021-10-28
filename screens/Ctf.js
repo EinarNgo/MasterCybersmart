@@ -36,7 +36,6 @@ export default function Ctf({ navigation, updateAuthState }) {
       console.log("error on fetching modul", error);
     }
   };
-  const uniqueModules = () => {};
 
   return (
     <Block flex center style={styles.home1}>

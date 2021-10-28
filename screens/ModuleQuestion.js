@@ -1,19 +1,11 @@
-import React, { Component, useState, useEffect } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
-import { getModuler, listModulers } from "../graphql/queries";
-import TestHeader from "../components/TestComps/TestHeader";
-import {
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
-import { Card, Button } from "react-native-elements";
-import Theme from "../constants/Theme";
-import { Block, theme } from "galio-framework";
-import Module_header from "../components/Module_header";
-import { constants } from "buffer";
+import { API, graphqlOperation } from "aws-amplify";
+import React, { useEffect, useState } from "react";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Button, Card } from "react-native-elements";
+import { TextInput } from "react-native-gesture-handler";
 import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
+import Module_header from "../components/Module_header";
+import { listModulers } from "../graphql/queries";
 const { width } = Dimensions.get("screen");
 const { height } = Dimensions.get("window").height;
 

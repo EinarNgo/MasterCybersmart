@@ -21,7 +21,7 @@ class Home extends React.Component {
               style={{ marginRight: theme.SIZES.BASE }}
               nav={"QuizIndex"}
             />
-            <Card item={articles[2]} />
+            <Card item={articles[2]} nav={"EducationArticles"} />
           </Block>
           <Card item={articles[4]} full />
         </Block>

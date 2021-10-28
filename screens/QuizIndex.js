@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from "react";
-import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
-import  {QuizMain, Quiz, QuizEnd} from '../Quizcomponents'
-import { getModuler, listModulers } from "../graphql/queries";
-import { Block, Text, theme } from "galio-framework";
-import {
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  Image,
-  ImageBackground,
-  Platform
-} from "react-native";
+import { API, graphqlOperation } from "aws-amplify";
+import { Block, theme } from "galio-framework";
+import React, { useEffect, useState } from "react";
+import { Dimensions, Platform, StyleSheet } from "react-native";
+import { HeaderHeight } from "../constants/utils";
+import { listModulers } from "../graphql/queries";
+import { Quiz, QuizEnd, QuizMain } from "../Quizcomponents";
 const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
-import { HeaderHeight } from "../constants/utils";
-import { Images, argonTheme } from "../constants";
-import Module_header from "../components/Module_header";
-import { render } from "react-dom";
-import { setMaxListeners } from "process";
 
 function QuizIndex() {
   const [questions, setQuestions] = useState([]);
   const [play, setPlay] = useState("Main");
-  const [correctCount,setCorrectCount] = useState(0);
-  const [length,setLength] = useState(questions.length);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [length, setLength] = useState(questions.length);
   const [activeIndex, setActiveIndex] = useState(0);
   const [answer, setAnswer] = useState(false);
   const [score, setScore] = useState(0);
@@ -45,24 +34,24 @@ function QuizIndex() {
   }, []);
 
   const handleAnswer = (answerFromButton) => {
-    console.log(answer)
-    if(answer==false) {
-      if(answerFromButton === questions[activeIndex].fasit) {
-        alert("Riktig svar")
-        setScore(score+1);
+    console.log(answer);
+    if (answer == false) {
+      if (answerFromButton === questions[activeIndex].fasit) {
+        alert("Riktig svar");
+        setScore(score + 1);
         setAnswer(true);
       } else {
         setAnswer(true);
-        alert("Feil svar")
+        alert("Feil svar");
       }
-    } 
+    }
   };
 
   const handleNext = () => {
-    console.log(activeIndex)
-    console.log(length)
-    if(activeIndex === length-1) {
-      console.log("End")
+    console.log(activeIndex);
+    console.log(length);
+    if (activeIndex === length - 1) {
+      console.log("End");
       setPlay("End");
     } else {
       setActiveIndex(activeIndex + 1);
@@ -80,34 +69,43 @@ function QuizIndex() {
     setActiveIndex(0);
     setScore(0);
     setPlay("Play");
-    setAnswer(false)
+    setAnswer(false);
   };
 
   const handleMain = () => {
     setActiveIndex(0);
     setScore(0);
     setPlay("Main");
-    setAnswer(false)
+    setAnswer(false);
   };
 
-  if(play === "Main") {
+  if (play === "Main") {
     return (
       <Block flex style={styles.bg}>
-        <QuizMain handleStart={handleStart} length={length}/>
+        <QuizMain handleStart={handleStart} length={length} />
       </Block>
     );
-  }
-  else if(play === "Play") {
+  } else if (play === "Play") {
     return (
       <Block flex style={styles.bg}>
-        <Quiz prop={questions[activeIndex]} handleAnswer={handleAnswer} handleNext={handleNext} answer={answer} length={length} score={score}/>
+        <Quiz
+          prop={questions[activeIndex]}
+          handleAnswer={handleAnswer}
+          handleNext={handleNext}
+          answer={answer}
+          length={length}
+          score={score}
+        />
       </Block>
     );
-  }
-  else if(play === "End") {
+  } else if (play === "End") {
     return (
       <Block flex style={styles.bg}>
-        <QuizEnd handleMain={handleMain} handleRestart={handleRestart} score={score}/>
+        <QuizEnd
+          handleMain={handleMain}
+          handleRestart={handleRestart}
+          score={score}
+        />
       </Block>
     );
   }
@@ -117,17 +115,17 @@ const styles = StyleSheet.create({
   quizScreen: {
     marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
     marginBottom: -HeaderHeight * 2,
-    flex: 1
+    flex: 1,
   },
   container: {
     width: width,
     height: height,
     padding: 0,
-    zIndex: 1
+    zIndex: 1,
   },
   background: {
     width: width,
-    height: height / 2
+    height: height / 2,
   },
   CategoriesCard: {
     // position: "relative",
@@ -144,12 +142,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
     shadowOpacity: 0.2,
-    zIndex: 2
+    zIndex: 2,
   },
-
-
-
 });
 
 export default QuizIndex;
-

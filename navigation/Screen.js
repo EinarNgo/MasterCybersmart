@@ -30,6 +30,7 @@ import { Header } from "../components";
 import config from "../aws-exports";
 import QuizIndex from "../screens/QuizIndex";
 import ModuleQuestion from "../screens/ModuleQuestion";
+import EducationArticles from "../components/EducationArticlesComponents/EducationArticles";
 Amplify.configure(config);
 
 const AuthenticationStack = createStackNavigator();
@@ -131,10 +132,42 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
+      <Stack.Screen
+        name="EducationArticles"
+        component={EducationArticles}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Home" back navigation={navigation} scene={scene} />
+          ),
+          headerTransparent: true,
+        }}
+      />
     </Stack.Navigator>
   );
 }
-
+function EducationArticlesStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="screen">
+      <Stack.Screen
+        name="EducationArticles"
+        component={EducationArticles}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title="Home"
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function CtfStack(props) {
   return (
@@ -266,6 +299,10 @@ function AppStack({ props, updateAuthState }) {
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="ModuleQuestion" component={CtfStack} />
+      <Drawer.Screen
+        name="EducationArticles"
+        component={EducationArticlesStack}
+      />
     </Drawer.Navigator>
   );
 }

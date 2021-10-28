@@ -56,13 +56,7 @@ export default function Ctf({ navigation, updateAuthState }) {
                   {modul.title}
                 </Card.Title>
                 <Card.Divider />
-                <Text style={{ paddingBottom: 15 }}>
-                  Tekst relatert til hver kategori lorem ipsum dolores sit amet
-                </Text>
-                <View style={styles.textview}>
-                  <Text style={styles.questions}>Antall spørsmål: 10</Text>
-                  <Text style={styles.solved}>Antall løste: 5</Text>
-                </View>
+                <Text style={{ paddingBottom: 15 }}>{modul.description}</Text>
                 <Button
                   onPress={() => navigation.navigate(ModuleQuestion)}
                   buttonStyle={{

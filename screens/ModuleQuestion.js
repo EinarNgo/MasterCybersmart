@@ -58,13 +58,10 @@ export default function ModuleQuestion() {
       console.log("error on fetching questions", error);
     }
   };
-  const ActiveQuestion = (number) => {};
   const checkAnswer = (answer) => {};
   const getFilteredQuestions = (filteredRequest) => {
-    var qs = Questions.filter((e) => e.kategori === filteredRequest);
-    setQuestions(qs);
-    var l = FilteredByCategories("Skadevare", Questions);
-    console.log(l);
+    var filteredQuestions = FilteredByCategories(filteredRequest, Questions);
+    setQuestions(filteredQuestions);
   };
   const prevQuestion = (number) => {
     setCurrentQuestion(list[number]);
@@ -98,11 +95,6 @@ export default function ModuleQuestion() {
             buttonStyle={styles.button}
             onPress={() => nextQuestion(CurrentIndex + 1)}
             title="Next"
-          ></Button>
-          <Button
-            buttonStyle={styles.button}
-            onPress={() => getFilteredQuestions("Skadevare")}
-            title="TEST"
           ></Button>
         </View>
       </View>

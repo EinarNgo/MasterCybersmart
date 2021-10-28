@@ -38,6 +38,8 @@ const QuizEnd = ({score:score, handleMain, handleRestart}) => {
                             handleMain()
                           }
                         />
+            </Block>
+            <Block flex style={styles.valg}>
                         <Button
                           title="Restart"
                           onPress={() =>

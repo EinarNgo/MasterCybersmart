@@ -1,8 +1,8 @@
 export default [
   {
-    title: 'Play CTF',
+    title: 'Capture the flag',
     image: 'https://core4.bmctoday.net/storage/images/RumxtyAnYA2EQOfT7WSsLUzXsu1U8PiLl0rpvGlj.jpeg?v=ea75bed',
-    cta: 'View article', 
+    cta: 'Spill', 
     horizontal: true
   },
   {
@@ -11,9 +11,9 @@ export default [
     cta: 'Spill'
   },
   {
-    title: 'Task ',
+    title: 'Undervisning',
     image: 'https://vertassets.blob.core.windows.net/image/2cf5b506/2cf5b506-1de1-4e24-bf94-796a96f28748/375_250-road_sign_challenges_battle_warning_450x300.jpg',
-    cta: 'View article' 
+    cta: 'Se pensum' 
   },
   {
     title: 'Check highscore',
@@ -21,9 +21,9 @@ export default [
     cta: 'View article' 
   },
   {
-    title: 'Education videos',
+    title: 'Undervisningsvideo',
     image: 'https://www.publicidadenaweb.com/wp-content/uploads/2019/06/como-fazer-video-de-vendas.jpg',
-    cta: 'View article', 
+    cta: 'Se video', 
     horizontal: true
   },
 ];

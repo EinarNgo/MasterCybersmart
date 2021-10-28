@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
-import  {QuizMain, Quiz} from '../Quizcomponents'
+import  {QuizMain, Quiz, QuizEnd} from '../Quizcomponents'
 import { getModuler, listModulers } from "../graphql/queries";
 import { Block, Text, theme } from "galio-framework";
 import {
@@ -17,6 +17,7 @@ import { HeaderHeight } from "../constants/utils";
 import { Images, argonTheme } from "../constants";
 import Module_header from "../components/Module_header";
 import { render } from "react-dom";
+import { setMaxListeners } from "process";
 
 function QuizIndex() {
   const [questions, setQuestions] = useState([]);
@@ -27,15 +28,13 @@ function QuizIndex() {
   const [answer, setAnswer] = useState(false);
   const [score, setScore] = useState(0);
 
-  console.log("1-------")
-  console.log(questions[activeIndex])
-
   const fetchQuestions = async () => {
     try {
       const questionData = await API.graphql(graphqlOperation(listModulers));
       const questionList = questionData.data.listModulers.items;
       setQuestions(questionList);
-      setLength(questionList.length);
+      //setLength(questionList.length);
+      setLength(2);
     } catch (error) {
       console.log("error on fetching questions", error);
     }
@@ -60,9 +59,11 @@ function QuizIndex() {
   };
 
   const handleNext = () => {
+    console.log(activeIndex)
+    console.log(length)
     if(activeIndex === length-1) {
-      console.log("Ferdig")
-      setPlay("ferdig");
+      console.log("End")
+      setPlay("End");
     } else {
       setActiveIndex(activeIndex + 1);
       setAnswer(false);
@@ -76,6 +77,13 @@ function QuizIndex() {
   };
 
   const handleRestart = () => {
+    setActiveIndex(0);
+    setScore(0);
+    setPlay("Play");
+    setAnswer(false)
+  };
+
+  const handleMain = () => {
     setActiveIndex(0);
     setScore(0);
     setPlay("Main");
@@ -97,7 +105,11 @@ function QuizIndex() {
     );
   }
   else if(play === "End") {
-
+    return (
+      <Block flex style={styles.bg}>
+        <QuizEnd handleMain={handleMain} handleRestart={handleRestart} score={score}/>
+      </Block>
+    );
   }
 }
 

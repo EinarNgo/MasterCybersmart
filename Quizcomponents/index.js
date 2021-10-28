@@ -1,3 +1,4 @@
 import QuizMain from "./QuizMain";
 import Quiz from "./Quiz"
-export {QuizMain, Quiz};
+import QuizEnd from "./QuizEnd";
+export {QuizMain, Quiz, QuizEnd};

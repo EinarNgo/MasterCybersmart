@@ -19,52 +19,32 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score}) => {
+const QuizEnd = ({score:score, handleMain, handleRestart}) => {
   return (
     <Block flex style={styles.quizScreen}>
       <Module_header name=""></Module_header>
       <Block flex style={styles.bg}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{ width, marginTop: '0%' }}
+            style={{ width, marginTop: '30%' }}
           >
             <Block flex style={styles.resultCard}>
-            <View style={styles.textview}>
-                <Text style={styles.questions}>Antall spørsmål: {length}</Text>
-                <Text style={styles.solved}>Antall løste: {score}</Text>
-              </View>
-              <Text bold size={16} color="#000" style={{marginTop: 10}}>
-                        Tid igjen: --,--
-              </Text>
-                    <Text style={styles.text}>{question.sporsmaal}</Text>
-            
+                <Text> Gratulerer du fikk {score} riktige! </Text>
             </Block>
-            <Block
-                    space="evenly"
-                    style={{ marginTop: 20, paddingBottom: 24 }}
-                  >
-                    {question.valgmuligheter.map((choices, idx) => (
-                      <Block flex style={styles.valg}>
+            <Block flex style={styles.valg}>
                         <Button
-                          key={idx}
-                          title={choices}
-                          color={answer ? choices === question.fasit ? 'green' : 'red' : 'blue'}
+                          title="Main"
                           onPress={() =>
-                            handleAnswer(choices)
+                            handleMain()
                           }
                         />
-       
-                      </Block>
-
-                      ))}
-                    
-                  </Block>
-                 
-                  {answer && (
-                    <Block flex style={styles.valg}>
-                    <Button title={"neste"} onPress={() => handleNext()} />
-                  </Block>
-                  )}
+                        <Button
+                          title="Restart"
+                          onPress={() =>
+                            handleRestart()
+                          }
+                        />
+            </Block>
                   
           </ScrollView>
       </Block>
@@ -166,4 +146,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Quiz;
+export default QuizEnd;

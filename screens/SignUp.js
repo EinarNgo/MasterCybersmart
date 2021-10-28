@@ -4,7 +4,8 @@ import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
-export default function SignUp({ navigation }) {
+
+export default function SignUp({ navigation}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ export default function SignUp({ navigation }) {
     try {
       await Auth.signUp({ username, password, attributes: { email } });
       console.log('Sign-up Confirmed');
-      navigation.navigate('ConfirmSignUp');
+      navigation.navigate('ConfirmSignUp',{username:username});
     } catch (error) {
       alert(error.message);
       console.log('Error signing up...', error);

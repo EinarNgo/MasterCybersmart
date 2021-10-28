@@ -36,6 +36,7 @@ const AuthenticationStack = createStackNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+
 function ProfileStack(props) {
   return (
     <Stack.Navigator initialRouteName="Profile" mode="card" headerMode="screen">
@@ -167,7 +168,10 @@ const Initializing = () => {
   );
 };
 
+
+
 function AuthenticationNavigation(props) {
+
   return (
     <AuthenticationStack.Navigator headerMode="none">
       <AuthenticationStack.Screen
@@ -183,10 +187,11 @@ function AuthenticationNavigation(props) {
           <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
         )}
       </AuthenticationStack.Screen>
-      <AuthenticationStack.Screen name="SignUp" component={SignUp} />
+      <AuthenticationStack.Screen name="SignUp" component={SignUp} username={props.username}/>
       <AuthenticationStack.Screen
         name="ConfirmSignUp"
         component={ConfirmSignUp}
+        username={props.username}
       />
     </AuthenticationStack.Navigator>
   );

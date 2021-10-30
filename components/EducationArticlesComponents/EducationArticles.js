@@ -1,21 +1,60 @@
 import { Block, theme } from "galio-framework";
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
-import { Card } from "react-native-elements";
+import { StyleSheet, View, Dimensions, Button, Text } from "react-native";
+import { Card, Icon } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
-import articles from "../../constants/articles";
+import constants from "../../constants/moduleConstants";
 
 const { width } = Dimensions.get("screen");
 export default function EducationArticles({ navigation, route }) {
-  return <Block flex center style={styles.home1}></Block>;
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+        {constants.Categories.map((categori, idx) => {
+          return (
+            <Card containerStyle={styles.card}>
+              <Card.Title>{categori.title}</Card.Title>
+              <Card.Divider></Card.Divider>
+              <Icon
+                name={categori.icon}
+                type={categori.type}
+                size={70}
+                containerStyle={styles.iconContainer}
+              />
+              <Text>{categori.description}</Text>
+              <Button
+                buttonStyle={styles.button}
+                title="Les artikkel"
+                onPress={() =>
+                  navigation.navigate("ArticleViewer", {
+                    link: categori.url,
+                  })
+                }
+              />
+            </Card>
+          );
+        })}
+      </ScrollView>
+    </View>
+  );
 }
 const styles = StyleSheet.create({
-  home1: {
-    width: "100%",
-    height: "100%",
+  container: {
+    marginTop: 89,
   },
-  articles: {
-    width: width - theme.SIZES.BASE * 2,
-    paddingVertical: theme.SIZES.BASE,
+  iconContainer: {
+    alignSelf: "center",
+    marginVertical: 20,
+  },
+
+  card: {
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  button: {
+    borderRadius: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    marginBottom: 0,
   },
 });

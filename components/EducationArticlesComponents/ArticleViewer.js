@@ -2,13 +2,13 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 
-export default function EducationArticles({ navigation, route }) {
+export default function ArticleViewer({ navigation, route }) {
   return (
     <WebView
       style={styles.container}
       originWhitelist={["https://*"]}
       allowsInlineMediaPlayback={true}
-      source={{ uri: "https://reactnative.dev/" }}
+      source={{ uri: route.params.link }}
     />
   );
 }

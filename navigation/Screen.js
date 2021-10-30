@@ -30,13 +30,13 @@ import { Header } from "../components";
 import config from "../aws-exports";
 import QuizIndex from "../screens/QuizIndex";
 import ModuleQuestion from "../screens/ModuleQuestion";
+import ArticleViewer from "../components/EducationArticlesComponents/ArticleViewer";
 import EducationArticles from "../components/EducationArticlesComponents/EducationArticles";
 Amplify.configure(config);
 
 const AuthenticationStack = createStackNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-
 
 function ProfileStack(props) {
   return (
@@ -142,6 +142,24 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
+      <Stack.Screen
+        name="ArticleViewer"
+        component={ArticleViewer}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title="Home"
+              back
+              navigation={navigation}
+              back
+              white
+              transparent
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -201,10 +219,7 @@ const Initializing = () => {
   );
 };
 
-
-
 function AuthenticationNavigation(props) {
-
   return (
     <AuthenticationStack.Navigator headerMode="none">
       <AuthenticationStack.Screen
@@ -220,7 +235,11 @@ function AuthenticationNavigation(props) {
           <SignIn {...screenProps} updateAuthState={props.updateAuthState} />
         )}
       </AuthenticationStack.Screen>
-      <AuthenticationStack.Screen name="SignUp" component={SignUp} username={props.username}/>
+      <AuthenticationStack.Screen
+        name="SignUp"
+        component={SignUp}
+        username={props.username}
+      />
       <AuthenticationStack.Screen
         name="ConfirmSignUp"
         component={ConfirmSignUp}

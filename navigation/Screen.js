@@ -116,6 +116,23 @@ function HomeStack(props) {
         }}
       />
       <Stack.Screen
+        name="ModuleQuestion"
+        component={ModuleQuestion}
+        centerComponent={{ name: "MY TITLE" }}
+        options={{
+          header: () => (
+            <Header
+              title="Home"
+              back
+              white
+              transparent
+              centerComponent={{ title: "MY TITLE" }}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
         name="QuizIndex"
         component={QuizIndex}
         options={{
@@ -163,7 +180,7 @@ function HomeStack(props) {
     </Stack.Navigator>
   );
 }
-function EducationArticlesStack(props) {
+/* function EducationArticlesStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
@@ -171,12 +188,23 @@ function EducationArticlesStack(props) {
         component={EducationArticles}
         options={{
           header: ({ navigation, scene }) => (
+            <Header title="Home" back navigation={navigation} scene={scene} />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="ArticleViewer"
+        component={ArticleViewer}
+        options={{
+          header: ({ navigation, scene }) => (
             <Header
               title="Home"
               back
+              navigation={navigation}
+              back
               white
               transparent
-              navigation={navigation}
               scene={scene}
             />
           ),
@@ -186,8 +214,8 @@ function EducationArticlesStack(props) {
     </Stack.Navigator>
   );
 }
-
-function CtfStack(props) {
+ 
+function ModuleStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
@@ -209,7 +237,7 @@ function CtfStack(props) {
       />
     </Stack.Navigator>
   );
-}
+}*/
 
 const Initializing = () => {
   return (
@@ -317,11 +345,8 @@ function AppStack({ props, updateAuthState }) {
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
-      <Drawer.Screen name="ModuleQuestion" component={CtfStack} />
-      <Drawer.Screen
-        name="EducationArticles"
-        component={EducationArticlesStack}
-      />
+      {/* <Drawer.Screen name="ModuleQuestion" component={ModuleStack} /> */}
+      {/* <Drawer.Screen name="EducationArticlesStack" component={EducationArticlesStack} /> */}
     </Drawer.Navigator>
   );
 }

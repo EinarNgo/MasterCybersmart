@@ -4,7 +4,7 @@ import { StyleSheet, View, Dimensions, Button, Text } from "react-native";
 import { Card, Icon } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import constants from "../../constants/moduleConstants";
-
+//sjekk høyde og width
 const { width } = Dimensions.get("screen");
 export default function EducationArticles({ navigation, route }) {
   return (
@@ -12,7 +12,7 @@ export default function EducationArticles({ navigation, route }) {
       <ScrollView>
         {constants.Categories.map((categori, idx) => {
           return (
-            <Card containerStyle={styles.card}>
+            <Card containerStyle={styles.card} key={`categori${idx}`}>
               <Card.Title>{categori.title}</Card.Title>
               <Card.Divider></Card.Divider>
               <Icon

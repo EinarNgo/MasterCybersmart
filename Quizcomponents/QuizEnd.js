@@ -22,7 +22,6 @@ const thumbMeasure = (width - 48 - 32) / 3;
 const QuizEnd = ({score:score, handleMain, handleRestart}) => {
   return (
     <Block flex style={styles.quizScreen}>
-      <Module_header name=""></Module_header>
       <Block flex style={styles.bg}>
           <ScrollView
             showsVerticalScrollIndicator={false}
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   bg: {
-    backgroundColor: "#6495ed"
+    backgroundColor: "white"
   },
   valg: {
     // position: "relative",

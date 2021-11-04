@@ -9,7 +9,8 @@ const { width } = Dimensions.get("screen");
 export default function EducationArticles({ navigation, route }) {
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+      >
         {constants.Categories.map((categori, idx) => {
           return (
             <Card containerStyle={styles.card} key={`categori${idx}`}>

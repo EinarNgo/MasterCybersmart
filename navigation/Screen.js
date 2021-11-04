@@ -140,8 +140,6 @@ function HomeStack(props) {
             <Header
               title="Home"
               back
-              white
-              transparent
               navigation={navigation}
               scene={scene}
             />

@@ -22,12 +22,16 @@ const thumbMeasure = (width - 48 - 32) / 3;
 const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score}) => {
   return (
     <Block flex style={styles.quizScreen}>
-      <Module_header name=""></Module_header>
       <Block flex style={styles.bg}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{ width, marginTop: '0%' }}
+            style={{ width, marginTop: '20%' }}
           >
+            <Block middle style={styles.statsContainer}>
+                    <Text bold size={28} color="black">
+                       Blir sendt ned
+                    </Text>
+              </Block>
             <Block flex style={styles.resultCard}>
             <View style={styles.textview}>
                 <Text style={styles.questions}>Antall spørsmål: {length}</Text>
@@ -41,7 +45,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
             </Block>
             <Block
                     space="evenly"
-                    style={{ marginTop: 20, paddingBottom: 24 }}
+                    style={{ marginTop: 0, paddingBottom: 24 }}
                   >
                     {question.valgmuligheter.map((choices, idx) => (
                       <Block flex style={styles.valg}>
@@ -65,6 +69,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                     <Button title={"neste"} onPress={() => handleNext()} />
                   </Block>
                   )}
+                  <Block style={styles.bottom}/>
                   
           </ScrollView>
       </Block>
@@ -76,7 +81,6 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
 const styles = StyleSheet.create({
   quizScreen: {
     marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
-    marginBottom: -HeaderHeight * 2,
     flex: 1,
   },
   container: {
@@ -84,6 +88,10 @@ const styles = StyleSheet.create({
     height: height,
     padding: 0,
     zIndex: 1
+  },
+  bottom: {
+    // position: "relative",
+    marginBottom: 50,
   },
   background: {
     width: width,
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   bg: {
-    backgroundColor: "#6495ed"
+    backgroundColor: "white"
   },
   valg: {
     // position: "relative",

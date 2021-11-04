@@ -1,7 +1,7 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { Block, theme } from "galio-framework";
 import React, { useEffect, useState } from "react";
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { Dimensions, Platform, StyleSheet, View } from "react-native";
 import { HeaderHeight } from "../constants/utils";
 import { listModulers } from "../graphql/queries";
 import { Quiz, QuizEnd, QuizMain } from "../Quizcomponents";
@@ -79,34 +79,41 @@ function QuizIndex() {
     setAnswer(false);
   };
 
+  
   if (play === "Main") {
     return (
-      <Block flex style={styles.bg}>
-        <QuizMain handleStart={handleStart} length={length} />
-      </Block>
+      <View style={styles.container}>
+        <Block flex style={styles.bg}>
+          <QuizMain handleStart={handleStart} length={length} />
+        </Block>
+      </View>
     );
   } else if (play === "Play") {
     return (
-      <Block flex style={styles.bg}>
-        <Quiz
-          prop={questions[activeIndex]}
-          handleAnswer={handleAnswer}
-          handleNext={handleNext}
-          answer={answer}
-          length={length}
-          score={score}
-        />
-      </Block>
+      <View style={styles.container}>
+        <Block flex style={styles.bg}>
+          <Quiz
+            prop={questions[activeIndex]}
+            handleAnswer={handleAnswer}
+            handleNext={handleNext}
+            answer={answer}
+            length={length}
+            score={score}
+          />
+        </Block>
+      </View>
     );
   } else if (play === "End") {
     return (
-      <Block flex style={styles.bg}>
-        <QuizEnd
-          handleMain={handleMain}
-          handleRestart={handleRestart}
-          score={score}
-        />
-      </Block>
+      <View style={styles.container}>
+        <Block flex style={styles.bg}>
+          <QuizEnd
+            handleMain={handleMain}
+            handleRestart={handleRestart}
+            score={score}
+          />
+        </Block>
+      </View>
     );
   }
 }

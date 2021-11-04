@@ -5,78 +5,99 @@ import {
   ScrollView,
   Image,
   ImageBackground,
-  Platform
+  Platform,
+  Button
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
 import { Images, argonTheme } from "../constants";
 import Module_header from "../components/Module_header";
-import { Card } from '../components';
+import { Card, Icon } from "react-native-elements";
 import quiz from '../constants/quiz';
-import { Button } from "../components";
 const { width, height } = Dimensions.get("screen");
 
 const QuizMain = ({handleStart, length:length}) => {
   return (
     <Block flex style={styles.quizScreen}>
-        <Module_header name=""></Module_header>
         <Block flex style={styles.bg}>
             <ScrollView
-              showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '0%' }}
+              showsVerticalScrollIndicator={true}
+              style={{ width, marginTop: '15%' }}
             >
               <Block middle style={styles.statsContainer}>
-                    <Text bold size={28} color="#fff">
+                    <Text bold size={28} color="black">
                       Quiz
                     </Text>
               </Block>
-              <Block flex style={styles.resultCard}>
-              <Text bold size={16} color="#000" style={{marginTop: -5}}>
+              <Block style={styles.result}>
+                      <Text bold size={16} color="#000" style={{marginTop: -5}}>
                         Resultater
                       </Text>
+              </Block>
+              <Block flex style={styles.resultCard}>
               <Block
                       middle
                       row
                       space="evenly"
                       style={{ marginTop: 20, paddingBottom: 24 }}
                     >
-                      <Button
-                        small
-                        style={{ backgroundColor: argonTheme.COLORS.INFO }}
-                      >
-                        Poeng: ?
-                      </Button>
-                      <Button
-                        small
-                        style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-                      >
-                        Forsøk: ?
-                      </Button>
-                
-                    </Block>
+                      <Text color="black">
+                      Poengsum: ??
+                    </Text>
+                    <Text color="black">
+                      Antall løste: ??
+                    </Text>
+                  </Block>
               </Block>
-              <Block flex style={styles.CategoriesCard}>
-                <Block
-                      row
-                      space="between"
-                    >
-                      <Text bold size={16} color="#000" style={{marginTop: -5}}>
-                        Kategori
+              <Block style={styles.result}>
+                      <Text bold size={16} color="#000" style={{marginTop: 20}}>
+                        Kategorier
                       </Text>
-                    </Block>
-                  <Block row space="between" style={{ flexWrap: "wrap" }}>
-                    <Button onPress={() => handleStart()}>
-                      Kryptografi:
-                      </Button>
-                      
-                      <Card item={quiz[3]}/>
-                  </Block>
-                  <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      <Card item={quiz[4]} style={{ marginRight: theme.SIZES.BASE }}/>
-                      <Card item={quiz[1]}/>
-                  </Block>
-        
               </Block>
+
+              
+              
+              <Block flex style={styles.resultCard}>
+                  <Card.Title>Kryptografi</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name="bug"
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Quizzz med 10 random spørsmål, som tester dine ferdigheter innenfor temaet kryptografi</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    onPress={() => handleStart()}
+                    
+                  />
+              </Block>
+              <Block flex style={styles.resultCard}>
+              <Card.Title>Personvern</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name="bug"
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Test 123</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    onPress={() =>
+                      navigation.navigate("ArticleViewer",{
+                        link: categori.url,
+                      })
+                    }
+                  />
+              </Block>
+              <Block style={styles.bottom}/>
+              
             </ScrollView>
         </Block>
       </Block>
@@ -86,12 +107,11 @@ const QuizMain = ({handleStart, length:length}) => {
 const styles = StyleSheet.create({
   quizScreen: {
     marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
-    marginBottom: -HeaderHeight * 2,
     flex: 1,
     
   },
   bg: {
-    backgroundColor: "#6495ed"
+    backgroundColor: "white"
   },
   container: {
     width: width,
@@ -99,16 +119,11 @@ const styles = StyleSheet.create({
     padding: 0,
     zIndex: 1
   },
-  background: {
-    width: width,
-    height: height / 2
-  },
   CategoriesCard: {
     // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginTop: 20,
-    marginBottom: 50,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     borderBottomLeftRadius: 6,
@@ -125,6 +140,7 @@ const styles = StyleSheet.create({
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginTop: 20,
+    marginBottom: 10,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     borderBottomLeftRadius: 6,
@@ -136,25 +152,69 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     zIndex: 2
   },
-  info: {
-    paddingHorizontal: 40
+  result: {
+    // position: "relative",
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginBottom: -20,
+    zIndex: 2
   },
-  quiz: {
-    width: width - theme.SIZES.BASE * 2,
-    paddingVertical: theme.SIZES.BASE,
+  bottom: {
+    // position: "relative",
+    marginBottom: 50,
   },
   statsContainer: {
     position: "relative",
     marginBottom: 65,
     marginTop: 100,
   },
-  nameInfo: {
-    marginTop: 35
+  textContainer: {
+    position: "relative",
+    marginBottom: 20,
+  },
+  container: {
+    marginTop: 89,
+  },
+  iconContainer: {
+    alignSelf: "center",
+    marginVertical: 20,
   },
 
-
-
+  card: {
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  button: {
+    borderRadius: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    marginBottom: 0,
+  },
 });
 
 export default QuizMain;
 
+/*
+<Block flex style={styles.CategoriesCard}>
+                <Block
+                      row
+                      space="between"
+                    >
+                      <Text bold size={16} color="#000" style={{marginTop: -5}}>
+                        Kategori
+                      </Text>
+                    </Block>
+                  <Block row space="between" style={{ flexWrap: "wrap" }}>
+                    <Button onPress={() => handleStart()}>
+                      Kryptografi:
+                    </Button>
+                      
+                      <Card item={quiz[3]}/>
+                  </Block>
+                  <Block row space="between" style={{ flexWrap: "wrap" }}>
+                      <Card item={quiz[4]} style={{ marginRight: theme.SIZES.BASE }}/>
+                      <Card item={quiz[1]}/>
+                  </Block>
+        
+              </Block>
+*/

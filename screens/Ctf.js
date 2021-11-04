@@ -15,15 +15,24 @@ import { getModuler, listModulers } from "../graphql/queries";
 import Module_header from "../components/Module_header";
 import ModuleQuestion from "./ModuleQuestion";
 import moduleConstants from "../constants/moduleConstants";
+import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 
 const { width } = Dimensions.get("screen");
 
 export default function Ctf({ navigation, updateAuthState }) {
-  const [modulers, setModulers] = useState([]);
+  const [modules, setModules] = useState([]);
+  const [filteredModule, setFilteredModule] = useState([]);
 
   useEffect(() => {
     fetchModulers();
   }, []);
+  useEffect(() => {
+    if (filteredModule.length == 0) {
+      console.log("waiting...");
+    } else {
+      navigateToModule();
+    }
+  }, [filteredModule]);
 
   const fetchModulers = async () => {
     try {
@@ -31,10 +40,20 @@ export default function Ctf({ navigation, updateAuthState }) {
 
       const modulerList = modulerData.data.listModulers.items;
 
-      setModulers(modulerList);
+      setModules(modulerList);
     } catch (error) {
       console.log("error on fetching modul", error);
     }
+  };
+  const navigateToModule = () => {
+    navigation.navigate("ModuleQuestion", {
+      questions: filteredModule,
+    });
+  };
+
+  const getFilteredQuestions = (filteredRequest, fullList) => {
+    var filtered = FilteredByCategories(filteredRequest, fullList);
+    setFilteredModule(filtered);
   };
 
   return (
@@ -47,24 +66,17 @@ export default function Ctf({ navigation, updateAuthState }) {
         <TextInput editable={false} style={styles.title}>
           Kategorier
         </TextInput>
+
         <Block flex>
           {moduleConstants.Categories.map((modul, idx) => {
             return (
               <Card containerStyle={styles.card} key={`modul${idx}`}>
-                <Card.Title style={{ textAlign: "center", fontSize: 30 }}>
-                  {modul.title}
-                </Card.Title>
+                <Card.Title>{modul.title}</Card.Title>
                 <Card.Divider />
                 <Text style={{ paddingBottom: 15 }}>{modul.description}</Text>
                 <Button
-                  onPress={() => navigation.navigate(ModuleQuestion)}
-                  buttonStyle={{
-                    borderRadius: 0,
-                    marginLeft: 0,
-                    marginRight: 0,
-                    marginBottom: 0,
-                    backgroundColor: "limegreen",
-                  }}
+                  onPress={() => getFilteredQuestions(modul.title, modules)}
+                  buttonStyle={styles.buttonStyle}
                   title="START"
                 />
               </Card>
@@ -85,11 +97,12 @@ const styles = StyleSheet.create({
     paddingVertical: theme.SIZES.BASE,
   },
   title: {
-    color: "limegreen",
+    color: "#3B464B",
     fontSize: 22,
     textAlign: "center",
     borderBottomColor: "#CACACA",
     borderBottomWidth: 2,
+    fontWeight: "600",
   },
   textview: {
     display: "flex",
@@ -98,11 +111,13 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   card: {
-    borderRadius: 15,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 2,
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  buttonStyle: {
+    borderRadius: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    marginBottom: 0,
   },
 });

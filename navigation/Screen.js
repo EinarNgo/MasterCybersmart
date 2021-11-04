@@ -118,15 +118,15 @@ function HomeStack(props) {
       <Stack.Screen
         name="ModuleQuestion"
         component={ModuleQuestion}
-        centerComponent={{ name: "MY TITLE" }}
         options={{
-          header: () => (
+          header: ({ navigation, scene }) => (
             <Header
               title="Home"
               back
               white
               transparent
-              centerComponent={{ title: "MY TITLE" }}
+              navigation={navigation}
+              scene={scene}
             />
           ),
           headerTransparent: true,
@@ -164,7 +164,6 @@ function HomeStack(props) {
           header: ({ navigation, scene }) => (
             <Header
               title="Home"
-              back
               navigation={navigation}
               back
               white

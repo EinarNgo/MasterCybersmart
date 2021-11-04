@@ -8,7 +8,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 export default function Module_header(props) {
-  const headerTheme = ["#22c1c3", "limegreen"];
+  const headerTheme = ["gray", "black"];
   const start = [0.1, 1];
   const end = [1, 0.1];
 
@@ -45,6 +45,6 @@ const styles = {
     alignSelf: "center",
     fontSize: 30,
     fontFamily: "Arial",
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 };

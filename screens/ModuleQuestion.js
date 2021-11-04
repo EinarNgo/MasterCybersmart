@@ -9,86 +9,72 @@ import { listModulers } from "../graphql/queries";
 const { width } = Dimensions.get("screen");
 const { height } = Dimensions.get("window").height;
 
-export default function ModuleQuestion() {
+export default function ModuleQuestion({ navigation, route }) {
+  const filteredQs = route.params.questions;
+  const title = route.params.questions[0].kategori;
   const [Questions, setQuestions] = useState([]);
-  const [CurrentQuestion, setCurrentQuestion] = useState(
-    " Velkommen trykk på test "
-  );
+  const [CurrentQuestion, setCurrentQuestion] = useState("");
   const [CurrentIndex, setCurrentIndex] = useState(0);
-  const list = [
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-  ];
 
   useEffect(() => {
-    fetchQuestions();
+    setQuestions(filteredQs);
   }, []);
   useEffect(() => {}, [CurrentIndex]);
-  const fetchQuestions = async () => {
-    try {
-      const questions = await API.graphql(graphqlOperation(listModulers));
 
-      const questionArray = questions.data.listModulers.items;
+  const checkAnswer = (answer) => {};
 
-      setQuestions(questionArray);
-    } catch (error) {
-      console.log("error on fetching questions", error);
+  const prevQuestion = (number) => {
+    console.log("forrige funksjon");
+    console.log(number);
+    console.log("forrige funksjon");
+    if (number < 0) {
+      alert("Kan ikke gå tilbake, dette er første spørsmål");
+    } else {
+      setCurrentQuestion(Questions[number]);
+      setCurrentIndex(CurrentIndex - 1);
     }
   };
-  const checkAnswer = (answer) => {};
-  const getFilteredQuestions = (filteredRequest) => {
-    var filteredQuestions = FilteredByCategories(filteredRequest, Questions);
-    setQuestions(filteredQuestions);
-  };
-  const prevQuestion = (number) => {
-    setCurrentQuestion(list[number]);
-    setCurrentIndex(CurrentIndex - 1);
-  };
   const nextQuestion = (number) => {
-    setCurrentQuestion(list[number]);
-    setCurrentIndex(CurrentIndex + 1);
+    console.log("neste funksjon");
+    console.log(number);
+    console.log(Questions.length);
+    console.log("neste funksjon");
+    if (number >= Questions.length) {
+      alert("ikke flere spørsmål, vennligst velg ny kategori");
+    } else {
+      setCurrentQuestion(Questions[number]);
+      setCurrentIndex(CurrentIndex + 1);
+    }
   };
-
+  const test = (
+    <View style={styles.container}>
+      <Card containerStyle={styles.questionCard}>
+        <Text style={styles.text}>{CurrentQuestion.sporsmaal}</Text>
+        <TextInput
+          style={styles.input}
+          onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
+        ></TextInput>
+      </Card>
+      <View style={styles.buttonContainer}>
+        <Button
+          buttonStyle={styles.button}
+          onPress={() => prevQuestion(CurrentIndex - 1)}
+          title="Previous"
+        ></Button>
+        <Button
+          buttonStyle={styles.button}
+          onPress={() => nextQuestion(CurrentIndex + 1)}
+          title="Next"
+        ></Button>
+      </View>
+    </View>
+  );
+  //endre på at første spørsmål ikke er tom
   return (
     <View style={{ flex: 1 }}>
       <View>
-        <Module_header name="KategoriNAVN"></Module_header>
-      </View>
-      <View style={styles.container}>
-        <Card containerStyle={styles.questionCard}>
-          <Text style={styles.text}>{CurrentQuestion}</Text>
-          <TextInput
-            style={styles.input}
-            onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
-          ></TextInput>
-        </Card>
-        <View style={styles.buttonContainer}>
-          <Button
-            buttonStyle={styles.button}
-            onPress={() => prevQuestion(CurrentIndex - 1)}
-            title="Previous"
-          ></Button>
-          <Button
-            buttonStyle={styles.button}
-            onPress={() => nextQuestion(CurrentIndex + 1)}
-            title="Next"
-          ></Button>
-        </View>
+        <Module_header name={title}></Module_header>
+        {Questions ? test : <Text>tullllll</Text>}
       </View>
     </View>
   );
@@ -108,7 +94,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   button: {
-    backgroundColor: "limegreen",
+    backgroundColor: "darkgray",
     shadowColor: "black",
     width: 150,
     marginTop: 10,

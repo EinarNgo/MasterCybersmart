@@ -69,7 +69,7 @@ export default function ModuleQuestion({ navigation, route }) {
       </View>
     </View>
   );
-  //endre på at første spørsmål ikke er tom
+  //endre på at første spørsmål ikke er tom og at første spørsmål peker på null og ikke 1
   return (
     <View style={{ flex: 1 }}>
       <View>

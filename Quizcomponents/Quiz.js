@@ -19,7 +19,7 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score}) => {
+const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel}) => {
   return (
     <Block flex style={styles.quizScreen}>
       <Block flex style={styles.bg}>
@@ -29,7 +29,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
           >
             <Block middle style={styles.statsContainer}>
                     <Text bold size={28} color="black">
-                       Blir sendt ned
+                       {tittel}
                     </Text>
               </Block>
             <Block flex style={styles.resultCard}>
@@ -48,7 +48,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                     style={{ marginTop: 0, paddingBottom: 24 }}
                   >
                     {question.valgmuligheter.map((choices, idx) => (
-                      <Block flex style={styles.valg}>
+                      <Block flex style={styles.valg} key={`categori${idx}`}>
                         <Button
                           key={idx}
                           title={choices}

@@ -5,6 +5,7 @@ import { Dimensions, Platform, StyleSheet, View } from "react-native";
 import { HeaderHeight } from "../constants/utils";
 import { listModulers } from "../graphql/queries";
 import { Quiz, QuizEnd, QuizMain } from "../Quizcomponents";
+import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 
@@ -16,14 +17,16 @@ function QuizIndex() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [answer, setAnswer] = useState(false);
   const [score, setScore] = useState(0);
+  const [filterQuestion, setFilterQuestion] = useState([]);
+  const [filterLength, setFilterLength] = useState([]);
+  const [tittel, setTittel] = useState("");
 
   const fetchQuestions = async () => {
     try {
       const questionData = await API.graphql(graphqlOperation(listModulers));
       const questionList = questionData.data.listModulers.items;
       setQuestions(questionList);
-      //setLength(questionList.length);
-      setLength(2);
+      setLength(questionList.length);
     } catch (error) {
       console.log("error on fetching questions", error);
     }
@@ -33,10 +36,16 @@ function QuizIndex() {
     fetchQuestions();
   }, []);
 
+  const getFilteredQuestions = (filteredRequest) => {
+    var filtered = FilteredByCategories(filteredRequest, questions);
+    setFilterQuestion(filtered);
+    setFilterLength(filtered.length)
+  };
+
   const handleAnswer = (answerFromButton) => {
     console.log(answer);
     if (answer == false) {
-      if (answerFromButton === questions[activeIndex].fasit) {
+      if (answerFromButton === filterQuestion[activeIndex].fasit) {
         alert("Riktig svar");
         setScore(score + 1);
         setAnswer(true);
@@ -49,8 +58,8 @@ function QuizIndex() {
 
   const handleNext = () => {
     console.log(activeIndex);
-    console.log(length);
-    if (activeIndex === length - 1) {
+    console.log(filterLength);
+    if (activeIndex === filterLength - 1) {
       console.log("End");
       setPlay("End");
     } else {
@@ -59,7 +68,9 @@ function QuizIndex() {
     }
   };
 
-  const handleStart = () => {
+  const handleStart = (Kategori) => {
+    getFilteredQuestions(Kategori);
+    setTittel(Kategori);
     setActiveIndex(0);
     setScore(0);
     setPlay("Play");
@@ -78,7 +89,6 @@ function QuizIndex() {
     setPlay("Main");
     setAnswer(false);
   };
-
   
   if (play === "Main") {
     return (
@@ -91,16 +101,21 @@ function QuizIndex() {
   } else if (play === "Play") {
     return (
       <View style={styles.container}>
-        <Block flex style={styles.bg}>
+        {filterLength > 0 ? (
+          <Block flex style={styles.bg}>
           <Quiz
-            prop={questions[activeIndex]}
+            prop={filterQuestion[activeIndex]}
             handleAnswer={handleAnswer}
+            tittel={tittel}
             handleNext={handleNext}
             answer={answer}
-            length={length}
+            length={filterLength}
             score={score}
           />
         </Block>
+      ) :
+        //Husk å aktivere databasen hvis denne beskjed kommer =)
+       (<h2 className="text-2xl text-white font-bold"> Spørsmål ikke loaded... </h2>)}
       </View>
     );
   } else if (play === "End") {

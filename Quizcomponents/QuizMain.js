@@ -3,17 +3,12 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Image,
-  ImageBackground,
   Platform,
   Button
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
-import { Images, argonTheme } from "../constants";
-import Module_header from "../components/Module_header";
 import { Card, Icon } from "react-native-elements";
-import quiz from '../constants/quiz';
 const { width, height } = Dimensions.get("screen");
 
 const QuizMain = ({handleStart, length:length}) => {
@@ -53,12 +48,9 @@ const QuizMain = ({handleStart, length:length}) => {
                       <Text bold size={16} color="#000" style={{marginTop: 20}}>
                         Kategorier
                       </Text>
-              </Block>
-
-              
-              
+              </Block> 
               <Block flex style={styles.resultCard}>
-                  <Card.Title>Kryptografi</Card.Title>
+                  <Card.Title>Personvern</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
                     name="bug"
@@ -66,17 +58,16 @@ const QuizMain = ({handleStart, length:length}) => {
                     containerStyle={styles.iconContainer}
                   />
                   <Block middle style={styles.textContainer}>
-                    <Text>Quizzz med 10 random spørsmål, som tester dine ferdigheter innenfor temaet kryptografi</Text>
+                    <Text>Quizzz med 10 random spørsmål, som tester dine ferdigheter innenfor temaet personvern</Text>
                   </Block>
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
-                    onPress={() => handleStart()}
-                    
+                    onPress={() => handleStart("Personvern")}
                   />
               </Block>
               <Block flex style={styles.resultCard}>
-              <Card.Title>Personvern</Card.Title>
+              <Card.Title>Etisk hacking</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
                     name="bug"
@@ -84,16 +75,12 @@ const QuizMain = ({handleStart, length:length}) => {
                     containerStyle={styles.iconContainer}
                   />
                   <Block middle style={styles.textContainer}>
-                    <Text>Test 123</Text>
+                    <Text>Etisk hacking handler om å avdekke svakheter i et datasystem på vegne av den som eier produktet</Text>
                   </Block>
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
-                    onPress={() =>
-                      navigation.navigate("ArticleViewer",{
-                        link: categori.url,
-                      })
-                    }
+                    onPress={() => handleStart("Etisk hacking")}
                   />
               </Block>
               <Block style={styles.bottom}/>
@@ -193,28 +180,3 @@ const styles = StyleSheet.create({
 });
 
 export default QuizMain;
-
-/*
-<Block flex style={styles.CategoriesCard}>
-                <Block
-                      row
-                      space="between"
-                    >
-                      <Text bold size={16} color="#000" style={{marginTop: -5}}>
-                        Kategori
-                      </Text>
-                    </Block>
-                  <Block row space="between" style={{ flexWrap: "wrap" }}>
-                    <Button onPress={() => handleStart()}>
-                      Kryptografi:
-                    </Button>
-                      
-                      <Card item={quiz[3]}/>
-                  </Block>
-                  <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      <Card item={quiz[4]} style={{ marginRight: theme.SIZES.BASE }}/>
-                      <Card item={quiz[1]}/>
-                  </Block>
-        
-              </Block>
-*/

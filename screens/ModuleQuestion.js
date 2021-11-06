@@ -1,87 +1,122 @@
-import { API, graphqlOperation } from "aws-amplify";
 import React, { useEffect, useState } from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
-import { Button, Card } from "react-native-elements";
+import { Dimensions, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Button, Card, Icon } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
-import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
+import { ActivityIndicator } from "react-native-paper";
 import Module_header from "../components/Module_header";
-import { listModulers } from "../graphql/queries";
 const { width } = Dimensions.get("screen");
 const { height } = Dimensions.get("window").height;
 
 export default function ModuleQuestion({ navigation, route }) {
   const filteredQs = route.params.questions;
   const title = route.params.questions[0].kategori;
-  const [Questions, setQuestions] = useState([]);
-  const [CurrentQuestion, setCurrentQuestion] = useState("");
-  const [CurrentIndex, setCurrentIndex] = useState(0);
+  const [questions, setQuestions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isQuestionsFilled = questions && questions.length > 0;
 
   useEffect(() => {
     setQuestions(filteredQs);
   }, []);
-  useEffect(() => {}, [CurrentIndex]);
+  useEffect(() => {}, [currentIndex]);
 
-  const checkAnswer = (answer) => {};
+  const checkAnswer = (answer) => {
+    alert("sjekk svar");
+  };
 
-  const prevQuestion = (number) => {
-    console.log("forrige funksjon");
-    console.log(number);
-    console.log("forrige funksjon");
-    if (number < 0) {
+  const prevQuestion = () => {
+    if (currentIndex <= 0) {
       alert("Kan ikke gå tilbake, dette er første spørsmål");
     } else {
-      setCurrentQuestion(Questions[number]);
-      setCurrentIndex(CurrentIndex - 1);
+      setCurrentIndex(currentIndex - 1);
     }
   };
-  const nextQuestion = (number) => {
-    console.log("neste funksjon");
-    console.log(number);
-    console.log(Questions.length);
-    console.log("neste funksjon");
-    if (number >= Questions.length) {
+  const nextQuestion = () => {
+    if (currentIndex >= questions.length - 1) {
       alert("ikke flere spørsmål, vennligst velg ny kategori");
     } else {
-      setCurrentQuestion(Questions[number]);
-      setCurrentIndex(CurrentIndex + 1);
+      setCurrentIndex(currentIndex + 1);
     }
   };
-  const test = (
-    <View style={styles.container}>
-      <Card containerStyle={styles.questionCard}>
-        <Text style={styles.text}>{CurrentQuestion.sporsmaal}</Text>
-        <TextInput
-          style={styles.input}
-          onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
-        ></TextInput>
-      </Card>
+  const loadingModule = () => {
+    return (
+      <View style={styles.iconHolder}>
+        <ActivityIndicator
+          size="large"
+          color="red"
+          style={styles.iconContainer}
+        ></ActivityIndicator>
+      </View>
+    );
+  };
+  const buttonModule = () => {
+    return (
       <View style={styles.buttonContainer}>
         <Button
           buttonStyle={styles.button}
-          onPress={() => prevQuestion(CurrentIndex - 1)}
+          onPress={() => prevQuestion()}
           title="Previous"
         ></Button>
         <Button
           buttonStyle={styles.button}
-          onPress={() => nextQuestion(CurrentIndex + 1)}
+          onPress={() => nextQuestion()}
           title="Next"
         ></Button>
       </View>
-    </View>
-  );
-  //endre på at første spørsmål ikke er tom og at første spørsmål peker på null og ikke 1
+    );
+  };
+  const cardModule = () => {
+    const firstQuestion = questions[currentIndex];
+    return (
+      <View style={styles.container}>
+        <Card containerStyle={styles.questionCard}>
+          <ScrollView style={styles.questionContainer}>
+            <Text style={styles.text}>{firstQuestion?.sporsmaal}</Text>
+          </ScrollView>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
+            ></TextInput>
+          </View>
+        </Card>
+        {buttonModule()}
+      </View>
+    );
+  };
+  const questionModule = () => {
+    if (isQuestionsFilled) {
+      return cardModule();
+    } else {
+      {
+        loadingModule();
+      }
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
-      <View>
+      <View style={{ flex: 1 }}>
         <Module_header name={title}></Module_header>
-        {Questions ? test : <Text>tullllll</Text>}
+        {questionModule()}
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  iconContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
+  },
+
+  iconHolder: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  questionContainer: {},
+  inputContainer: {},
   text: {
-    fontSize: 30,
+    fontSize: 20,
     textAlign: "center",
     textAlignVertical: "bottom",
   },
@@ -106,8 +141,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   container: {
-    maxWidth: width,
-    height: height,
+    flex: 1,
   },
   input: {
     borderWidth: 1,
@@ -121,5 +155,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 8,
     elevation: 2,
+    flex: 1 / 2,
   },
 });

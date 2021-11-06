@@ -21,18 +21,10 @@ const { width } = Dimensions.get("screen");
 
 export default function Ctf({ navigation, updateAuthState }) {
   const [modules, setModules] = useState([]);
-  const [filteredModule, setFilteredModule] = useState([]);
 
   useEffect(() => {
     fetchModulers();
   }, []);
-  useEffect(() => {
-    if (filteredModule.length == 0) {
-      console.log("waiting...");
-    } else {
-      navigateToModule();
-    }
-  }, [filteredModule]);
 
   const fetchModulers = async () => {
     try {
@@ -45,15 +37,16 @@ export default function Ctf({ navigation, updateAuthState }) {
       console.log("error on fetching modul", error);
     }
   };
-  const navigateToModule = () => {
+  const navigateToModule = (filteredQs) => {
     navigation.navigate("ModuleQuestion", {
-      questions: filteredModule,
+      questions: filteredQs,
     });
   };
 
   const getFilteredQuestions = (filteredRequest, fullList) => {
     var filtered = FilteredByCategories(filteredRequest, fullList);
-    setFilteredModule(filtered);
+
+    navigateToModule(filtered);
   };
 
   return (

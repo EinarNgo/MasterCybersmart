@@ -24,10 +24,12 @@ export default function EducationArticles({ navigation, route }) {
               <Text>{categori.description}</Text>
               <Button
                 buttonStyle={styles.button}
-                title="Les artikkel"
+                title={`Video om ${categori.title.toLowerCase()}`}
                 onPress={() =>
-                  navigation.navigate("ArticleViewer", {
-                    link: categori.url,
+                  navigation.navigate("YoutubeViewer", {
+                    link: categori.youtubeUrl,
+                    description: categori.description,
+                    title: categori.title,
                   })
                 }
               />

@@ -32,6 +32,8 @@ import QuizIndex from "../screens/QuizIndex";
 import ModuleQuestion from "../screens/ModuleQuestion";
 import ArticleViewer from "../components/EducationArticlesComponents/ArticleViewer";
 import EducationArticles from "../components/EducationArticlesComponents/EducationArticles";
+import YoutubeViewer from "../components/EducationVideos/YoutubeViewer";
+import EducationVideoIndex from "../components/EducationVideos/EducationVideoIndex";
 Amplify.configure(config);
 
 const AuthenticationStack = createStackNavigator();
@@ -137,12 +139,7 @@ function HomeStack(props) {
         component={QuizIndex}
         options={{
           header: ({ navigation, scene }) => (
-            <Header
-              title="Home"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
+            <Header title="Home" back navigation={navigation} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -174,36 +171,22 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
-    </Stack.Navigator>
-  );
-}
-/* function EducationArticlesStack(props) {
-  return (
-    <Stack.Navigator mode="card" headerMode="screen">
       <Stack.Screen
-        name="EducationArticles"
-        component={EducationArticles}
+        name="YoutubeViewer"
+        component={YoutubeViewer}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} scene={scene} />
+            <Header title="Home" navigation={navigation} back scene={scene} />
           ),
           headerTransparent: true,
         }}
       />
       <Stack.Screen
-        name="ArticleViewer"
-        component={ArticleViewer}
+        name="EducationVideoIndex"
+        component={EducationVideoIndex}
         options={{
           header: ({ navigation, scene }) => (
-            <Header
-              title="Home"
-              back
-              navigation={navigation}
-              back
-              white
-              transparent
-              scene={scene}
-            />
+            <Header title="Home" navigation={navigation} back scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -211,30 +194,6 @@ function HomeStack(props) {
     </Stack.Navigator>
   );
 }
- 
-function ModuleStack(props) {
-  return (
-    <Stack.Navigator mode="card" headerMode="screen">
-      <Stack.Screen
-        name="ModuleQuestion"
-        component={ModuleQuestion}
-        centerComponent={{ name: "MY TITLE" }}
-        options={{
-          header: () => (
-            <Header
-              title="Home"
-              back
-              white
-              transparent
-              centerComponent={{ title: "MY TITLE" }}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}*/
 
 const Initializing = () => {
   return (
@@ -342,8 +301,6 @@ function AppStack({ props, updateAuthState }) {
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
-      {/* <Drawer.Screen name="ModuleQuestion" component={ModuleStack} /> */}
-      {/* <Drawer.Screen name="EducationArticlesStack" component={EducationArticlesStack} /> */}
     </Drawer.Navigator>
   );
 }

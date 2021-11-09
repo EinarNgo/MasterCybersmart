@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, StyleSheet, Text, View, ScrollView } from "react-native";
-import { Button, Card, Icon } from "react-native-elements";
+import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, Card } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 import { ActivityIndicator } from "react-native-paper";
 import Module_header from "../components/Module_header";
@@ -20,7 +20,13 @@ export default function ModuleQuestion({ navigation, route }) {
   useEffect(() => {}, [currentIndex]);
 
   const checkAnswer = (answer) => {
-    alert("sjekk svar");
+    const isAnswerRight =
+      answer.toLowerCase() === questions[currentIndex].fasit.toLowerCase();
+    if (isAnswerRight) {
+      alert("riktig");
+    } else {
+      alert("feil");
+    }
   };
 
   const prevQuestion = () => {
@@ -74,6 +80,10 @@ export default function ModuleQuestion({ navigation, route }) {
           </ScrollView>
           <View style={styles.inputContainer}>
             <TextInput
+              clearTextOnFocus={true}
+              autoCorrect={true}
+              placeholder="Svar"
+              clearButtonMode="always"
               style={styles.input}
               onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
             ></TextInput>

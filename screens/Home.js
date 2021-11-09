@@ -23,7 +23,7 @@ class Home extends React.Component {
             />
             <Card item={articles[2]} nav={"EducationArticles"} />
           </Block>
-          <Card item={articles[4]} full />
+          <Card item={articles[4]} full nav={"EducationVideoIndex"} />
         </Block>
       </ScrollView>
     );

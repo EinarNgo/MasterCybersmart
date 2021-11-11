@@ -30,6 +30,7 @@ import { Header } from "../components";
 import config from "../aws-exports";
 import QuizIndex from "../screens/QuizIndex";
 import ModuleQuestion from "../screens/ModuleQuestion";
+import PasswordChecker from "../screens/PasswordChecker";
 import ArticleViewer from "../components/EducationArticlesComponents/ArticleViewer";
 import EducationArticles from "../components/EducationArticlesComponents/EducationArticles";
 import YoutubeViewer from "../components/EducationVideos/YoutubeViewer";
@@ -184,6 +185,16 @@ function HomeStack(props) {
       <Stack.Screen
         name="EducationVideoIndex"
         component={EducationVideoIndex}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Home" navigation={navigation} back scene={scene} />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="PasswordChecker"
+        component={PasswordChecker}
         options={{
           header: ({ navigation, scene }) => (
             <Header title="Home" navigation={navigation} back scene={scene} />

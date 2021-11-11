@@ -26,4 +26,9 @@ export default [
     cta: 'Se video', 
     horizontal: true
   },
+  {
+    title: 'Passord sjekker',
+    image: 'https://www.publicidadenaweb.com/wp-content/uploads/2019/06/como-fazer-video-de-vendas.jpg',
+    cta: 'Sjekk passord'
+  },
 ];

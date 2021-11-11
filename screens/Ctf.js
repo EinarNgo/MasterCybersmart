@@ -51,7 +51,6 @@ export default function Ctf({ navigation, updateAuthState }) {
 
   return (
     <Block flex center style={styles.home1}>
-      <Module_header name="CTF"></Module_header>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollList}

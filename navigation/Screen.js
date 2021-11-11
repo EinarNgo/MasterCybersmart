@@ -106,14 +106,7 @@ function HomeStack(props) {
         component={Ctf}
         options={{
           header: ({ navigation, scene }) => (
-            <Header
-              title="Home"
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
+            <Header title="Home" back navigation={navigation} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -123,14 +116,7 @@ function HomeStack(props) {
         component={ModuleQuestion}
         options={{
           header: ({ navigation, scene }) => (
-            <Header
-              title="Home"
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
+            <Header title="Home" back navigation={navigation} scene={scene} />
           ),
           headerTransparent: true,
         }}

@@ -83,6 +83,40 @@ const QuizMain = ({handleStart, length:length}) => {
                     onPress={() => handleStart("Etisk hacking")}
                   />
               </Block>
+              <Block flex style={styles.resultCard}>
+              <Card.Title>Etisk hacking</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name="bug"
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Etisk hacking handler om å avdekke svakheter i et datasystem på vegne av den som eier produktet</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    onPress={() => handleStart("Skadevare")}
+                  />
+              </Block>
+              <Block flex style={styles.resultCard}>
+              <Card.Title>Etisk hacking</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name="bug"
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Etisk hacking handler om å avdekke svakheter i et datasystem på vegne av den som eier produktet</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    onPress={() => handleStart("Phising")}
+                  />
+              </Block>
               <Block style={styles.bottom}/>
               
             </ScrollView>

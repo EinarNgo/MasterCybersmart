@@ -4,8 +4,11 @@ import { Button, Card } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 import { ActivityIndicator } from "react-native-paper";
 import Module_header from "../components/Module_header";
-const { width } = Dimensions.get("screen");
-const { height } = Dimensions.get("window").height;
+import { Block, theme } from "galio-framework";
+import { HeaderHeight } from "../constants/utils";
+//const { width } = Dimensions.get("screen");
+//const { height } = Dimensions.get("window").height;
+const { width, height } = Dimensions.get("screen");
 
 export default function ModuleQuestion({ navigation, route }) {
   const filteredQs = route.params.questions;
@@ -57,40 +60,65 @@ export default function ModuleQuestion({ navigation, route }) {
   const buttonModule = () => {
     return (
       <View style={styles.buttonContainer}>
-        <Button
+        <Block>
+        {currentIndex != 0 &&
+          <Button
           buttonStyle={styles.button}
           onPress={() => prevQuestion()}
           title="Previous"
-        ></Button>
-        <Button
+        />
+        }
+        </Block>
+        {currentIndex != questions.length - 1 &&
+          <Button
           buttonStyle={styles.button}
           onPress={() => nextQuestion()}
           title="Next"
-        ></Button>
+        />}
+
       </View>
     );
   };
   const cardModule = () => {
     const firstQuestion = questions[currentIndex];
     return (
-      <View style={styles.container}>
-        <Card containerStyle={styles.questionCard}>
-          <ScrollView style={styles.questionContainer}>
-            <Text style={styles.text}>{firstQuestion?.sporsmaal}</Text>
-          </ScrollView>
-          <View style={styles.inputContainer}>
-            <TextInput
-              clearTextOnFocus={true}
-              autoCorrect={true}
-              placeholder="Svar"
-              clearButtonMode="always"
-              style={styles.input}
-              onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
-            ></TextInput>
-          </View>
-        </Card>
-        {buttonModule()}
-      </View>
+      <Block flex style={styles.quizScreen}>
+        <Block flex style={styles.bg}>
+            <ScrollView
+              showsVerticalScrollIndicator={true}
+              style={{ width, marginTop: '15%' }}
+            >
+              <Block middle style={styles.statsContainer}>
+                    <Text bold size={28} color="black">
+                      
+                    </Text>
+              </Block>
+
+              <Block flex style={styles.resultCard}>
+                  <Card.Title>{title}</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Block middle style={styles.textContainer}>
+                    <Text>{firstQuestion?.sporsmaal}</Text>
+                  </Block>
+                  <TextInput
+                    marginHorizontal="5%"
+                    clearTextOnFocus={true}
+                    autoCorrect={true}
+                    placeholder="Svar"
+                    clearButtonMode="always"
+                    style={styles.input}
+                    onSubmitEditing={(text) => checkAnswer(text.nativeEvent.text)}
+                  />
+                  <Block flex marginTop="5%">
+                  {buttonModule()}
+                  </Block>
+              </Block>
+              
+              <Block style={styles.bottom}/>
+              
+            </ScrollView>
+        </Block>
+      </Block>
     );
   };
   const questionModule = () => {
@@ -111,25 +139,80 @@ export default function ModuleQuestion({ navigation, route }) {
 }
 const styles = StyleSheet.create({
   mainContainer: { flex: 1, marginTop: "20%" },
+  quizScreen: {
+    marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
+    flex: 1,
+    
+  },
+  bg: {
+    backgroundColor: "white"
+  },
+  container: {
+    width: width,
+    height: height,
+    padding: 0,
+    zIndex: 1
+  },
+  CategoriesCard: {
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginTop: 20,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    zIndex: 2
+  },
+  resultCard: {
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginTop: 20,
+    marginBottom: 10,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    zIndex: 2
+  },
+  result: {
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginBottom: -20,
+    zIndex: 2
+  },
+  bottom: {
+    marginBottom: 50,
+  },
+  statsContainer: {
+    position: "relative",
+    marginBottom: 65,
+    marginTop: 100,
+  },
+  textContainer: {
+    position: "relative",
+    marginBottom: 20,
+  },
+  container: {
+    marginTop: 89,
+  },
   iconContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
+    alignSelf: "center",
+    marginVertical: 20,
   },
 
-  iconHolder: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  questionContainer: {},
-  inputContainer: {},
-  text: {
-    fontSize: 20,
-    textAlign: "center",
-    textAlignVertical: "bottom",
-  },
-  header: {
-    height: 100,
+  card: {
+    backgroundColor: "white",
+    alignItems: "center",
   },
   buttonContainer: {
     flexDirection: "row",
@@ -141,28 +224,5 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     width: 150,
     marginTop: 10,
-  },
-
-  testText: {
-    fontSize: 25,
-    padding: 10,
-    color: "white",
-  },
-  container: {
-    flex: 1,
-  },
-  input: {
-    borderWidth: 1,
-    height: 50,
-  },
-  questionCard: {
-    height: 350,
-    borderRadius: 15,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 2,
-    flex: 1 / 2,
   },
 });

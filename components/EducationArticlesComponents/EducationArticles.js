@@ -40,7 +40,7 @@ export default function EducationArticles({ navigation, route }) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 89,
+    marginTop: "20%",
   },
   iconContainer: {
     alignSelf: "center",

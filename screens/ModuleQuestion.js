@@ -104,15 +104,13 @@ export default function ModuleQuestion({ navigation, route }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <Module_header name={title}></Module_header>
-        {questionModule()}
-      </View>
+    <View style={styles.mainContainer}>
+      <View style={{ flex: 1 }}>{questionModule()}</View>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  mainContainer: { flex: 1, marginTop: "20%" },
   iconContainer: {
     flexDirection: "row",
     justifyContent: "space-around",

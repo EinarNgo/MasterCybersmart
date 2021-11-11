@@ -83,6 +83,7 @@ export default function Ctf({ navigation, updateAuthState }) {
 const styles = StyleSheet.create({
   home1: {
     width: width,
+    marginTop: "20%",
   },
   scrollList: {
     width: width - theme.SIZES.BASE * 2,

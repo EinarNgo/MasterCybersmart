@@ -26,7 +26,7 @@ export default function YoutubeViewer({ navigation, route }) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 89,
+    marginTop: "20%",
     flex: 1,
     backgroundColor: "#e5ecf8",
   },

@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     
   },
   bg: {
-    backgroundColor: "white"
+    backgroundColor: "#7a88b0"
   },
   container: {
     width: width,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
     shadowOpacity: 0.2,
-    zIndex: 2
+    zIndex: 2,
   },
   resultCard: {
     // position: "relative",
@@ -171,17 +171,16 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
     shadowOpacity: 0.2,
-    zIndex: 2
+    zIndex: 2,
+    backgroundColor: "#d6ddf1",
   },
   result: {
-    // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginBottom: -20,
     zIndex: 2
   },
   bottom: {
-    // position: "relative",
     marginBottom: 50,
   },
   statsContainer: {

@@ -31,7 +31,7 @@ export default moduleConstants = {
       title: "Personvern",
       description:
         "Personvern handler om å beskytte rettighetene til et individ og deres personopplysninger.",
-      url: "https://snl.no/personvern",
+      url: "https://www.itgovernance.co.uk/articles-of-the-gdpr",
       icon: "id-card",
       type: "font-awesome",
       youtubeUrl: "epeusX3fXAU",

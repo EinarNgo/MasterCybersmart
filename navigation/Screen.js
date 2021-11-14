@@ -150,7 +150,6 @@ function HomeStack(props) {
               title="Home"
               navigation={navigation}
               back
-              white
               transparent
               scene={scene}
             />
@@ -183,7 +182,13 @@ function HomeStack(props) {
         component={PasswordChecker}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" navigation={navigation} back scene={scene} />
+            <Header
+              title="Home"
+              navigation={navigation}
+              back
+              bgColor={"limegreen"}
+              scene={scene}
+            />
           ),
           headerTransparent: true,
         }}

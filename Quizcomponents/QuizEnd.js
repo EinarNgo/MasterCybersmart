@@ -32,7 +32,7 @@ const QuizEnd = ({score:score, handleMain, handleRestart}) => {
             </Block>
             <Block flex style={styles.valg}>
                         <Button
-                          title="Main"
+                          title="Quiz meny"
                           onPress={() =>
                             handleMain()
                           }
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   bg: {
-    backgroundColor: "#32CD32"
+    //backgroundColor: "#32CD32"
   },
   valg: {
     // position: "relative",

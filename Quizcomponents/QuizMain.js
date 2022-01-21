@@ -135,9 +135,11 @@ const styles = StyleSheet.create({
     flex: 1,
     
   },
+  /*
   bg: {
-    backgroundColor: "#32CD32"
+    backgroundColor: "#FFFFFF"
   },
+  */
   container: {
     width: width,
     height: height,
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.2,
     zIndex: 2,
-    backgroundColor: "#d6ddf1",
+    backgroundColor: "#ffffff",
   },
   result: {
     padding: theme.SIZES.BASE,

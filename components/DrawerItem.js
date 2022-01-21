@@ -19,24 +19,6 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
-      case "Elements":
-        return (
-          <Icon
-            name="map-big"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.ERROR}
-          />
-        );
-      case "Articles":
-        return (
-          <Icon
-            name="spaceship"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
-          />
-        );
       case "Profile":
         return (
           <Icon
@@ -44,15 +26,6 @@ class DrawerItem extends React.Component {
             family="ArgonExtra"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.WARNING}
-          />
-        );
-      case "Account":
-        return (
-          <Icon
-            name="calendar-date"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.INFO}
           />
         );
       case "Les mer":
@@ -83,7 +56,7 @@ class DrawerItem extends React.Component {
         onPress={() =>
           title == "Les mer"
             ? Linking.openURL(
-                "https://demos.creative-tim.com/argon-pro-react-native/docs/"
+                "https://www.ntnu.edu/ccis/cybersmart"
               ).catch(err => console.error("An error occurred", err))
             : navigation.navigate(title)
         }
@@ -113,7 +86,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16
   },
   activeStyle: {
-    backgroundColor: argonTheme.COLORS.ACTIVE,
+    backgroundColor: argonTheme.COLORS.ACTIVE_SWITCH,
     borderRadius: 4
   },
   shadow: {

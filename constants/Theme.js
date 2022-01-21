@@ -14,6 +14,7 @@ export default {
     INPUT_SUCCESS: '#7BDEB2',
     INPUT_ERROR: '#FCB3A4',
     ACTIVE: '#5E72E4', //same as primary
+    ACTIVE_SWITCH: '#32CD32',
     BUTTON_COLOR: '#9C26B0', //wtf
     PLACEHOLDER: '#9FA5AA',
     SWITCH_ON: '#5E72E4',

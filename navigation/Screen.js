@@ -96,6 +96,7 @@ function HomeStack(props) {
               options
               navigation={navigation}
               scene={scene}
+              bgColor={"limegreen"}
             />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
@@ -106,7 +107,7 @@ function HomeStack(props) {
         component={Ctf}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -116,7 +117,7 @@ function HomeStack(props) {
         component={ModuleQuestion}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -126,7 +127,7 @@ function HomeStack(props) {
         component={QuizIndex}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -136,7 +137,7 @@ function HomeStack(props) {
         component={EducationArticles}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -162,7 +163,7 @@ function HomeStack(props) {
         component={YoutubeViewer}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" navigation={navigation} back scene={scene} />
+            <Header title="Home" navigation={navigation} back bgColor={"limegreen"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -172,7 +173,7 @@ function HomeStack(props) {
         component={EducationVideoIndex}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" navigation={navigation} back scene={scene} />
+            <Header title="Home" navigation={navigation} back bgColor={"limegreen"} scene={scene} />
           ),
           headerTransparent: true,
         }}

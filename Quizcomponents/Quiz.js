@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   bg: {
-    backgroundColor: "white"
+    backgroundColor: "#32CD32"
   },
   valg: {
     // position: "relative",

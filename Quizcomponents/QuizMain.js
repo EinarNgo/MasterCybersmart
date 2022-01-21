@@ -37,10 +37,10 @@ const QuizMain = ({handleStart, length:length}) => {
                       style={{ marginTop: 20, paddingBottom: 24 }}
                     >
                       <Text color="black">
-                      Poengsum: ??
+                      Poengsum: 0
                     </Text>
                     <Text color="black">
-                      Antall løste: ??
+                      Antall løste: 0
                     </Text>
                   </Block>
               </Block>
@@ -53,7 +53,8 @@ const QuizMain = ({handleStart, length:length}) => {
                   <Card.Title>Personvern</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
-                    name="bug"
+                    name={"id-card"}
+                    type={"font-awesome"}
                     size={70}
                     containerStyle={styles.iconContainer}
                   />
@@ -70,7 +71,8 @@ const QuizMain = ({handleStart, length:length}) => {
               <Card.Title>Etisk hacking</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
-                    name="bug"
+                    name={"user-secret"}
+                    type={"font-awesome"}
                     size={70}
                     containerStyle={styles.iconContainer}
                   />
@@ -84,15 +86,16 @@ const QuizMain = ({handleStart, length:length}) => {
                   />
               </Block>
               <Block flex style={styles.resultCard}>
-              <Card.Title>Etisk hacking</Card.Title>
+              <Card.Title>Skadevare</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
-                    name="bug"
+                    name={"bug"}
+                    type={"font-awesome"}
                     size={70}
                     containerStyle={styles.iconContainer}
                   />
                   <Block middle style={styles.textContainer}>
-                    <Text>Etisk hacking handler om å avdekke svakheter i et datasystem på vegne av den som eier produktet</Text>
+                    <Text>Skadevare handler om programvare som utfører handlinger på en bruker sitt system, uten deres tillatelse.</Text>
                   </Block>
                   <Button
                     buttonStyle={styles.button}
@@ -101,15 +104,16 @@ const QuizMain = ({handleStart, length:length}) => {
                   />
               </Block>
               <Block flex style={styles.resultCard}>
-              <Card.Title>Etisk hacking</Card.Title>
+              <Card.Title>Phishing</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
-                    name="bug"
+                    name="hook"
+                    type={"material-community"}
                     size={70}
                     containerStyle={styles.iconContainer}
                   />
                   <Block middle style={styles.textContainer}>
-                    <Text>Etisk hacking handler om å avdekke svakheter i et datasystem på vegne av den som eier produktet</Text>
+                    <Text>Phishing handler om å snoke digitalt eller å anskaffe sensitiv informasjon om noen, oftest ved å forfalske mailer.</Text>
                   </Block>
                   <Button
                     buttonStyle={styles.button}
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
     
   },
   bg: {
-    backgroundColor: "#7a88b0"
+    backgroundColor: "#32CD32"
   },
   container: {
     width: width,

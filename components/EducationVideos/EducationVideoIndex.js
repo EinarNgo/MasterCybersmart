@@ -1,7 +1,7 @@
 import { Block, theme } from "galio-framework";
 import React from "react";
-import { StyleSheet, View, Dimensions, Button, Text } from "react-native";
-import { Card, Icon } from "react-native-elements";
+import { StyleSheet, View, Dimensions, Text } from "react-native";
+import { Card, Icon, Button } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import constants from "../../constants/moduleConstants";
 //sjekk høyde og width
@@ -58,5 +58,6 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
     marginBottom: 0,
+    marginTop: 10,
   },
 });

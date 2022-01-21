@@ -3,12 +3,11 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Platform,
-  Button
+  Platform
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
-import { Card, Icon } from "react-native-elements";
+import { Card, Icon,Button } from "react-native-elements";
 const { width, height } = Dimensions.get("screen");
 
 const QuizMain = ({handleStart, length:length}) => {
@@ -212,8 +211,8 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 0,
-    marginLeft: 0,
-    marginRight: 0,
+    marginLeft: 10,
+    marginRight: 10,
     marginBottom: 0,
   },
 });

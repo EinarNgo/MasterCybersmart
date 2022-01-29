@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import {
   StyleSheet,
   Dimensions,
   ScrollView,
   Text,
   TextInput,
-  View,
-  Image,
 } from "react-native";
 import { Block, theme } from "galio-framework";
-import { Card, ListItem, Button, Icon } from "react-native-elements";
-import { getModuler, listModulers } from "../graphql/queries";
-import Module_header from "../components/Module_header";
-import ModuleQuestion from "./ModuleQuestion";
+import { Card, Button } from "react-native-elements";
+import { listModulers } from "../graphql/queries";
 import moduleConstants from "../constants/moduleConstants";
 import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 

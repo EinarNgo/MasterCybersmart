@@ -7,7 +7,6 @@ import { listModulers } from "../graphql/queries";
 import { Quiz, QuizEnd, QuizMain } from "../Quizcomponents";
 import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 const { width, height } = Dimensions.get("screen");
-const thumbMeasure = (width - 48 - 32) / 3;
 
 function QuizIndex() {
   const [questions, setQuestions] = useState([]);

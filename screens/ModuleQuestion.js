@@ -3,11 +3,8 @@ import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, Card } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 import { ActivityIndicator } from "react-native-paper";
-import Module_header from "../components/Module_header";
 import { Block, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
-//const { width } = Dimensions.get("screen");
-//const { height } = Dimensions.get("window").height;
 const { width, height } = Dimensions.get("screen");
 
 export default function ModuleQuestion({ navigation, route }) {

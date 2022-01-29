@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  ImageBackground,
-  Image,
-  StyleSheet,
-  StatusBar,
   Dimensions,
   View,
   ActivityIndicator,
-  Navbar,
 } from "react-native";
-import { Block, Button, Text, theme } from "galio-framework";
+import { Block } from "galio-framework";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-const { height, width } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
-import argonTheme from "../constants/Theme";
-import Images from "../constants/Images";
 import Onboarding from "../screens/Onboarding";
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";

@@ -3,21 +3,15 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Image,
-  ImageBackground,
   Platform,
   View,
-  ButtonContainer,
   Button
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
-import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
-import Module_header from "../components/Module_header";
 
 const { width, height } = Dimensions.get("screen");
 
-const thumbMeasure = (width - 48 - 32) / 3;
 
 const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel}) => {
   return (

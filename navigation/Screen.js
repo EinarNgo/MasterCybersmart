@@ -14,7 +14,6 @@ import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
 import ConfirmSignUp from "../screens/ConfirmSignUp";
 import Home from "../screens/Home";
-import Pro from "../screens/Pro";
 import Ctf from "../screens/Ctf";
 import CustomDrawerContent from "./Menu";
 import Profile from "../screens/Profile";
@@ -54,23 +53,6 @@ function ProfileStack(props) {
           headerTransparent: true,
         }}
       />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
     </Stack.Navigator>
   );
 }
@@ -89,10 +71,10 @@ function HomeStack(props) {
               options
               navigation={navigation}
               scene={scene}
-              bgColor={"limegreen"}
+              bgColor={"dodgerblue"}
             />
           ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
+          cardStyle: { backgroundColor: "#FFFFFF" }
         }}
       />
       <Stack.Screen
@@ -100,7 +82,7 @@ function HomeStack(props) {
         component={Ctf}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -110,7 +92,7 @@ function HomeStack(props) {
         component={ModuleQuestion}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -120,7 +102,7 @@ function HomeStack(props) {
         component={QuizIndex}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -130,7 +112,7 @@ function HomeStack(props) {
         component={EducationArticles}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} bgColor={"limegreen"} scene={scene} />
+            <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -156,7 +138,7 @@ function HomeStack(props) {
         component={YoutubeViewer}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" navigation={navigation} back bgColor={"limegreen"} scene={scene} />
+            <Header title="Home" navigation={navigation} back bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -166,7 +148,7 @@ function HomeStack(props) {
         component={EducationVideoIndex}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" navigation={navigation} back bgColor={"limegreen"} scene={scene} />
+            <Header title="Home" navigation={navigation} back bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -180,7 +162,7 @@ function HomeStack(props) {
               title="Home"
               navigation={navigation}
               back
-              bgColor={"limegreen"}
+              bgColor={"dodgerblue"}
               scene={scene}
             />
           ),

@@ -5,10 +5,6 @@ const LogoOnboarding = require("../assets/imgs/argon-logo-onboarding.png");
 const ProfileBackground = require("../assets/imgs/profile-screen-bg.png");
 const QuizBackground = require("../assets/imgs/quizBackground.jpg");
 const RegisterBackground = require("../assets/imgs/register-bg.png");
-const Pro = require("../assets/imgs/getPro-bg.png");
-const ArgonLogo = require("../assets/imgs/argonlogo.png");
-const iOSLogo = require("../assets/imgs/ios.png");
-const androidLogo = require("../assets/imgs/android.png");
 // internet imgs
 
 const ProfilePicture = 'https://www.hidefninja.com/community/media/question-mark-jpg.13517/full';
@@ -36,8 +32,4 @@ export default {
   RegisterBackground,
   Viewed,
   Products,
-  Pro,
-  ArgonLogo,
-  iOSLogo,
-  androidLogo
 };

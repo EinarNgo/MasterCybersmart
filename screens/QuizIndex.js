@@ -31,6 +31,7 @@ function QuizIndex() {
     }
   };
 
+  //UseEffect funksjon som henter inn fetchQuestion før alt annet blir hentet
   useEffect(() => {
     fetchQuestions();
   }, []);
@@ -52,7 +53,7 @@ function QuizIndex() {
         setAnswer(true);
         alert("Feil svar");
       }
-    }
+    } 
   };
 
   const handleNext = () => {

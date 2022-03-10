@@ -10,7 +10,7 @@ import {
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
 import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
-import { Quiz, QuizEnd } from "../Quizcomponents";
+import { Quiz } from "../Quizcomponents";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -23,8 +23,8 @@ const getFilteredQuestions = (filteredRequest,questions) => {
 const QuizMain = ({route, navigation}) => {
   const { kategori, question } = route.params;
   const filterQuestion = FilteredByCategories(kategori, question);
-  //const [filterLength, setFilterLength] = useState(filterQuestion.length);
-  const [filterLength, setFilterLength] = useState(1);
+  const [filterLength, setFilterLength] = useState(filterQuestion.length);
+  //const [filterLength, setFilterLength] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
   const [play, setPlay] = useState("Play");
   const [answer, setAnswer] = useState(false);
@@ -56,24 +56,10 @@ const QuizMain = ({route, navigation}) => {
     }
   };
 
-  const handleStart = (Kategori) => {
-    getFilteredQuestions(Kategori);
-    setTittel(Kategori);
-    setActiveIndex(0);
-    setScore(0);
-    setPlay("Play");
-  };
-
   const handleRestart = () => {
     setActiveIndex(0);
     setScore(0);
     setPlay("Play");
-    setAnswer(false);
-  };
-
-  const handleMain = () => {
-    setActiveIndex(0);
-    setScore(0);
     setAnswer(false);
   };
 
@@ -101,11 +87,35 @@ const QuizMain = ({route, navigation}) => {
     return (
       <View style={styles.container}>
         <Block flex style={styles.bg}>
-          <QuizEnd
-            handleMain={handleMain}
-            handleRestart={handleRestart}
-            score={score}
-          />
+        <Block flex style={styles.bg}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{ width, marginTop: '30%' }}
+          >
+            <Block flex style={styles.resultCard}>
+                <Text> Gratulerer du fikk {score} riktige! </Text>
+            </Block>
+            <Block flex style={styles.valg}>
+                        <Button
+                          title="Quiz meny"
+                          
+                          onPress={() =>
+                            navigation.navigate("QuizIndex")
+                          }
+                          
+                        />
+            </Block>
+            <Block flex style={styles.valg}>
+                        <Button
+                          title="Restart"
+                          onPress={() =>
+                            handleRestart()
+                          }
+                        />
+            </Block>
+                  
+          </ScrollView>
+      </Block>
         </Block>
       </View>
     );

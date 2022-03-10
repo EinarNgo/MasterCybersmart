@@ -22,7 +22,6 @@ import { Header } from "../components";
 import config from "../aws-exports";
 import QuizIndex from "../screens/QuizIndex";
 import QuizMain from "../Quizcomponents/QuizMain";
-import QuizEnd from "../Quizcomponents/QuizEnd";
 import Quiz from "../Quizcomponents/Quiz";
 import ModuleQuestion from "../screens/ModuleQuestion";
 import PasswordChecker from "../screens/PasswordChecker";
@@ -123,16 +122,6 @@ function HomeStack(props) {
       <Stack.Screen
         name="Quiz"
         component={Quiz}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
-          ),
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="QuizEnd"
-        component={QuizEnd}
         options={{
           header: ({ navigation, scene }) => (
             <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />

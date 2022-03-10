@@ -14,11 +14,7 @@ const { width, height } = Dimensions.get("screen");
 
 const QuizIndex = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
-  const [correctCount, setCorrectCount] = useState(0);
   const [length, setLength] = useState(questions.length);
-  const [answer, setAnswer] = useState(false);
-  const [score, setScore] = useState(0);
-  const [tittel, setTittel] = useState("");
 
   const fetchQuestions = async () => {
     try {

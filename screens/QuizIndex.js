@@ -105,7 +105,10 @@ const QuizIndex = ({ navigation, route }) => {
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
-                    //onPress={() => handleStart("Etisk hacking")}
+                    onPress={() => navigation.navigate("QuizMain",{
+                      kategori: "Etisk hacking",
+                      question: questions,
+                    })}
                   />
               </Block>
               <Block flex style={styles.resultCard}>
@@ -123,7 +126,10 @@ const QuizIndex = ({ navigation, route }) => {
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
-                    onPress={() => handleStart("Skadevare")}
+                    onPress={() => navigation.navigate("QuizMain",{
+                      kategori: "Skadevare",
+                      question: questions,
+                    })}
                   />
               </Block>
               <Block flex style={styles.resultCard}>
@@ -141,7 +147,10 @@ const QuizIndex = ({ navigation, route }) => {
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
-                    onPress={() => handleStart("Phising")}
+                    onPress={() => navigation.navigate("QuizMain",{
+                      kategori: "Phising",
+                      question: questions,
+                    })}
                   />
               </Block>
               <Block style={styles.bottom}/>

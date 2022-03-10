@@ -12,7 +12,7 @@ import { HeaderHeight } from "../constants/utils";
 const { width, height } = Dimensions.get("screen");
 
 
-const QuizEnd = ({score:score, handleMain, handleRestart}) => {
+const QuizEnd = ({score:score, handleMain, handleRestart,navigation, route}) => {
   return (
     <Block flex style={styles.quizScreen}>
       <Block flex style={styles.bg}>
@@ -26,9 +26,11 @@ const QuizEnd = ({score:score, handleMain, handleRestart}) => {
             <Block flex style={styles.valg}>
                         <Button
                           title="Quiz meny"
+                          
                           onPress={() =>
-                            handleMain()
+                            navigation.navigate("QuizMain")
                           }
+                          
                         />
             </Block>
             <Block flex style={styles.valg}>

@@ -1,23 +1,23 @@
+import {React, useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  Platform
+} from "react-native";
+import { Block, Text, theme } from "galio-framework";
 import { API, graphqlOperation } from "aws-amplify";
-import { Block, theme } from "galio-framework";
-import React, { useEffect, useState } from "react";
-import { Dimensions, Platform, StyleSheet, View } from "react-native";
-import { HeaderHeight } from "../constants/utils";
 import { listModulers } from "../graphql/queries";
-import { Quiz, QuizEnd, QuizMain } from "../Quizcomponents";
-import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
+import { HeaderHeight } from "../constants/utils";
+import { Card, Icon,Button } from "react-native-elements";
 const { width, height } = Dimensions.get("screen");
 
-function QuizIndex({ navigation, route }) {
+const QuizIndex = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
-  const [play, setPlay] = useState("Main");
   const [correctCount, setCorrectCount] = useState(0);
   const [length, setLength] = useState(questions.length);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [answer, setAnswer] = useState(false);
   const [score, setScore] = useState(0);
-  const [filterQuestion, setFilterQuestion] = useState([]);
-  const [filterLength, setFilterLength] = useState([]);
   const [tittel, setTittel] = useState("");
 
   const fetchQuestions = async () => {
@@ -36,125 +36,148 @@ function QuizIndex({ navigation, route }) {
     fetchQuestions();
   }, []);
 
-  const getFilteredQuestions = (filteredRequest) => {
-    var filtered = FilteredByCategories(filteredRequest, questions);
-    setFilterQuestion(filtered);
-    setFilterLength(filtered.length)
-  };
-
-  const handleAnswer = (answerFromButton) => {
-    console.log(answer);
-    if (answer == false) {
-      if (answerFromButton === filterQuestion[activeIndex].fasit) {
-        alert("Riktig svar");
-        setScore(score + 1);
-        setAnswer(true);
-      } else {
-        setAnswer(true);
-        alert("Feil svar");
-      }
-    } 
-  };
-
-  const handleNext = () => {
-    console.log(activeIndex);
-    console.log(filterLength);
-    if (activeIndex === filterLength - 1) {
-      console.log("End");
-      setPlay("End");
-    } else {
-      setActiveIndex(activeIndex + 1);
-      setAnswer(false);
-    }
-  };
-
-  const handleStart = (Kategori) => {
-    getFilteredQuestions(Kategori);
-    setTittel(Kategori);
-    setActiveIndex(0);
-    setScore(0);
-    setPlay("Play");
-  };
-
-  const handleRestart = () => {
-    setActiveIndex(0);
-    setScore(0);
-    setPlay("Play");
-    setAnswer(false);
-  };
-
-  const handleMain = () => {
-    setActiveIndex(0);
-    setScore(0);
-    setPlay("Main");
-    setAnswer(false);
-  };
-  
-  if (play === "Main") {
-    return (
-      <View style={styles.container}>
+  return (
+    <Block flex style={styles.quizScreen}>
         <Block flex style={styles.bg}>
-          <QuizMain handleStart={handleStart} length={length} navigation={navigation}/>
+            <ScrollView
+              showsVerticalScrollIndicator={true}
+              style={{ width, marginTop: '15%' }}
+            >
+              <Block middle style={styles.statsContainer}>
+                    <Text bold size={28} color="black">
+                      Quiz
+                    </Text>
+              </Block>
+              <Block style={styles.result}>
+                      <Text bold size={16} color="#000" style={{marginTop: -5}}>
+                        Resultater
+                      </Text>
+              </Block>
+              <Block flex style={styles.resultCard}>
+              <Block
+                      middle
+                      row
+                      space="evenly"
+                      style={{ marginTop: 20, paddingBottom: 24 }}
+                    >
+                      <Text color="black">
+                      Poengsum: 0
+                    </Text>
+                    <Text color="black">
+                      Antall løste: 0
+                    </Text>
+                  </Block>
+              </Block>
+              <Block style={styles.result}>
+                      <Text bold size={16} color="#000" style={{marginTop: 20}}>
+                        Kategorier
+                      </Text>
+              </Block> 
+              <Block flex style={styles.resultCard}>
+                  <Card.Title>Personvern</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name={"id-card"}
+                    type={"font-awesome"}
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Quizzz med 10 random spørsmål, som tester dine ferdigheter innenfor temaet personvern</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    onPress={() => navigation.navigate("QuizMain",{
+                      kategori: "Personvern",
+                      question: questions,
+                    })}
+                  />
+              </Block>
+              <Block flex style={styles.resultCard}>
+              <Card.Title>Etisk hacking</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name={"user-secret"}
+                    type={"font-awesome"}
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Etisk hacking handler om å avdekke svakheter i et datasystem på vegne av den som eier produktet</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    //onPress={() => handleStart("Etisk hacking")}
+                  />
+              </Block>
+              <Block flex style={styles.resultCard}>
+              <Card.Title>Skadevare</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name={"bug"}
+                    type={"font-awesome"}
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Skadevare handler om programvare som utfører handlinger på en bruker sitt system, uten deres tillatelse.</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    onPress={() => handleStart("Skadevare")}
+                  />
+              </Block>
+              <Block flex style={styles.resultCard}>
+              <Card.Title>Phishing</Card.Title>
+                  <Card.Divider></Card.Divider>
+                  <Icon
+                    name="hook"
+                    type={"material-community"}
+                    size={70}
+                    containerStyle={styles.iconContainer}
+                  />
+                  <Block middle style={styles.textContainer}>
+                    <Text>Phishing handler om å snoke digitalt eller å anskaffe sensitiv informasjon om noen, oftest ved å forfalske mailer.</Text>
+                  </Block>
+                  <Button
+                    buttonStyle={styles.button}
+                    title="Spill"
+                    onPress={() => handleStart("Phising")}
+                  />
+              </Block>
+              <Block style={styles.bottom}/>
+              
+            </ScrollView>
         </Block>
-      </View>
-    );
-  } else if (play === "Play") {
-    return (
-      <View style={styles.container}>
-        {filterLength > 0 ? (
-          <Block flex style={styles.bg}>
-          <Quiz
-            prop={filterQuestion[activeIndex]}
-            handleAnswer={handleAnswer}
-            tittel={tittel}
-            handleNext={handleNext}
-            answer={answer}
-            length={filterLength}
-            score={score}
-          />
-        </Block>
-      ) :
-        //Husk å aktivere databasen hvis denne beskjed kommer =)
-       (<h2 className="text-2xl text-white font-bold"> Spørsmål ikke loaded... </h2>)}
-      </View>
-    );
-  } else if (play === "End") {
-    return (
-      <View style={styles.container}>
-        <Block flex style={styles.bg}>
-          <QuizEnd
-            handleMain={handleMain}
-            handleRestart={handleRestart}
-            score={score}
-          />
-        </Block>
-      </View>
-    );
-  }
+      </Block>
+  )
 }
 
 const styles = StyleSheet.create({
   quizScreen: {
     marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
-    marginBottom: -HeaderHeight * 2,
     flex: 1,
+    
   },
+  /*
+  bg: {
+    backgroundColor: "#FFFFFF"
+  },
+  */
   container: {
     width: width,
     height: height,
     padding: 0,
-    zIndex: 1,
-  },
-  background: {
-    width: width,
-    height: height / 2,
+    zIndex: 1
   },
   CategoriesCard: {
     // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginTop: 20,
-    marginBottom: 50,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     borderBottomLeftRadius: 6,
@@ -165,6 +188,60 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.2,
     zIndex: 2,
+  },
+  resultCard: {
+    // position: "relative",
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginTop: 20,
+    marginBottom: 10,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    zIndex: 2,
+    backgroundColor: "#ffffff",
+  },
+  result: {
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginBottom: -20,
+    zIndex: 2
+  },
+  bottom: {
+    marginBottom: 50,
+  },
+  statsContainer: {
+    position: "relative",
+    marginBottom: 65,
+    marginTop: 100,
+  },
+  textContainer: {
+    position: "relative",
+    marginBottom: 20,
+  },
+  container: {
+    marginTop: 89,
+  },
+  iconContainer: {
+    alignSelf: "center",
+    marginVertical: 20,
+  },
+
+  card: {
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+  button: {
+    borderRadius: 0,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 0,
   },
 });
 

@@ -115,7 +115,7 @@ function HomeStack(props) {
         component={QuizMain}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Test" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
+            <Header title="Quiz dashbord" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}
@@ -158,6 +158,7 @@ function HomeStack(props) {
             <Header
               title="Artikkel"
               navigation={navigation}
+              bgColor={"dodgerblue"}
               back
               transparent
               scene={scene}

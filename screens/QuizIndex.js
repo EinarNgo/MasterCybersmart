@@ -8,7 +8,7 @@ import { Quiz, QuizEnd, QuizMain } from "../Quizcomponents";
 import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 const { width, height } = Dimensions.get("screen");
 
-function QuizIndex() {
+function QuizIndex({ navigation, route }) {
   const [questions, setQuestions] = useState([]);
   const [play, setPlay] = useState("Main");
   const [correctCount, setCorrectCount] = useState(0);
@@ -94,7 +94,7 @@ function QuizIndex() {
     return (
       <View style={styles.container}>
         <Block flex style={styles.bg}>
-          <QuizMain handleStart={handleStart} length={length} />
+          <QuizMain handleStart={handleStart} length={length} navigation={navigation}/>
         </Block>
       </View>
     );

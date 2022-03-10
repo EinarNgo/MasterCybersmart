@@ -21,6 +21,9 @@ import Profile from "../screens/Profile";
 import { Header } from "../components";
 import config from "../aws-exports";
 import QuizIndex from "../screens/QuizIndex";
+import QuizMain from "../Quizcomponents/QuizMain";
+import QuizEnd from "../Quizcomponents/QuizEnd";
+import Quiz from "../Quizcomponents/Quiz";
 import ModuleQuestion from "../screens/ModuleQuestion";
 import PasswordChecker from "../screens/PasswordChecker";
 import ArticleViewer from "../components/EducationArticlesComponents/ArticleViewer";
@@ -56,7 +59,6 @@ function ProfileStack(props) {
     </Stack.Navigator>
   );
 }
-
 function HomeStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
@@ -97,9 +99,40 @@ function HomeStack(props) {
           headerTransparent: true,
         }}
       />
+      
       <Stack.Screen
         name="QuizIndex"
         component={QuizIndex}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"}/>
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="QuizMain"
+        component={QuizMain}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Test" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Quiz"
+        component={Quiz}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
+          ),
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="QuizEnd"
+        component={QuizEnd}
         options={{
           header: ({ navigation, scene }) => (
             <Header title="Home" back navigation={navigation} bgColor={"dodgerblue"} scene={scene} />
@@ -123,7 +156,7 @@ function HomeStack(props) {
         options={{
           header: ({ navigation, scene }) => (
             <Header
-              title="Home"
+              title="Artikkel"
               navigation={navigation}
               back
               transparent
@@ -138,7 +171,7 @@ function HomeStack(props) {
         component={YoutubeViewer}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Home" navigation={navigation} back bgColor={"dodgerblue"} scene={scene} />
+            <Header title="Videoer" navigation={navigation} back bgColor={"dodgerblue"} scene={scene} />
           ),
           headerTransparent: true,
         }}

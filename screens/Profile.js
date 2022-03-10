@@ -6,7 +6,8 @@ import {
   Image,
   ImageBackground,
   Platform,
-  View
+  View,
+  TouchableOpacity
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Button } from "../components";
@@ -33,7 +34,6 @@ export default class Profile extends React.Component {
               style={{ width, marginTop: '60%' }}
             >
               <Block flex style={styles.profileCard}>
-
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
@@ -44,15 +44,9 @@ export default class Profile extends React.Component {
                     <Block style={styles.divider} />
                   </Block>
                   <Block middle>
-                  <AnimatedLoader
-                    visible={true}
-                    overlayColor="rgba(255,255,255,0.75)"
-                    animationStyle={styles.lottie}
-                    speed={1}>
-                    <Text>Doing something...</Text>
-                  </AnimatedLoader>
-
-
+                  <Text bold size={14} color="#32325D">
+                      Sjekk igjen senere
+                    </Text>
 
                   </Block>
                 </Block>
@@ -129,3 +123,13 @@ const styles = StyleSheet.create({
   }
 });
 
+/*
+              <AnimatedLoader
+                    visible={true}
+                    overlayColor="rgba(255,255,255,0.75)"
+                    source={require("../assets/loader.json")}
+                    animationStyle={styles.lottie}
+                    speed={1}>
+                    <Text>Utvikler i arbeid...</Text>
+                  </AnimatedLoader>
+                  */

@@ -26,6 +26,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-44.0.0.tar.gz",
+    "react-native-animated-loader": "^0.0.9",
     "react-native-elements": "^3.1.0",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-modal-dropdown": "^0.7.0",

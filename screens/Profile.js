@@ -5,7 +5,8 @@ import {
   ScrollView,
   Image,
   ImageBackground,
-  Platform
+  Platform,
+  View
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { Button } from "../components";
@@ -13,12 +14,13 @@ import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 
 const { width, height } = Dimensions.get("screen");
-
+import AnimatedLoader from 'react-native-animated-loader';
 const thumbMeasure = (width - 48 - 32) / 3;
 
-class Profile extends React.Component {
+export default class Profile extends React.Component {
   render() {
     return (
+      
       <Block flex style={styles.profile}>
         <Block flex>
           <ImageBackground
@@ -42,7 +44,15 @@ class Profile extends React.Component {
                     <Block style={styles.divider} />
                   </Block>
                   <Block middle>
-                      
+                  <AnimatedLoader
+                    visible={true}
+                    overlayColor="rgba(255,255,255,0.75)"
+                    animationStyle={styles.lottie}
+                    speed={1}>
+                    <Text>Doing something...</Text>
+                  </AnimatedLoader>
+
+
 
                   </Block>
                 </Block>
@@ -112,7 +122,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: thumbMeasure,
     height: thumbMeasure
+  },
+  lottie: {
+    width: 100,
+    height: 100
   }
 });
 
-export default Profile;

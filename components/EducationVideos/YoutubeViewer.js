@@ -1,18 +1,44 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Button, View, Alert, StyleSheet, Text } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Card, Icon } from "react-native-elements";
+import AnimatedLoader from 'react-native-animated-loader';
 
 export default function YoutubeViewer({ navigation, route }) {
   const youtubeLink = route.params.link;
   const cardTitle = route.params.title;
   const description = route.params.description;
+  const [show, setShow] = useState(false);
+
+  const loadingYT = () => {
+    return (
+      <YoutubePlayer height={225} videoId={youtubeLink} />
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.titleContainer}>{cardTitle.toUpperCase()}</Text>
       <View style={styles.playerContainer}>
-        <YoutubePlayer height={225} videoId={youtubeLink} />
+      <YoutubePlayer
+          height={225}
+          videoId={youtubeLink}
+          play={true}
+          onChangeState={() => setShow(true)}
+        /> 
+      {show == false? (
+        <AnimatedLoader
+        visible={true}
+        overlayColor="rgba(255,255,255,0.75)"
+        source={require("../../assets/loader.json")}
+        animationStyle={styles.lottie}
+        speed={1}>
+        <Text>Henter youtube video...</Text>
+      </AnimatedLoader>
+        
+      ) :
+      <Text>{console.log("spiller av video")}</Text>
+      }
       </View>
       <View>
         <Card containerStyle={styles.card}>
@@ -51,5 +77,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "#e5ecf8",
     borderRadius: 1,
+  },
+  lottie: {
+    width: 100,
+    height: 100,
   },
 });

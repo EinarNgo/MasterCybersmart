@@ -5,12 +5,14 @@ import {
   ScrollView,
   Platform,
   View,
-  Button
+  Button,
+  Alert
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
 import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 import { Quiz } from "../Quizcomponents";
+import LottieView from "lottie-react-native";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -23,23 +25,48 @@ const getFilteredQuestions = (filteredRequest,questions) => {
 const QuizMain = ({route, navigation}) => {
   const { kategori, question } = route.params;
   const filterQuestion = FilteredByCategories(kategori, question);
-  const [filterLength, setFilterLength] = useState(filterQuestion.length);
-  //const [filterLength, setFilterLength] = useState(1);
+  //const [filterLength, setFilterLength] = useState(filterQuestion.length);
+  const [filterLength, setFilterLength] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
   const [play, setPlay] = useState("Play");
   const [answer, setAnswer] = useState(false);
   const [score, setScore] = useState(0);
 
   const handleAnswer = (answerFromButton) => {
+
+    
     console.log(answer);
     if (answer == false) {
       if (answerFromButton === filterQuestion[activeIndex].fasit) {
-        alert("Riktig svar");
+        Alert.alert(
+        "Gratulerer riktig svar!",
+        '<LottieView source={require("../assets/gratz.json")} loop autoPlay/>',
+        [
+          {
+            text: "Se svarene",
+            onPress: () => console.log("Ask me later pressed")
+          },
+          { text: "Neste", onPress: () => handleNext() }
+        ]
+        
+        );
+        
         setScore(score + 1);
         setAnswer(true);
       } else {
         setAnswer(true);
-        alert("Feil svar");
+        Alert.alert(
+          "Beklager feil svar!",
+          'Du klarer det nestegang =)',
+          [
+            {
+              text: "Se svarene",
+              onPress: () => console.log("Ask me later pressed")
+            },
+            { text: "Neste", onPress: () => handleNext() }
+          ]
+          
+          );
       }
     } 
   };
@@ -93,7 +120,10 @@ const QuizMain = ({route, navigation}) => {
             style={{ width, marginTop: '30%' }}
           >
             <Block flex style={styles.resultCard}>
-                <Text> Gratulerer du fikk {score} riktige! </Text>
+              <Block flex style={styles.end}>
+                <LottieView source={require("../assets/endscreen.json")} autoPlay /*loop={false}*/ style={{width: "100%", height: "100%"}}/>
+                </Block>
+                <Text> Gratulerer du fikk {score} riktig(e)! </Text>
             </Block>
             <Block flex style={styles.valg}>
                         <Button
@@ -161,7 +191,10 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   resultCard: {
-    // position: "relative",
+    //position: "relative",
+    //display: 'flex',
+    //flexDirection: 'column',
+    //flexWrap: 'wrap',
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginTop: 20,
@@ -175,7 +208,26 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
     shadowOpacity: 0.2,
-    zIndex: 2
+    zIndex: 2,
+    justifyContent: "center",
+    alignItems: 'center',
+  },
+  end: {
+    // position: "relative",
+    display: 'flex',
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginTop: 20,
+    marginBottom: 50,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowOffset: { width: 0, height: 0 },
+    zIndex: 2,
+
+    justifyContent: "center"
+  },
+  animation: {
+    width:10,
+    height:10,
   },
   bg: {
     //backgroundColor: ""

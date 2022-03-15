@@ -10,12 +10,10 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
-import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 
 const { width, height } = Dimensions.get("screen");
-import AnimatedLoader from 'react-native-animated-loader';
 const thumbMeasure = (width - 48 - 32) / 3;
 
 export default class Profile extends React.Component {

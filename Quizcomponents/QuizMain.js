@@ -6,7 +6,8 @@ import {
   Platform,
   View,
   Button,
-  Alert
+  Alert,
+  Modal, Pressable
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
@@ -57,7 +58,7 @@ const QuizMain = ({route, navigation}) => {
         setAnswer(true);
         Alert.alert(
           "Beklager feil svar!",
-          'Du klarer det nestegang =)',
+          "",
           [
             {
               text: "Se svarene",

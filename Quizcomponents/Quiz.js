@@ -5,21 +5,23 @@ import {
   ScrollView,
   Platform,
   View,
-  Button
+  Button,
+  Modal,
+  Pressable
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
+import LottieView from "lottie-react-native";
 
 const { width, height } = Dimensions.get("screen");
 
-
-const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel}) => {
+const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel, modalVisible:modalVisible, handleModalVisible}) => {
   return (
     <Block flex style={styles.quizScreen}>
       <Block flex style={styles.bg}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{ width, marginTop: '20%' }}
+            style={{ width , marginTop: '20%' }}
           >
             <Block middle style={styles.statsContainer}>
                     <Text bold size={28} color="black">
@@ -57,6 +59,58 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                       ))}
                     
                   </Block>
+                  <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                  >
+                    <ScrollView
+                      showsVerticalScrollIndicator={false}
+                      //style={{ width: '60%' , marginTop: '50%'}}
+                    >    
+
+                    {answer ? (
+                      <Block flex style={styles.resultCard1}>
+                      <Block flex style={styles.end}>
+                      <LottieView source={require("../assets/gratz.json")} loop autoPlay style={{width: "100%", height: "100%"}}/>
+                        </Block>
+                        <Text> Gratulerer svaret var riktig, stå på! </Text>
+                        <Pressable
+                          style={[styles.button, styles.buttonClose]}
+                          onPress={() => handleModalVisible()}
+                        >
+                          <Text style={styles.textStyle}>Se svar</Text>
+                        </Pressable>
+                        <Pressable
+                          style={[styles.button, styles.buttonClose]}
+                          onPress={() => handleNext()}
+                        >
+                          <Text style={styles.textStyle}>Neste</Text>
+                        </Pressable>
+                    </Block>
+                    ) :
+                    <Block flex style={styles.resultCard1}>
+                      <Block flex style={styles.end}>
+                      <LottieView source={require("../assets/wrong.json")} loop autoPlay style={{width: "100%", height: "100%"}}/>
+                        </Block>
+                        <Text> Feil svar, du klarer det nestegang </Text>
+                        <Pressable
+                          style={[styles.button, styles.buttonClose]}
+                          onPress={() => handleModalVisible()}
+                        >
+                          <Text style={styles.textStyle}>Se svar</Text>
+                        </Pressable>
+                        <Pressable
+                          style={[styles.button, styles.buttonClose]}
+                          onPress={() => handleNext()}
+                        >
+                          <Text style={styles.textStyle}>Neste</Text>
+                        </Pressable>
+                    </Block>
+                    }
+                  
+                    </ScrollView>
+                  </Modal>
                  
                   {answer && (
                     <Block flex style={styles.valg}>
@@ -164,6 +218,78 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingBottom: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  },
+  end: {
+    padding: theme.SIZES.BASE,
+    marginHorizontal: theme.SIZES.BASE,
+    marginTop: 20,
+    marginBottom: 50,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowOffset: { width: 0, height: 0 },
+    zIndex: 2,
+    justifyContent: "center",
+    alignItems: 'center',
+  },
+  resultCard1: {
+    padding: theme.SIZES.BASE,
+    //marginHorizontal: theme.SIZES.BASE,
+    marginTop: 20,
+    marginBottom: 50,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
+    backgroundColor: theme.COLORS.WHITE,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    zIndex: 2,
+    alignItems: 'center',
+    justifyContent: "center",
+    marginTop: '60%',
+    marginHorizontal: '15%'
   },
 
 });

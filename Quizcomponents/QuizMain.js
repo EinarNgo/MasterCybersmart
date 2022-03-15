@@ -6,8 +6,7 @@ import {
   Platform,
   View,
   Button,
-  Alert,
-  Modal, Pressable
+  Alert
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
@@ -27,47 +26,23 @@ const QuizMain = ({route, navigation}) => {
   const { kategori, question } = route.params;
   const filterQuestion = FilteredByCategories(kategori, question);
   //const [filterLength, setFilterLength] = useState(filterQuestion.length);
-  const [filterLength, setFilterLength] = useState(1);
+  const [filterLength, setFilterLength] = useState(2);
   const [activeIndex, setActiveIndex] = useState(0);
   const [play, setPlay] = useState("Play");
   const [answer, setAnswer] = useState(false);
   const [score, setScore] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const handleAnswer = (answerFromButton) => {
-
-    
+  const handleAnswer = (answerFromButton) => {    
     console.log(answer);
     if (answer == false) {
       if (answerFromButton === filterQuestion[activeIndex].fasit) {
-        Alert.alert(
-        "Gratulerer riktig svar!",
-        '<LottieView source={require("../assets/gratz.json")} loop autoPlay/>',
-        [
-          {
-            text: "Se svarene",
-            onPress: () => console.log("Ask me later pressed")
-          },
-          { text: "Neste", onPress: () => handleNext() }
-        ]
-        
-        );
-        
         setScore(score + 1);
         setAnswer(true);
+        setModalVisible(true);
       } else {
-        setAnswer(true);
-        Alert.alert(
-          "Beklager feil svar!",
-          "",
-          [
-            {
-              text: "Se svarene",
-              onPress: () => console.log("Ask me later pressed")
-            },
-            { text: "Neste", onPress: () => handleNext() }
-          ]
-          
-          );
+        setAnswer(false);
+        setModalVisible(true);
       }
     } 
   };
@@ -81,14 +56,21 @@ const QuizMain = ({route, navigation}) => {
     } else {
       setActiveIndex(activeIndex + 1);
       setAnswer(false);
+      setModalVisible(false);
     }
   };
+
+  const handleModalVisible = () => {
+    setModalVisible(false);
+  }
+
 
   const handleRestart = () => {
     setActiveIndex(0);
     setScore(0);
     setPlay("Play");
     setAnswer(false);
+    setModalVisible(false);
   };
 
   if (play === "Play") {
@@ -104,6 +86,8 @@ const QuizMain = ({route, navigation}) => {
             answer={answer}
             length={filterLength}
             score={score}
+            modalVisible={modalVisible}
+            handleModalVisible={handleModalVisible}
           />
         </Block>
       ) :

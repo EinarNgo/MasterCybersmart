@@ -10,12 +10,6 @@ export default function YoutubeViewer({ navigation, route }) {
   const description = route.params.description;
   const [show, setShow] = useState(false);
 
-  const loadingYT = () => {
-    return (
-      <YoutubePlayer height={225} videoId={youtubeLink} />
-    );
-  }
-
   return (
     <View style={styles.container}>
       <Text style={styles.titleContainer}>{cardTitle.toUpperCase()}</Text>

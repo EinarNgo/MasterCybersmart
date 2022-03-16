@@ -32,16 +32,18 @@ const QuizMain = ({route, navigation}) => {
   const [answer, setAnswer] = useState(false);
   const [score, setScore] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+  const [check, setCheck] = useState(false);
 
   const handleAnswer = (answerFromButton) => {    
-    console.log(answer);
     if (answer == false) {
       if (answerFromButton === filterQuestion[activeIndex].fasit) {
         setScore(score + 1);
         setAnswer(true);
+        setCheck(true);
         setModalVisible(true);
       } else {
-        setAnswer(false);
+        setAnswer(true);
+        setCheck(false);
         setModalVisible(true);
       }
     } 
@@ -88,6 +90,7 @@ const QuizMain = ({route, navigation}) => {
             score={score}
             modalVisible={modalVisible}
             handleModalVisible={handleModalVisible}
+            check={check}
           />
         </Block>
       ) :

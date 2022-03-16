@@ -15,7 +15,7 @@ import LottieView from "lottie-react-native";
 
 const { width, height } = Dimensions.get("screen");
 
-const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel, modalVisible:modalVisible, handleModalVisible}) => {
+const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel, modalVisible:modalVisible, handleModalVisible, check}) => {
   return (
     <Block flex style={styles.quizScreen}>
       <Block flex style={styles.bg}>
@@ -48,7 +48,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                         <Button
                           key={idx}
                           title={choices}
-                          color={answer ? choices === question.fasit ? 'green' : 'red' : 'blue'}
+                          color={answer ? choices === question.fasit ? 'green' : 'blue' : 'blue'}
                           onPress={() =>
                             handleAnswer(choices)
                           }
@@ -66,10 +66,9 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                   >
                     <ScrollView
                       showsVerticalScrollIndicator={false}
-                      //style={{ width: '60%' , marginTop: '50%'}}
                     >    
 
-                    {answer ? (
+                    {check ? (
                       <Block flex style={styles.resultCard1}>
                       <Block flex style={styles.end}>
                       <LottieView source={require("../assets/gratz.json")} loop autoPlay style={{width: "100%", height: "100%"}}/>

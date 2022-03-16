@@ -74,6 +74,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                       <LottieView source={require("../assets/gratz.json")} loop autoPlay style={{width: "100%", height: "100%"}}/>
                         </Block>
                         <Text> Gratulerer svaret var riktig, stå på! </Text>
+                        <Block flex style={styles.column}>
                         <Pressable
                           style={[styles.button, styles.buttonClose]}
                           onPress={() => handleModalVisible()}
@@ -86,6 +87,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                         >
                           <Text style={styles.textStyle}>Neste</Text>
                         </Pressable>
+                        </Block>
                     </Block>
                     ) :
                     <Block flex style={styles.resultCard1}>
@@ -93,6 +95,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                       <LottieView source={require("../assets/wrong.json")} loop autoPlay style={{width: "100%", height: "100%"}}/>
                         </Block>
                         <Text> Feil svar, du klarer det nestegang </Text>
+                        <Block flex style={styles.column}>
                         <Pressable
                           style={[styles.button, styles.buttonClose]}
                           onPress={() => handleModalVisible()}
@@ -105,6 +108,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                         >
                           <Text style={styles.textStyle}>Neste</Text>
                         </Pressable>
+                        </Block>
                     </Block>
                     }
                   
@@ -178,8 +182,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     zIndex: 2
   },
-  bg: {
-    //backgroundColor: ""
+  column: {
+    paddingTop: "5%",
+    flexDirection: 'row',
   },
   valg: {
     // position: "relative",
@@ -240,15 +245,18 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
-    elevation: 2,
+    elevation: 1,
+    paddingHorizontal: '15%'
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
+    marginLeft: 5,
+    marginRight: 5
   },
   textStyle: {
     color: "white",

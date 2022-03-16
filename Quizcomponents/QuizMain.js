@@ -66,6 +66,9 @@ const QuizMain = ({route, navigation}) => {
     setModalVisible(false);
   }
 
+  const handleEnd = () => {
+    setPlay("End");
+  }
 
   const handleRestart = () => {
     setActiveIndex(0);
@@ -91,6 +94,7 @@ const QuizMain = ({route, navigation}) => {
             modalVisible={modalVisible}
             handleModalVisible={handleModalVisible}
             check={check}
+            handleEnd={handleEnd}
           />
         </Block>
       ) :

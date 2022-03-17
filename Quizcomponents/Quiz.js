@@ -14,13 +14,11 @@ import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
 import LottieView from "lottie-react-native";
 import CountDown from 'react-native-countdown-component';
-import ParticlesBg from 'particles-bg'
-import Images from "../constants/Images";
 
 const { width, height } = Dimensions.get("screen");
 
 const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel, modalVisible:modalVisible, handleModalVisible, check, handleEnd, activeIndex}) => {
-  const [time, setTime] = useState(length*30);
+  const [time, setTime] = useState(length*60);
   const Background = require("../assets/quiz.jpg");
   return (
     <Block flex style={styles.quizScreen}>

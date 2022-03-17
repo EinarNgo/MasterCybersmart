@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, Text, View, ImageBackground } from "react-native";
 import { Button, Card } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 import { ActivityIndicator } from "react-native-paper";
@@ -13,6 +13,7 @@ export default function ModuleQuestion({ navigation, route }) {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const isQuestionsFilled = questions && questions.length > 0;
+  const Background = require("../assets/colorful.jpg");
 
   useEffect(() => {
     setQuestions(filteredQs);
@@ -80,6 +81,7 @@ export default function ModuleQuestion({ navigation, route }) {
     const firstQuestion = questions[currentIndex];
     return (
       <Block flex style={styles.quizScreen}>
+        
         <Block flex style={styles.bg}>
             <ScrollView
               showsVerticalScrollIndicator={true}
@@ -129,9 +131,12 @@ export default function ModuleQuestion({ navigation, route }) {
   };
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={{ flex: 1 }}>{questionModule()}</View>
-    </View>
+    <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
+      <View style={styles.mainContainer}>
+          <View style={{ flex: 1 }}>{questionModule()}</View>
+      </View>
+    </ImageBackground>
+
   );
 }
 const styles = StyleSheet.create({
@@ -221,5 +226,10 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     width: 150,
     marginTop: 10,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });

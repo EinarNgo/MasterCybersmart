@@ -6,6 +6,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  ImageBackground
 } from "react-native";
 import { Block, theme } from "galio-framework";
 import { Card, Button } from "react-native-elements";
@@ -17,6 +18,7 @@ const { width } = Dimensions.get("screen");
 
 export default function Ctf({ navigation, updateAuthState }) {
   const [modules, setModules] = useState([]);
+  const Background = require("../assets/colorful.jpg");
 
   useEffect(() => {
     fetchModulers();
@@ -46,6 +48,7 @@ export default function Ctf({ navigation, updateAuthState }) {
   };
 
   return (
+    <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
     <Block flex center style={styles.home1}>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -73,6 +76,8 @@ export default function Ctf({ navigation, updateAuthState }) {
         </Block>
       </ScrollView>
     </Block>
+    </ImageBackground>
+
   );
 }
 
@@ -108,5 +113,10 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
     marginBottom: 0,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });

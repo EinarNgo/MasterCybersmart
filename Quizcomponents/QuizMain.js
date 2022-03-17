@@ -6,7 +6,8 @@ import {
   Platform,
   View,
   Button,
-  Alert
+  Alert,
+  ImageBackground
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
@@ -33,6 +34,7 @@ const QuizMain = ({route, navigation}) => {
   const [score, setScore] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const [check, setCheck] = useState(false);
+  const Background = require("../assets/quiz.jpg");
 
   const handleAnswer = (answerFromButton) => {    
     if (answer == false) {
@@ -95,6 +97,7 @@ const QuizMain = ({route, navigation}) => {
             handleModalVisible={handleModalVisible}
             check={check}
             handleEnd={handleEnd}
+            activeIndex={activeIndex}
           />
         </Block>
       ) :
@@ -107,6 +110,7 @@ const QuizMain = ({route, navigation}) => {
       <View style={styles.container}>
         <Block flex style={styles.bg}>
         <Block flex style={styles.bg}>
+        <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{ width, marginTop: '30%' }}
@@ -137,6 +141,7 @@ const QuizMain = ({route, navigation}) => {
             </Block>
                   
           </ScrollView>
+          </ImageBackground>
       </Block>
         </Block>
       </View>
@@ -260,6 +265,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingBottom: 10,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 
 });

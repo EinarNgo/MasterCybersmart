@@ -1,13 +1,16 @@
 import React from "react";
-import { StyleSheet, Dimensions, ScrollView } from "react-native";
+import { StyleSheet, Dimensions, ScrollView, ImageBackground } from "react-native";
 import { Block, theme } from "galio-framework";
 import { Card } from "../components";
 import articles from "../constants/articles";
 const { width } = Dimensions.get("screen");
+const Background = require("../assets/colorful.jpg");
 
 class Home extends React.Component {
+  
   renderArticles = () => {
     return (
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.articles}
@@ -28,14 +31,18 @@ class Home extends React.Component {
           <Card item={articles[4]} full nav={"EducationVideoIndex"} />
         </Block>
       </ScrollView>
+
+
     );
   };
 
   render() {
     return (
+      <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
       <Block flex center style={styles.home1}>
         {this.renderArticles()}
       </Block>
+            </ImageBackground>
     );
   }
 }
@@ -47,6 +54,11 @@ const styles = StyleSheet.create({
   articles: {
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 

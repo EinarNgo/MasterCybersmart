@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Platform
+  Platform,
+  ImageBackground
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { API, graphqlOperation } from "aws-amplify";
@@ -15,6 +16,7 @@ const { width, height } = Dimensions.get("screen");
 const QuizIndex = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
   const [length, setLength] = useState(questions.length);
+  const Background = require("../assets/quiz.jpg");
 
   const fetchQuestions = async () => {
     try {
@@ -35,6 +37,8 @@ const QuizIndex = ({ navigation, route }) => {
   return (
     <Block flex style={styles.quizScreen}>
         <Block flex style={styles.bg}>
+        <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
+
             <ScrollView
               showsVerticalScrollIndicator={true}
               style={{ width, marginTop: '15%' }}
@@ -156,6 +160,7 @@ const QuizIndex = ({ navigation, route }) => {
               <Block style={styles.bottom}/>
               
             </ScrollView>
+            </ImageBackground>
         </Block>
       </Block>
   )
@@ -247,6 +252,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 0,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 

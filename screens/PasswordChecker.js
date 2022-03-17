@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   View,
+  ImageBackground
 } from "react-native";
 import { Card } from "react-native-elements";
 import PasswordBar from "../components/PasswordChecker/PasswordBar";
@@ -14,6 +15,7 @@ LogBox.ignoreAllLogs();
 
 function PasswordChecker({ navigation }) {
   const [password, setPassword] = useState("");
+  const Background = require("../assets/506554.jpg");
   const bulletListData = [
     " Ha minimum en lengde på seks tegn",
     " Ha forskjellige tegn for mer kompleksitet",
@@ -25,6 +27,7 @@ function PasswordChecker({ navigation }) {
     PASS_LABELS = ["For kort", "Svak", "Normal", "Sterk", "Sikker"];
 
   return (
+    <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
       <Card containerStyle={styles.card}>
         <Card.Title style={styles.title}>Passord sjekker</Card.Title>
@@ -81,6 +84,8 @@ function PasswordChecker({ navigation }) {
         />
       </Card>
     </View>
+              </ImageBackground>
+
   );
 }
 
@@ -128,6 +133,11 @@ const styles = StyleSheet.create({
     shadowRadius: 6.68,
 
     elevation: 11,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 

@@ -42,6 +42,7 @@ export default function YoutubeViewer({ navigation, route }) {
         </Card>
       </View>
     </View>
+
   );
 }
 const styles = StyleSheet.create({
@@ -75,5 +76,5 @@ const styles = StyleSheet.create({
   lottie: {
     width: 100,
     height: 100,
-  },
+  }
 });

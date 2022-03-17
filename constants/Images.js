@@ -5,6 +5,7 @@ const LogoOnboarding = require("../assets/imgs/argon-logo-onboarding.png");
 const ProfileBackground = require("../assets/imgs/profile-screen-bg.png");
 const QuizBackground = require("../assets/imgs/quizBackground.jpg");
 const RegisterBackground = require("../assets/imgs/register-bg.png");
+
 // internet imgs
 
 const ProfilePicture = 'https://www.hidefninja.com/community/media/question-mark-jpg.13517/full';

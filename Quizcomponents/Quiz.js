@@ -7,40 +7,36 @@ import {
   View,
   Button,
   Modal,
-  Pressable
+  Pressable,
+  ImageBackground
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { HeaderHeight } from "../constants/utils";
 import LottieView from "lottie-react-native";
 import CountDown from 'react-native-countdown-component';
+import ParticlesBg from 'particles-bg'
+import Images from "../constants/Images";
 
 const { width, height } = Dimensions.get("screen");
 
-const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel, modalVisible:modalVisible, handleModalVisible, check, handleEnd}) => {
+const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel, modalVisible:modalVisible, handleModalVisible, check, handleEnd, activeIndex}) => {
   const [time, setTime] = useState(length*30);
+  const Background = require("../assets/quiz.jpg");
   return (
     <Block flex style={styles.quizScreen}>
       <Block flex style={styles.bg}>
+      <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{ width , marginTop: '20%' }}
           >
+            
             <Block middle style={styles.statsContainer}>
                     <Text bold size={28} color="black">
                        {tittel}
                     </Text>
-              </Block>
-            <Block flex style={styles.resultCard}>
-            <View style={styles.textview}>
-                <Text style={styles.questions}>Antall spørsmål: {length}</Text>
-                <Text style={styles.solved}>Antall løste: {score}</Text>
-              </View>
-              <Text bold size={16} color="#000" style={{marginTop: 10}}>
-                
-                        Tid igjen: 
-                        
-              </Text>
-              <CountDown
+                    <Block style={{marginTop: 30}}></Block>
+                    <CountDown
                           size={25}
                           until={time}
                           onFinish={() => handleEnd()}
@@ -50,7 +46,19 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                           timeLabels={{m: null, s: null}}
                           showSeparator
                         />
-                        <Block style={{marginTop: 20}}></Block>
+                        <Block style={{marginBottom: -30}}></Block>
+              </Block>
+            <Block flex style={styles.resultCard}>
+            <View style={styles.textview}>
+            <Text bold size={16} color="#000" style={{marginTop: 10}}>
+                
+                Spørsmål: {activeIndex+1}/{length}
+                
+      </Text>
+                <Text bold size={16} color="#000" style={{marginTop: 10}}>Antall løste: {score}</Text>
+              </View>
+              
+                        <Block style={{marginTop: 10}}></Block>
                     <Text style={styles.text}>{question.sporsmaal}</Text>
             
             </Block>
@@ -138,6 +146,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                   <Block style={styles.bottom}/>
                   
           </ScrollView>
+          </ImageBackground>
       </Block>
     </Block>
   );
@@ -312,6 +321,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: '60%',
     marginHorizontal: '15%'
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 
 });

@@ -1,13 +1,15 @@
 import { Block, theme } from "galio-framework";
 import React from "react";
-import { StyleSheet, View, Dimensions, Text } from "react-native";
+import { StyleSheet, View, Dimensions, Text, ImageBackground } from "react-native";
 import { Card, Icon, Button } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import constants from "../../constants/moduleConstants";
 //sjekk høyde og width
 const { width } = Dimensions.get("screen");
+const Background = require("../../assets/colorful.jpg");
 export default function EducationArticles({ navigation, route }) {
   return (
+    <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
       <ScrollView>
         {constants.Categories.map((categori, idx) => {
@@ -36,6 +38,7 @@ export default function EducationArticles({ navigation, route }) {
         })}
       </ScrollView>
     </View>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
@@ -57,5 +60,10 @@ const styles = StyleSheet.create({
     marginRight: 0,
     marginTop: 10,
     marginBottom: 0,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });

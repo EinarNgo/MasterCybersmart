@@ -12,20 +12,31 @@ import {
 import { Block, Text, theme } from "galio-framework";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
+import { Auth } from 'aws-amplify';
 
 const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
+const Background = require("../assets/colorful.jpg");
 
-export default class Profile extends React.Component {
-  render() {
+async function checkUser() {
+  try {
+    await Auth.signIn(username, password);
+    console.log('Success');
+    updateAuthState('loggedIn');
+    {console.log(await Auth.currentAuthenticatedUser())}
+  } catch (error) {
+    alert(error.message)
+    console.log('Error signing in...', error);
+  }
+}
+
+export default function Profile({ navigation, updateAuthState, user }) {  
     return (
       
       <Block flex style={styles.profile}>
         <Block flex>
           <ImageBackground
-            source={Images.ProfileBackground}
-            style={styles.profileContainer}
-            imageStyle={styles.profileBackground}
+            source={Background} resizeMode="cover" style={styles.image}
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
@@ -35,7 +46,7 @@ export default class Profile extends React.Component {
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Under arbeid
+                      Under arbeid {console.log(user)}
                     </Text>
                   </Block>
                   <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
@@ -45,7 +56,7 @@ export default class Profile extends React.Component {
                   <Text bold size={14} color="#32325D">
                       Sjekk igjen senere
                     </Text>
-
+                  
                   </Block>
                 </Block>
               </Block>
@@ -54,7 +65,7 @@ export default class Profile extends React.Component {
         </Block>
       </Block>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({
@@ -118,7 +129,12 @@ const styles = StyleSheet.create({
   lottie: {
     width: 100,
     height: 100
-  }
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
 });
 
 /*

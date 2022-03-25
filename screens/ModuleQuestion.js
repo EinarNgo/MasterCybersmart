@@ -81,8 +81,8 @@ export default function ModuleQuestion({ navigation, route }) {
     const firstQuestion = questions[currentIndex];
     return (
       <Block flex style={styles.quizScreen}>
-        
         <Block flex style={styles.bg}>
+        <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
             <ScrollView
               showsVerticalScrollIndicator={true}
               style={{ width, marginTop: '15%' }}
@@ -116,6 +116,7 @@ export default function ModuleQuestion({ navigation, route }) {
               <Block style={styles.bottom}/>
               
             </ScrollView>
+            </ImageBackground>
         </Block>
       </Block>
     );
@@ -131,11 +132,10 @@ export default function ModuleQuestion({ navigation, route }) {
   };
 
   return (
-    <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
       <View style={styles.mainContainer}>
           <View style={{ flex: 1 }}>{questionModule()}</View>
       </View>
-    </ImageBackground>
+
 
   );
 }

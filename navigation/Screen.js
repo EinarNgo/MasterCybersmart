@@ -44,11 +44,11 @@ function ProfileStack(props) {
         options={{
           header: ({ navigation, scene }) => (
             <Header
-              transparent
               white
               title="Profile"
               navigation={navigation}
               scene={scene}
+              bgColor={"dodgerblue"}
             />
           ),
           cardStyle: { backgroundColor: "#FFFFFF" },

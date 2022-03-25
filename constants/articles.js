@@ -1,18 +1,18 @@
 export default [
   {
     title: 'Capture the flag',
-    image: 'https://core4.bmctoday.net/storage/images/RumxtyAnYA2EQOfT7WSsLUzXsu1U8PiLl0rpvGlj.jpeg?v=ea75bed',
+    image: 'https://www.craftypenguins.net/wp-content/uploads/2020/12/Attacking-JWT-Post-1-3.png',
     cta: 'Spill', 
     horizontal: true
   },
   {
     title: 'Quiz',
-    image: 'https://previews.123rf.com/images/bestdesign36/bestdesign361712/bestdesign36171200777/91535981-conceptual-cyber-security-online-access-technology-paint-brush-word-cloud-isolated-background-collag.jpg',
+    image: 'https://www.zyxel.com/library/assets/solutions/TestYourCybersecurityKnowledge/cyberquiz_banner_1200x628.jpg',
     cta: 'Spill'
   },
   {
     title: 'Undervisning',
-    image: 'https://vertassets.blob.core.windows.net/image/2cf5b506/2cf5b506-1de1-4e24-bf94-796a96f28748/375_250-road_sign_challenges_battle_warning_450x300.jpg',
+    image: 'https://www.eschoolnews.com/files/2021/06/cyber-risks.jpeg',
     cta: 'Se pensum' 
   },
   {
@@ -28,7 +28,7 @@ export default [
   },
   {
     title: 'Passord sjekker',
-    image: 'https://www.publicidadenaweb.com/wp-content/uploads/2019/06/como-fazer-video-de-vendas.jpg',
+    image: 'https://www.howtogeek.com/wp-content/uploads/2019/11/img_5dcdb2cfe6171.png?height=200p&trim=2,2,2,2',
     cta: 'Sjekk passord'
   },
 ];

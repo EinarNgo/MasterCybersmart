@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Dimensions,
@@ -9,28 +9,35 @@ import {
   View,
   TouchableOpacity
 } from "react-native";
+import { Button } from "react-native-elements";
 import { Block, Text, theme } from "galio-framework";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 import { Auth } from 'aws-amplify';
+import PointCalculation from "../supportfunction/PointCalculation";
 
 const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const Background = require("../assets/colorful.jpg");
 
-async function checkUser() {
-  try {
-    await Auth.signIn(username, password);
-    console.log('Success');
-    updateAuthState('loggedIn');
-    {console.log(await Auth.currentAuthenticatedUser())}
-  } catch (error) {
-    alert(error.message)
-    console.log('Error signing in...', error);
-  }
-}
+export default function Profile({ navigation, updateAuthState, user }) {
+  const [name, setName] = useState("");
+  const [points, setPoints] = useState(0);
+  const [check, setCheck] = useState(false)
 
-export default function Profile({ navigation, updateAuthState, user }) {  
+  useEffect(() => {
+    getInformation();
+  }, []);
+
+  async function getInformation() {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      setName(user.attributes['custom:Name'])
+      setPoints(user.attributes['custom:Poeng'])
+    } catch (err) {
+      console.log('error fetching user info: ', err);
+    }
+  }
     return (
       
       <Block flex style={styles.profile}>
@@ -46,15 +53,21 @@ export default function Profile({ navigation, updateAuthState, user }) {
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Under arbeid {console.log(user)}
+                      Hei, {name} vi er under arbeid
                     </Text>
+                    <Button
+                      title="HEIHEI"
+                      onPress={() =>
+                        PointCalculation(10)
+                      }
+                    />
                   </Block>
                   <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                     <Block style={styles.divider} />
                   </Block>
                   <Block middle>
                   <Text bold size={14} color="#32325D">
-                      Sjekk igjen senere
+                      Din poengsum {points}
                     </Text>
                   
                   </Block>

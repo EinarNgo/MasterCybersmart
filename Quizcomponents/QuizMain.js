@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Dimensions,
@@ -6,7 +6,6 @@ import {
   Platform,
   View,
   Button,
-  Alert,
   ImageBackground
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
@@ -14,19 +13,13 @@ import { HeaderHeight } from "../constants/utils";
 import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 import { Quiz } from "../Quizcomponents";
 import LottieView from "lottie-react-native";
+import PointCalculation from "../supportfunction/PointCalculation";
 
 const { width, height } = Dimensions.get("screen");
-
-const getFilteredQuestions = (filteredRequest,questions) => {
-  var filtered = FilteredByCategories(filteredRequest, questions);
-  //setFilterQuestion(filtered);
-  //setFilterLength(filtered.length)
-};
 
 const QuizMain = ({route, navigation}) => {
   const { kategori, question } = route.params;
   const filterQuestion = FilteredByCategories(kategori, question);
-  //const [filterLength, setFilterLength] = useState(filterQuestion.length);
   const [filterLength, setFilterLength] = useState(2);
   const [activeIndex, setActiveIndex] = useState(0);
   const [play, setPlay] = useState("Play");
@@ -56,6 +49,7 @@ const QuizMain = ({route, navigation}) => {
     console.log(filterLength);
     if (activeIndex === filterLength - 1) {
       console.log("End");
+      PointCalculation(score)
       setPlay("End");
     } else {
       setActiveIndex(activeIndex + 1);
@@ -69,6 +63,7 @@ const QuizMain = ({route, navigation}) => {
   }
 
   const handleEnd = () => {
+    PointCalculation(score)
     setPlay("End");
   }
 
@@ -117,7 +112,7 @@ const QuizMain = ({route, navigation}) => {
           >
             <Block flex style={styles.resultCard}>
               <Block flex style={styles.end}>
-                <LottieView source={require("../assets/endscreen.json")} autoPlay /*loop={false}*/ style={{width: "100%", height: "100%"}}/>
+                <LottieView source={require("../assets/endscreen.json")} autoPlay style={{width: "100%", height: "100%"}}/>
                 </Block>
                 <Text> Gratulerer du fikk {score} riktig(e)! </Text>
             </Block>

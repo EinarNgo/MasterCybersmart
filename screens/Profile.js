@@ -20,10 +20,9 @@ const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const Background = require("../assets/colorful.jpg");
 
-export default function Profile({ navigation, updateAuthState, user }) {
+export default function Profile({ navigation, updateAuthState }) {
   const [name, setName] = useState("");
   const [points, setPoints] = useState(0);
-  const [check, setCheck] = useState(false)
 
   useEffect(() => {
     getInformation();
@@ -55,12 +54,7 @@ export default function Profile({ navigation, updateAuthState, user }) {
                     <Text bold size={28} color="#32325D">
                       Hei, {name} vi er under arbeid
                     </Text>
-                    <Button
-                      title="HEIHEI"
-                      onPress={() =>
-                        PointCalculation(10)
-                      }
-                    />
+
                   </Block>
                   <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                     <Block style={styles.divider} />

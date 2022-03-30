@@ -231,7 +231,10 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     position: "relative",
+    justifyContent: 'center',
+    resizeMode: 'cover',
     marginBottom: 20,
+    minWidth: '100%',
   },
   container: {
     marginTop: 89,
@@ -246,10 +249,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
+    justifyContent: 'center',
+    resizeMode: 'cover',
     borderRadius: 0,
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 0,
+    minWidth: '10%',
   },
   image: {
     flex: 1,

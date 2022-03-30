@@ -1,21 +1,22 @@
 import { Auth } from 'aws-amplify';
 
-export default async function PointCalculation(score) {
+export default async function FinishTask() {
   try {
     const user = await Auth.currentAuthenticatedUser();
-    const poeng = user.attributes['custom:Poeng']
+    const antallRiktig = user.attributes['custom:AntallRiktig']
 
-    if (poeng == undefined) {
+    if (antallRiktig == undefined) {
         const setZero = await Auth.updateUserAttributes(user, {
-            'custom:Poeng':  score.toString()
+            'custom:AntallRiktig':  "1"
         });
     } else {
-        const utregning = parseInt(poeng) + score
+        const utregning = parseInt(antallRiktig) + 1
         console.log('attributes:', utregning);
         const result = await Auth.updateUserAttributes(user, {
-        'custom:Poeng':  utregning.toString()
+        'custom:AntallRiktig':  utregning.toString()
         });
     }
+    
   } catch (err) {
     console.log('error fetching user info: ', err);
   }

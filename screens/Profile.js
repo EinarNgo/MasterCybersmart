@@ -3,26 +3,24 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Image,
   ImageBackground,
   Platform,
-  View,
-  TouchableOpacity
+  Pressable
 } from "react-native";
-import { Button } from "react-native-elements";
 import { Block, Text, theme } from "galio-framework";
-import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
+import AnimatedLoader from 'react-native-animated-loader';
 import { Auth } from 'aws-amplify';
-import PointCalculation from "../supportfunction/PointCalculation";
 
 const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const Background = require("../assets/colorful.jpg");
 
-export default function Profile({ navigation, updateAuthState }) {
+export default function Profile() {
   const [name, setName] = useState("");
   const [points, setPoints] = useState(0);
+  const [score, setScore] = useState(0);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
     getInformation();
@@ -31,12 +29,25 @@ export default function Profile({ navigation, updateAuthState }) {
   async function getInformation() {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      setName(user.attributes['custom:Name'])
+      setName(user.username)
       setPoints(user.attributes['custom:Poeng'])
+      setScore(user.attributes['custom:AntallRiktig'])
     } catch (err) {
       console.log('error fetching user info: ', err);
     }
   }
+
+  function Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  function getTimer() {
+    setShow(false)
+    setTimeout(() => {
+      console.log("2 sec.")
+      setShow(true)
+    }, 1000);
+  }
+
     return (
       
       <Block flex style={styles.profile}>
@@ -52,7 +63,7 @@ export default function Profile({ navigation, updateAuthState }) {
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Hei, {name} vi er under arbeid
+                      Hei, {Capitalize(name)} vi er under arbeid
                     </Text>
 
                   </Block>
@@ -61,9 +72,32 @@ export default function Profile({ navigation, updateAuthState }) {
                   </Block>
                   <Block middle>
                   <Text bold size={14} color="#32325D">
-                      Din poengsum {points}
-                    </Text>
-                  
+                  Din poengsum:
+                  {points == undefined ? 0 : points }
+                  </Text>
+                  <Text bold size={14} color="#32325D">
+                  Antall riktig på CTF:
+                  {score == undefined ? 0 : score }
+                  </Text>
+                  <Pressable
+                          style={[styles.buttonModal, styles.buttonClose]}
+                          onPress={() => (getInformation(),getTimer())}
+                        >
+                          <Text style={styles.textStyle}>Oppdater status</Text>
+                        </Pressable>
+                        {show == false ? (
+                          <AnimatedLoader
+                          visible={true}
+                          overlayColor="rgba(255,255,255,0.75)"
+                          source={require("../assets/loader.json")}
+                          animationStyle={styles.lottie}
+                          speed={1}>
+                          <Text>Henter artikkel...</Text>
+                        </AnimatedLoader>
+                          
+                        ) :
+                        <Text>{console.log("Viser artikkel")}</Text>
+                        }     
                   </Block>
                 </Block>
               </Block>
@@ -92,7 +126,6 @@ const styles = StyleSheet.create({
     height: height / 2
   },
   profileCard: {
-    // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
     marginTop: 65,
@@ -141,6 +174,17 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
+  },
+  buttonModal: {
+    borderRadius: 10,
+    padding: 10,
+    elevation: 1,
+    paddingHorizontal: '15%'
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+    marginLeft: 5,
+    marginRight: 5
   },
 });
 

@@ -8,7 +8,7 @@ import { Block } from "galio-framework";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 const { width } = Dimensions.get("screen");
-import Amplify, { API, Auth, graphqlOperation } from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 import Onboarding from "../screens/Onboarding";
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";

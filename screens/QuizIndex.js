@@ -15,7 +15,6 @@ const { width, height } = Dimensions.get("screen");
 
 const QuizIndex = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
-  const [length, setLength] = useState(questions.length);
   const Background = require("../assets/quiz.jpg");
 
   const fetchQuestions = async () => {
@@ -23,7 +22,6 @@ const QuizIndex = ({ navigation, route }) => {
       const questionData = await API.graphql(graphqlOperation(listModulers));
       const questionList = questionData.data.listModulers.items;
       setQuestions(questionList);
-      setLength(questionList.length);
     } catch (error) {
       console.log("error on fetching questions", error);
     }

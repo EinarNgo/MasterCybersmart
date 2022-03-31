@@ -63,7 +63,7 @@ export default function Profile() {
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Hei, {Capitalize(name)} vi er under arbeid
+                      Hei {Capitalize(name)}, vi er under utvikling
                     </Text>
 
                   </Block>
@@ -92,11 +92,11 @@ export default function Profile() {
                           source={require("../assets/loader.json")}
                           animationStyle={styles.lottie}
                           speed={1}>
-                          <Text>Henter artikkel...</Text>
+                          <Text>Henter oppdatering...</Text>
                         </AnimatedLoader>
                           
                         ) :
-                        <Text>{console.log("Viser artikkel")}</Text>
+                        <Text>{console.log("Henter oppdatering")}</Text>
                         }     
                   </Block>
                 </Block>

@@ -72,7 +72,7 @@ const QuizIndex = ({ navigation, route }) => {
                       </Text>
               </Block> 
               <Block flex style={styles.resultCard}>
-                  <Card.Title>Personvern</Card.Title>
+                  <Card.Title>Personvern og passord</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
                     name={"id-card"}
@@ -81,19 +81,19 @@ const QuizIndex = ({ navigation, route }) => {
                     containerStyle={styles.iconContainer}
                   />
                   <Block middle style={styles.textContainer}>
-                    <Text>Quizzz med 10 random spørsmål, som tester dine ferdigheter innenfor temaet personvern</Text>
+                    <Text>Quiz med 10 spørsmål, som tester dine ferdigheter innenfor temaene Personvern og Passordbruk</Text>
                   </Block>
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
                     onPress={() => navigation.navigate("QuizMain",{
-                      kategori: "Personvern",
+                      kategori: "Quiz: Personvern og Passord",
                       question: questions,
                     })}
                   />
               </Block>
               <Block flex style={styles.resultCard}>
-              <Card.Title>Etisk hacking</Card.Title>
+              <Card.Title>Etisk hacking og Phising</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
                     name={"user-secret"}
@@ -102,19 +102,19 @@ const QuizIndex = ({ navigation, route }) => {
                     containerStyle={styles.iconContainer}
                   />
                   <Block middle style={styles.textContainer}>
-                    <Text>Etisk hacking handler om å avdekke svakheter i et datasystem på vegne av den som eier produktet</Text>
+                    <Text>Quiz med 10 spørsmål, som tester dine ferdigheter innenfor temaene Etisk hacking og Phising</Text>
                   </Block>
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
                     onPress={() => navigation.navigate("QuizMain",{
-                      kategori: "Etisk hacking",
+                      kategori: "Quiz: Etisk hacking og Phising",
                       question: questions,
                     })}
                   />
               </Block>
               <Block flex style={styles.resultCard}>
-              <Card.Title>Skadevare</Card.Title>
+              <Card.Title>Skadevare og kryptografi</Card.Title>
                   <Card.Divider></Card.Divider>
                   <Icon
                     name={"bug"}
@@ -123,34 +123,13 @@ const QuizIndex = ({ navigation, route }) => {
                     containerStyle={styles.iconContainer}
                   />
                   <Block middle style={styles.textContainer}>
-                    <Text>Skadevare handler om programvare som utfører handlinger på en bruker sitt system, uten deres tillatelse.</Text>
+                    <Text>Quiz med 10 spørsmål, som tester dine ferdigheter innenfor temaene Skadevare og Kryptografi</Text>
                   </Block>
                   <Button
                     buttonStyle={styles.button}
                     title="Spill"
                     onPress={() => navigation.navigate("QuizMain",{
-                      kategori: "Skadevare",
-                      question: questions,
-                    })}
-                  />
-              </Block>
-              <Block flex style={styles.resultCard}>
-              <Card.Title>Phishing</Card.Title>
-                  <Card.Divider></Card.Divider>
-                  <Icon
-                    name="hook"
-                    type={"material-community"}
-                    size={70}
-                    containerStyle={styles.iconContainer}
-                  />
-                  <Block middle style={styles.textContainer}>
-                    <Text>Phishing handler om å snoke digitalt eller å anskaffe sensitiv informasjon om noen, oftest ved å forfalske mailer.</Text>
-                  </Block>
-                  <Button
-                    buttonStyle={styles.button}
-                    title="Spill"
-                    onPress={() => navigation.navigate("QuizMain",{
-                      kategori: "Phising",
+                      kategori: "Quiz: Skadevare og kryptografi",
                       question: questions,
                     })}
                   />

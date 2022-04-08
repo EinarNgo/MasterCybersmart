@@ -20,7 +20,7 @@ const { width, height } = Dimensions.get("screen");
 const QuizMain = ({route, navigation}) => {
   const { kategori, question } = route.params;
   const filterQuestion = FilteredByCategories(kategori, question);
-  const [filterLength, setFilterLength] = useState(2);
+  const [filterLength, setFilterLength] = useState(filterQuestion.length);
   const [activeIndex, setActiveIndex] = useState(0);
   const [play, setPlay] = useState("Play");
   const [answer, setAnswer] = useState(false);

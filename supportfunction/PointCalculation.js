@@ -16,6 +16,7 @@ export default async function PointCalculation(score) {
         'custom:Poeng':  utregning.toString()
         });
     }
+    
   } catch (err) {
     console.log('error fetching user info: ', err);
   }

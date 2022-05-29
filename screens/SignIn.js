@@ -15,19 +15,26 @@ export default function SignIn({ navigation, updateAuthState }) {
       console.log('Success');
       updateAuthState('loggedIn');
     } catch (error) {
-      alert(error.message)
-      console.log('Error signing in...', error);
+      if(error.message == "Incorrect username or password.") {
+        alert("Feil brukernavn eller passord.")
+      } else if(error.message == "User does not exist.") {
+        alert("Brukeren finnes ikke.")
+      } else if(error.message == "Username cannot be empty"){
+        alert("Brukernavn kan ikke være tom.")
+      } else {
+        alert(error.message)
+      }
     }
   }
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
-        <Text style={styles.title}>Sign in to your account</Text>
+        <Text style={styles.title}>Logg inn med brukeren din</Text>
         <AppTextInput
           value={username}
           onChangeText={text => setUsername(text)}
           leftIcon="account"
-          placeholder="Enter username"
+          placeholder="Brukernavn"
           autoCapitalize="none"
           keyboardType="email-address"
           textContentType="emailAddress"
@@ -36,17 +43,17 @@ export default function SignIn({ navigation, updateAuthState }) {
           value={password}
           onChangeText={text => setPassword(text)}
           leftIcon="lock"
-          placeholder="Enter password"
+          placeholder="Passord"
           autoCapitalize="none"
           autoCorrect={false}
           secureTextEntry
           textContentType="password"
         />
-        <AppButton title="Login" onPress={signIn} />
+        <AppButton title="Logg inn" onPress={signIn} />
         <View style={styles.footerButtonContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={styles.forgotPasswordButtonText}>
-              Don't have an account? Sign Up
+              Har ikke en bruker? Registrer deg
             </Text>
           </TouchableOpacity>
         </View>

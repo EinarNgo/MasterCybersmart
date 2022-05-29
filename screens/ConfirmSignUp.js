@@ -24,12 +24,12 @@ export default function ConfirmSignUp({ navigation, route}) {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
-        <Text style={styles.title}>Confirm Sign Up</Text>
+        <Text style={styles.title}>Bekreft registrering</Text>
         <AppTextInput
           value={route.params.username}
           onChangeText={text => setUsername(text)}
           leftIcon="account"
-          placeholder="Enter username"
+          placeholder="Brukernavn"
           autoCapitalize="none"
           keyboardType="email-address"
           textContentType="emailAddress"
@@ -38,14 +38,14 @@ export default function ConfirmSignUp({ navigation, route}) {
           value={authCode}
           onChangeText={text => setAuthCode(text)}
           leftIcon="numeric"
-          placeholder="Enter verification code"
+          placeholder="Verifiserings kode"
           keyboardType="numeric"
         />
-        <AppButton title="Confirm Sign Up" onPress={confirmSignUp} />
+        <AppButton title="Bekreft registrering" onPress={confirmSignUp} />
         <View style={styles.footerButtonContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
             <Text style={styles.forgotPasswordButtonText}>
-              Confirm verification later
+              Bekreft senere
             </Text>
           </TouchableOpacity>
         </View>

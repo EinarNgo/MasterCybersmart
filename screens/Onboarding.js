@@ -31,7 +31,7 @@ class Onboarding extends React.Component {
             <Block flex space="around" style={{ zIndex: 2 }}>
               <Block style={styles.title}>
                 <Block>
-                  <Text color="white" size={60}>
+                  <Text color="white" size={60}  style={styles.bigblue}>
                     From Zero
                   </Text>
                 </Block>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     marginTop: 20
-  }
+  },
 });
 
 export default Onboarding;

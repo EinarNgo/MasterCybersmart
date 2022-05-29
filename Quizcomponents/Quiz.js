@@ -52,7 +52,7 @@ const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctC
                 
                 Spørsmål: {activeIndex+1}/{length}
                 
-      </Text>
+              </Text>
                 <Text bold size={16} color="#000" style={{marginTop: 10}}>Antall løste: {score}</Text>
               </View>
               

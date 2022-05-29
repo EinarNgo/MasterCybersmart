@@ -22,12 +22,12 @@ export default function SignUp({ navigation}) {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
-        <Text style={styles.title}>Create a new account</Text>
+        <Text style={styles.title}>Registrer en bruker</Text>
         <AppTextInput
           value={username}
           onChangeText={text => setUsername(text)}
           leftIcon="account"
-          placeholder="Enter username"
+          placeholder="Brukernavn"
           autoCapitalize="none"
           keyboardType="email-address"
           textContentType="emailAddress"
@@ -36,7 +36,7 @@ export default function SignUp({ navigation}) {
           value={password}
           onChangeText={text => setPassword(text)}
           leftIcon="lock"
-          placeholder="Enter password"
+          placeholder="Passord"
           autoCapitalize="none"
           autoCorrect={false}
           secureTextEntry
@@ -46,16 +46,16 @@ export default function SignUp({ navigation}) {
           value={email}
           onChangeText={text => setEmail(text)}
           leftIcon="email"
-          placeholder="Enter email"
+          placeholder="Epost"
           autoCapitalize="none"
           keyboardType="email-address"
           textContentType="emailAddress"
         />
-        <AppButton title="Sign Up" onPress={signUp} />
+        <AppButton title="Registrer" onPress={signUp} />
         <View style={styles.footerButtonContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
             <Text style={styles.forgotPasswordButtonText}>
-              Already have an account? Sign In
+              Har en bruker fra før? Logg inn
             </Text>
           </TouchableOpacity>
         </View>

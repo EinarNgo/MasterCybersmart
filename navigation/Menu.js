@@ -12,6 +12,7 @@ import { Block, Text, theme } from "galio-framework";
 import Images from "../constants/Images";
 import { DrawerItem as DrawerCustomItem } from '../components';
 
+//Sidemeny for hjem og profil. I tillegg til logg ut funksjon
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state,updateAuthState, ...res }) {
   const insets = useSafeArea();
   const screens = [

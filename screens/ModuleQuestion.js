@@ -20,15 +20,18 @@ export default function ModuleQuestion({ navigation, route }) {
   const [check, setCheck] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  //Henter spørmsålene
   useEffect(() => {
     setQuestions(filteredQs);
   }, []);
   useEffect(() => {}, [currentIndex]);
 
+  //håndterer om tilbakemodulen vises
   const handleModalVisible = () => {
     setModalVisible(false);
   }
 
+  //sjekker om svaret er riktig
   const checkAnswer = (answer) => {
     const isAnswerRight =
       answer.toLowerCase() === questions[currentIndex].fasit.toLowerCase();
@@ -45,6 +48,7 @@ export default function ModuleQuestion({ navigation, route }) {
     }
   };
 
+  //Går tilbake til forrige spørsmål
   const prevQuestion = () => {
     if (currentIndex <= 0) {
       alert("Kan ikke gå tilbake, dette er første spørsmål");
@@ -53,6 +57,8 @@ export default function ModuleQuestion({ navigation, route }) {
       onChangeText("")
     }
   };
+
+  //Går tilbake til neste spørsmål
   const nextQuestion = () => {
     if (currentIndex >= questions.length - 1) {
       alert("ikke flere spørsmål, vennligst velg ny kategori");
@@ -61,6 +67,8 @@ export default function ModuleQuestion({ navigation, route }) {
       onChangeText("")
     }
   };
+
+  //Henter modulen
   const loadingModule = () => {
     return (
       <View style={styles.iconHolder}>
@@ -72,6 +80,8 @@ export default function ModuleQuestion({ navigation, route }) {
       </View>
     );
   };
+
+  //Håndtering av neste og tilbake knapper
   const buttonModule = () => {
     return (
       <View style={styles.buttonContainer}>

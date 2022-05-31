@@ -16,16 +16,19 @@ const { width, height } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const Background = require("../assets/colorful.jpg");
 
+//Profilside
 export default function Profile() {
   const [name, setName] = useState("");
   const [points, setPoints] = useState(0);
   const [score, setScore] = useState(0);
   const [show, setShow] = useState(true);
 
+  //Henter informasjon før modulen lastes
   useEffect(() => {
     getInformation();
   }, []);
 
+  //Henter brukerinformasjon fra AWS
   async function getInformation() {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -37,9 +40,12 @@ export default function Profile() {
     }
   }
 
+  //Gjør forbokstaven større
   function Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+
+  //Stopper livvsyklusen når informasjonen hentes
   function getTimer() {
     setShow(false)
     setTimeout(() => {

@@ -7,6 +7,8 @@ import constants from "../../constants/moduleConstants";
 //sjekk høyde og width
 const { width } = Dimensions.get("screen");
 const Background = require("../../assets/colorful.jpg");
+
+//Hovedskjermen til artiklene, henter inn en ny komponent
 export default function EducationArticles({ navigation, route }) {
   return (
     <ImageBackground source={Background} resizeMode="cover" style={styles.image}>

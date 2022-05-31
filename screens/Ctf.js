@@ -16,14 +16,17 @@ import { FilteredByCategories } from "../assets/functions/FilteredByCategories";
 
 const { width } = Dimensions.get("screen");
 
+//Komponent for valg av kategorier til ctf
 export default function Ctf({ navigation, updateAuthState }) {
   const [modules, setModules] = useState([]);
   const Background = require("../assets/colorful.jpg");
 
+  //Henter inne modulene før ting blir rendret
   useEffect(() => {
     fetchModulers();
   }, []);
 
+  //Henter data fra databasen og legger det i en liste
   const fetchModulers = async () => {
     try {
       const modulerData = await API.graphql(graphqlOperation(listModulers));
@@ -35,12 +38,15 @@ export default function Ctf({ navigation, updateAuthState }) {
       console.log("error on fetching modul", error);
     }
   };
+
+  //En action funksjon som sender brukeren til ctf spørsmålene med ønsket kategori
   const navigateToModule = (filteredQs) => {
     navigation.navigate("ModuleQuestion", {
       questions: filteredQs,
     });
   };
 
+  //Filtrerer spørsmålene etter kategori
   const getFilteredQuestions = (filteredRequest, fullList) => {
     var filtered = FilteredByCategories(filteredRequest, fullList);
 

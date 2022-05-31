@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 
+//Hjelpefunksjon til å regnet ut antall riktig
 export default async function FinishTask() {
   try {
     const user = await Auth.currentAuthenticatedUser();

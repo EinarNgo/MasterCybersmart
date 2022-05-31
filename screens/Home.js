@@ -8,6 +8,7 @@ const Background = require("../assets/colorful.jpg");
 
 class Home extends React.Component {
   
+  //Rendrer alle de fem modulene til hjemskjerm
   renderArticles = () => {
     return (
 

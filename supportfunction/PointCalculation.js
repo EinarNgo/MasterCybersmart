@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 
+//Hjelpefunksjon til å regnet ut poeng
 export default async function PointCalculation(score) {
   try {
     const user = await Auth.currentAuthenticatedUser();

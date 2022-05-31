@@ -4,10 +4,13 @@ import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
+
+//Komponent til å godkjenne nye brukere
 export default function ConfirmSignUp({ navigation, route}) {
   const [username, setUsername] = useState("");
   const [authCode, setAuthCode] = useState('');
   
+  //Funksjon for å godkjenne brukeren ved å bruke en autentiseringskode som blir sendt på epost.
   async function confirmSignUp({ navigation }) {
     try {
       await Auth.confirmSignUp(username, authCode);

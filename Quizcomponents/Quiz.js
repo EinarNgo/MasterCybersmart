@@ -17,6 +17,7 @@ import CountDown from 'react-native-countdown-component';
 
 const { width, height } = Dimensions.get("screen");
 
+//Selve quiz komponenten når du spiller
 const Quiz = ({prop: question, handleAnswer, handleNext, answer:answer, correctCount:correctCount, length:length, score:score, tittel:tittel, modalVisible:modalVisible, handleModalVisible, check, handleEnd, activeIndex}) => {
   const [time, setTime] = useState(length*60);
   const Background = require("../assets/quiz.jpg");

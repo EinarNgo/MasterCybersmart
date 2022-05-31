@@ -35,6 +35,9 @@ const AuthenticationStack = createStackNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+//For håndtering av stack
+
+//Profilstack
 function ProfileStack(props) {
   return (
     <Stack.Navigator initialRouteName="Profile" mode="card" headerMode="screen">
@@ -58,6 +61,8 @@ function ProfileStack(props) {
     </Stack.Navigator>
   );
 }
+
+//Hjemstack, kobler alle modulene der sammen
 function HomeStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
@@ -196,6 +201,7 @@ function HomeStack(props) {
   );
 }
 
+//Ved innlasting av mobilapplikasjon
 const Initializing = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -204,6 +210,7 @@ const Initializing = () => {
   );
 };
 
+//Autentisering for innlogging, registrering og bekreftelse
 function AuthenticationNavigation(props) {
   return (
     <AuthenticationStack.Navigator headerMode="none">
@@ -234,6 +241,7 @@ function AuthenticationNavigation(props) {
   );
 }
 
+//Pålogging stack
 export default function SignStack(props) {
   const [isUserLoggedIn, setUserLoggedIn] = useState("initializing");
   useEffect(() => {
@@ -267,6 +275,7 @@ export default function SignStack(props) {
   );
 }
 
+//Kobler stackene sammen
 function AppStack({ props, updateAuthState }) {
   return (
     <Drawer.Navigator

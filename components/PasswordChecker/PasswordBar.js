@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Dimensions, Animated } from "react-native";
 import PropTypes from "prop-types";
 
+//Passordbar
 const deviceWindow = Dimensions.get("window"),
   regexArr = [/[a-z]/, /[A-Z]/, /[0-9]/, /[^A-Za-z0-9]/];
 

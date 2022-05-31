@@ -9,6 +9,8 @@ export default function SignUp({ navigation}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+
+  //Registreringsfunksjon som er koblet opp til aws
   async function signUp() {
     try {
       await Auth.signUp({ username, password, attributes: { email } });

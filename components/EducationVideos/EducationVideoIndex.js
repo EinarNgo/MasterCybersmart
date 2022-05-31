@@ -6,6 +6,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import constants from "../../constants/moduleConstants";
 //sjekk høyde og width
 const { width } = Dimensions.get("screen");
+
+//Hovedskjermen til video, henter inn en ny komponent
 export default function EducationArticles({ navigation, route }) {
   const Background = require("../../assets/colorful.jpg");
   return (

@@ -17,6 +17,7 @@ import PointCalculation from "../supportfunction/PointCalculation";
 
 const { width, height } = Dimensions.get("screen");
 
+//Komponent til quiz hovedskjerm
 const QuizMain = ({route, navigation}) => {
   const { kategori, question } = route.params;
   const filterQuestion = FilteredByCategories(kategori, question);
@@ -29,6 +30,7 @@ const QuizMain = ({route, navigation}) => {
   const [check, setCheck] = useState(false);
   const Background = require("../assets/quiz.jpg");
 
+  //Sjekker svaret om det er riktig
   const handleAnswer = (answerFromButton) => {    
     if (answer == false) {
       if (answerFromButton === filterQuestion[activeIndex].fasit) {
@@ -44,6 +46,7 @@ const QuizMain = ({route, navigation}) => {
     } 
   };
 
+  //Håndterer nesteknappen
   const handleNext = () => {
     console.log(activeIndex);
     console.log(filterLength);
@@ -58,15 +61,18 @@ const QuizMain = ({route, navigation}) => {
     }
   };
 
+  //Håndterer om tilbakemelding vises
   const handleModalVisible = () => {
     setModalVisible(false);
   }
 
+  //Håndterer Avslutt komponenten
   const handleEnd = () => {
     PointCalculation(score)
     setPlay("End");
   }
 
+  //Håndter start på nytt
   const handleRestart = () => {
     setActiveIndex(0);
     setScore(0);
@@ -75,6 +81,7 @@ const QuizMain = ({route, navigation}) => {
     setModalVisible(false);
   };
 
+  //Håndter alle komponentene for å spille quiz
   if (play === "Play") {
     return (
       <View style={styles.container}>

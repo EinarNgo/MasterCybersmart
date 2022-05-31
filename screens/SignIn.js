@@ -9,6 +9,8 @@ import AppButton from '../components/AppButton';
 export default function SignIn({ navigation, updateAuthState }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  //Påloggings funksjon
   async function signIn() {
     try {
       await Auth.signIn(username, password);

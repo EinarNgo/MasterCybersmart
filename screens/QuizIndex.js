@@ -17,6 +17,7 @@ const QuizIndex = ({ navigation, route }) => {
   const [questions, setQuestions] = useState([]);
   const Background = require("../assets/quiz.jpg");
 
+  //Henter informasjonen
   const fetchQuestions = async () => {
     try {
       const questionData = await API.graphql(graphqlOperation(listModulers));

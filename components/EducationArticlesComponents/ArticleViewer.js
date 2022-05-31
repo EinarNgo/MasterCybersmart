@@ -4,6 +4,7 @@ import { WebView } from "react-native-webview";
 import AnimatedLoader from 'react-native-animated-loader';
 import { Block } from "galio-framework";
 
+//Skjerm for artiklene
 export default function ArticleViewer({ navigation, route }) {
   const [show, setShow] = useState(false);
   return (

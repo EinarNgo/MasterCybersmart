@@ -13,15 +13,19 @@ import PasswordBar from "../components/PasswordChecker/PasswordBar";
 
 LogBox.ignoreAllLogs();
 
+//Passordmodul, sjekker passordet til brukeren
 function PasswordChecker({ navigation }) {
   const [password, setPassword] = useState("");
   const Background = require("../assets/506554.jpg");
+
   const bulletListData = [
     " Ha minimum en lengde på seks tegn",
     " Ha forskjellige tegn for mer kompleksitet",
     " Ha både store og små bokstaver",
     " Ikke ha navn eller bursdag som passord",
   ];
+
+  //Variabler for passordlengde og merknad til passordstyker, 
   const MAX_LEN = 15,
     MIN_LEN = 6,
     PASS_LABELS = ["For kort", "Svak", "Normal", "Sterk", "Sikker"];

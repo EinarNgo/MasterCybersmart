@@ -13,6 +13,7 @@ const { height, width } = Dimensions.get("screen");
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
 
+//Modul for boarding skjerm, første brukeren ser når de aksesserer nettsiden.
 class Onboarding extends React.Component {
   render() {
     const { navigation } = this.props;

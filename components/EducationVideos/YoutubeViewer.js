@@ -4,6 +4,7 @@ import YoutubePlayer from "react-native-youtube-iframe";
 import { Card, Icon } from "react-native-elements";
 import AnimatedLoader from 'react-native-animated-loader';
 
+//Skjerm som viser youtube, blir hentet inn i hovedskjermen
 export default function YoutubeViewer({ navigation, route }) {
   const youtubeLink = route.params.link;
   const cardTitle = route.params.title;
